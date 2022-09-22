@@ -12,7 +12,8 @@ class CreateContacts < ActiveRecord::Migration[7.0]
       t.string :twitter_url
       t.string :linkedin_profile_url
       t.string :linkedin_company_url
-
+      t.integer :user_id
+      t.integer :company_id
       t.timestamps
     end
   end

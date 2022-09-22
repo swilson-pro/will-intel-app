@@ -15,16 +15,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_152151) do
   enable_extension "plpgsql"
 
   create_table "companies", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "name"
     t.string "linkedin_company_id"
     t.string "linkedin_regularCompanyUrl"
     t.string "logoUrl"
     t.text "description"
     t.string "website"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -39,11 +38,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_152151) do
     t.string "twitter_url"
     t.string "linkedin_profile_url"
     t.string "linkedin_company_url"
+    t.integer "user_id"
+    t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.string "image_url"
-    t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,6 +54,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_152151) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "companies", "users"
-  add_foreign_key "contacts", "users"
 end

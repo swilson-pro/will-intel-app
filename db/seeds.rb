@@ -4,6 +4,7 @@ require 'csv'
 User.destroy_all
 Contact.destroy_all
 Company.destroy_all
+
 puts 'seeding users...'
 
 user1 = User.create!(name: "Bill", email: "bill@gmail.com", username: "bill", password_digest: "bill")
@@ -23,28 +24,45 @@ contacts_csv = CSV.parse(contacts_csv_text, :headers => true, :encoding => 'ISO-
 
 puts 'seeding contacts'
 
-# looops through the csv and converts each row into a has. headers of the csv file will be used as keys for the hash b/c we added the :headers => true option in previous step.
-contacts_csv.each do |row|
-    c = Contact.new
-    c.name = row['name']
-    c.pbid = row['pbid']
-    c.company_name = row['company_name']
-    c.position = row['position']
-    c.bio = row['bio']
-    c.phone = row['phone']
-    c.email = row['email']
-    c.location = row['location']
-    c.twitter_url = row['twitter_url']
-    c.linkedin_profile_url = row['linkedin_profile_url']
-    c.linkedin_company_url = row['linkedin_company_url']
-    c.user_id = row['user_id']
-    c.image_url = row['image_url']
+# # looops through the csv and converts each row into a has. headers of the csv file will be used as keys for the hash b/c we added the :headers => true option in previous step.
+# contacts_csv.each do |row|
+#     # c = Contact.new
+#     # c.name = row['name']
+#     # c.pbid = row['pbid']
+#     # c.company_name = row['company_name']
+#     # c.position = row['position']
+#     # c.bio = row['bio']
+#     # c.phone = row['phone']
+#     # c.email = row['email']
+#     # c.location = row['location']
+#     # c.twitter_url = row['twitter_url']
+#     # c.linkedin_profile_url = row['linkedin_profile_url']
+#     # c.linkedin_company_url = row['linkedin_company_url']
+#     # c.user_id = row['user_id']
+#     # c.image_url = row['image_url']
     
-    c.save
-    
-    # puts "#{c.name}, #{c.pbid}, #{c.company_name}, #{c.position}, #{c.bio}, #{c.phone}, #{c.email}, #{c.location}, #{c.twitter_url}, #{c.linkedin_profile_url}, #{c.linkedin_company_url}, #{c.user_id}, #{c.image_url} saved"
+#     # c.save
 
-end
+#     Contact.create!(
+#         name: row['name'],
+#         pbid: row['pbid'],
+#         company_name: row['company_name'],
+#         position: row['position'],
+#         bio: row['bio'],
+#         phone: row['phone'],
+#         email: row['email'],
+#         location: row['location'],
+#         twitter_url: row['twitter_url'],
+#         linkedin_profile_url: row['linkedin_profile_url'],
+#         linkedin_company_url: row['linkedin_company_url'],
+#         user_id: User.first.id,
+#         image_url: row['image_url'],
+        
+#     )
+    
+#     # puts "#{c.name}, #{c.pbid}, #{c.company_name}, #{c.position}, #{c.bio}, #{c.phone}, #{c.email}, #{c.location}, #{c.twitter_url}, #{c.linkedin_profile_url}, #{c.linkedin_company_url}, #{c.user_id}, #{c.image_url} saved"
+
+# end
 
 puts 'reading companies csv'
 
@@ -83,6 +101,47 @@ end
 
 
 
+# looops through the csv and converts each row into a has. headers of the csv file will be used as keys for the hash b/c we added the :headers => true option in previous step.
+contacts_csv.each do |row|
+    # c = Contact.new
+    # c.name = row['name']
+    # c.pbid = row['pbid']
+    # c.company_name = row['company_name']
+    # c.position = row['position']
+    # c.bio = row['bio']
+    # c.phone = row['phone']
+    # c.email = row['email']
+    # c.location = row['location']
+    # c.twitter_url = row['twitter_url']
+    # c.linkedin_profile_url = row['linkedin_profile_url']
+    # c.linkedin_company_url = row['linkedin_company_url']
+    # c.user_id = row['user_id']
+    # c.image_url = row['image_url']
+    
+    # c.save
+    # note to self - if it can't find the company, create a new company
+    company = Company.find_by(name: row['company_name']) || Company.create!(name: row['company_name'], user_id: User.first.id)
+    # if !company Company.create(name: row['name']) 
+    Contact.create!(
+        name: row['name'],
+        pbid: row['pbid'],
+        company_name: row['company_name'],
+        position: row['position'],
+        bio: row['bio'],
+        phone: row['phone'],
+        email: row['email'],
+        location: row['location'],
+        twitter_url: row['twitter_url'],
+        linkedin_profile_url: row['linkedin_profile_url'],
+        linkedin_company_url: row['linkedin_company_url'],
+        user_id: User.first.id,
+        image_url: row['image_url'],
+        company_id: company.id,
+    )
+    
+    # puts "#{c.name}, #{c.pbid}, #{c.company_name}, #{c.position}, #{c.bio}, #{c.phone}, #{c.email}, #{c.location}, #{c.twitter_url}, #{c.linkedin_profile_url}, #{c.linkedin_company_url}, #{c.user_id}, #{c.image_url} saved"
+
+end
 
 
 
