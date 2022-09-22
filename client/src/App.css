@@ -1,0 +1,59 @@
+* {
+  font-family: Montserrat;
+}
+
+body{
+  background: rgb(209,209,209);
+}
+
+thead {
+  background-color: rgb(255,255,255);
+  /* padding: 0.5em 1em; */
+  /* border-bottom: 1px solid black; */
+}
+
+tbody {
+  background-color: rgb(255, 255, 255);
+}
+
+tbody tr {
+  /* border: 1px solid blue; */
+  border: 10px solid rgb(135, 135, 135);
+  background-color: rgb(255,255,255);
+}
+
+th {
+  border-bottom: 1px solid red;
+  height: 1em;
+  font-size: small;
+  padding: 0.7em 1.5em;
+  text-align: left;
+}
+
+td {
+  font-size: small;
+  padding: 0.7em 1.5em;
+  text-align: left;
+}
+
+.contacts-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+/* .contacts-table thead tr th {
+  background-color: rgb(246, 248, 250)
+} */
+
+.searchbox {
+  margin-left: 5px;
+}
+
+.filterLabel {
+  margin-left: 5px;
+}
+
+.new-contact {
+  margin-left: 5px;
+}
