@@ -93,6 +93,13 @@ companies_csv.each do |row|
         logoUrl: row['logoUrl'],
         description: row['description'],
         website: row['website'],
+        pb_companyID: row['pb_companyID'],
+        company_also_known_as: row['company_also_known_as'],
+        parent_company: row['parent_company'],
+        company_legal_name: row['company_legal_name'],
+        primary_industry_sector: row['primary_industry_sector'],
+        primary_industry_group: row['primary_industry_group'],
+        primary_industry_code: row['primary_industry_code']
     )
     # puts "#{c.user_id}, #{c.name}, #{c.linkedin_company_id}, #{c.linkedin_regularCompanyUrl}, #{c.logoUrl}, #{c.description}, #{c.website} saved"
 

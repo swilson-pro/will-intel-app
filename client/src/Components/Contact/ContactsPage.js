@@ -57,7 +57,6 @@ const ContactsPage = ({blackList}) => {
         fetchOwnersNames()
     }, [owner])
 
-
     let formatter = (str) => {
         let arr = str.split('')
         for (let i = 0; i < arr.length; i++) {
