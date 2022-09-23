@@ -7,7 +7,7 @@ class ContactsController < ApplicationController
 
     def show
         contact = Contact.find(params[:id])
-        render json: contact, serializer: ContactTableSerializer
+        render json: contact, serializer: ContactSerializer
     end
 
     def create

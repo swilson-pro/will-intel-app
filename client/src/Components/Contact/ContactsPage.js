@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const ContactsPage = ({conBlackList}) => {
 
     // const blackList = ['bio', 'twitter_url', 'image_url', 'user_id']
+
+    let navigate = useNavigate()
 
     const [ownersNames, setOwnersNames] = useState([])
     const [owner, setOwner] = useState("All")
@@ -104,11 +107,17 @@ const ContactsPage = ({conBlackList}) => {
         setOwner(e.target.value)
     }
 
+    const handleClick = (id) => {
+        console.log('clicked: ', id)
+        navigate(`/contacts/${id}`)
+    }
+
     console.log('ownersNames', ownersNames)
     console.log('owner', owner)
 
     return(
-        <main className='main'>
+        <main>
+            <div className='top-of-page'>
             <NavLink className='new-contact-navlink' to='/contacts/new' >
                 <button className="new-contact">Create Contact</button></NavLink>
             <div className="filter">
@@ -128,6 +137,7 @@ const ContactsPage = ({conBlackList}) => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
+            </div>
             </div>
             <div className="fixTableHead">
             <table className='contacts-table'>
@@ -150,7 +160,7 @@ const ContactsPage = ({conBlackList}) => {
                         // console.log('contactVals', contactVals)
 
                         return (
-                            <tr>
+                            <tr onClick={() => handleClick(contact.id)}>
                         {contactVals.map(val => {
 
                             // console.log('val', val)
