@@ -2,14 +2,9 @@
   font-family: Montserrat;
 }
 
+
 body{
   background: rgb(209,209,209);
-}
-
-table {
-  border-collapse: collapse;
-  margin: 25px 0;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 thead {
@@ -42,7 +37,11 @@ td {
   text-align: left;
 }
 
-
+table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
 
 /* .contacts-table thead tr th {
   background-color: rgb(246, 248, 250)

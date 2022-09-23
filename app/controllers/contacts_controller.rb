@@ -2,7 +2,12 @@ class ContactsController < ApplicationController
 
     def index
         contacts = Contact.all
-        render json: contacts
+        render json: contacts, each_serializer: ContactTableSerializer
+    end
+
+    def show
+        contact = Contact.find(params[:id])
+        render json: contact, serializer: ContactTableSerializer
     end
 
     def create

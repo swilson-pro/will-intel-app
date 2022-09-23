@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   get '/contacts', to: 'contacts#index'
+  get '/contacts/:id', to: 'contacts#show'
   post '/contacts', to: 'contacts#create'
   delete '/contacts/:id', to: 'contacts#destroy'
 

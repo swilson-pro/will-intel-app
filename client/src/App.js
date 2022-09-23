@@ -4,6 +4,7 @@ import HomePage from './Components/HomePage';
 import NavBar from './NavBar';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import ContactsPage from './Components/Contact/ContactsPage';
+import ContactCard from './Components/Contact/ContactCard';
 import NewContact from './Components/Contact/NewContact';
 import CompaniesPage from './Components/Companies/CompaniesPage';
 import NewCompany from './Components/Companies/NewCompany';
@@ -14,7 +15,7 @@ import NewProduct from './Components/Product/NewProduct';
 function App() {
 
   const conBlackList = ['twitter_url', 'image_url', 'user_id', 'company_id', 'company_products']
-  const compBlackList = ['logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
+  const compBlackList = ['hq_email', 'hq_address_line_2', 'hq_address_line_1', 'primary_contact_pbid', 'verticals', 'linkedin_regularCompanyUrl', 'year_founded', 'employees', 'linkedin_company_id', 'logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
   const prodBlackList = ['price_sign', 'image_link', 'api_featured_image', 'input_company_name']
 
   return (
@@ -23,6 +24,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path='/contacts/new' element={<NewContact conBlackList={conBlackList} />} />
+          <Route path='/contacts/:id' element={<ContactCard conBlackList={conBlackList} />} />
           <Route path='/contacts' element={<ContactsPage conBlackList={conBlackList} />} />
           <Route path='/companies/new' element={<NewCompany compBlackList={compBlackList} />} />
           <Route path='/companies' element={ <CompaniesPage compBlackList={compBlackList} /> } />

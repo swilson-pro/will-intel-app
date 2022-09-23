@@ -1,0 +1,14 @@
+.fixTableHead {
+    overflow-y: auto;
+    height: 110px;
+}
+
+.fixTableHead thead th {
+    position: sticky;
+    top: 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
