@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   post '/companies', to: 'companies#create'
 
   get '/products', to: 'products#index'
+  post '/products', to: 'products#create'
 end

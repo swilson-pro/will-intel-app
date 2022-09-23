@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const ProductsPage = ({prodBlackList}) => {
 
@@ -108,6 +109,8 @@ const ProductsPage = ({prodBlackList}) => {
 
     return (
         <main className="main">
+            <NavLink className='new-product-navlink' to='/products/new' >
+                <button className='new-product'>Add Product</button></NavLink>
             <div className="filter">
                 <label className='filterLabel'>Choose owner:</label>
                 <select name='ownersNames' id='ownersNames' onChange={updateOwner}>

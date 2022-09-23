@@ -104,8 +104,7 @@ const ContactsPage = ({conBlackList}) => {
         setOwner(e.target.value)
     }
 
-    console.log('ownersNames', ownersNames)
-    console.log('owner', owner)
+
 
     return(
         <main className='main'>
@@ -144,9 +143,9 @@ const ContactsPage = ({conBlackList}) => {
                     {newDisplayedContacts.map(contact=>{
                         // console.log('Object.keys(contact)', Object.keys(contact))
                         let contactKeys = Object.keys(contact)
-                        // console.log('contactKeys', contactKeys)
+                        console.log('contactKeys', contactKeys)
                         let contactVals = Object.values(contact)
-                        // console.log('contactVals', contactVals)
+                        console.log('contactVals', contactVals)
 
                         return (
                             <tr>
