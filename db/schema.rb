@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_182255) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_22_221502) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_182255) do
     t.string "primary_industry_sector"
     t.string "primary_industry_group"
     t.string "primary_industry_code"
+    t.string "verticals"
+    t.string "employees"
+    t.string "year_founded"
+    t.string "primary_contact_pbid"
+    t.string "primary_contact"
+    t.string "hq_location"
+    t.string "hq_address_line_1"
+    t.string "hq_address_line_2"
+    t.string "hq_city"
+    t.string "hq_state_or_province"
+    t.string "hq_post_code"
+    t.string "hq_country_or_terrirory"
+    t.string "hq_phone"
+    t.string "hq_email"
+    t.string "hq_global_region"
+    t.string "hq_global_sub_region"
+    t.text "financing_status_note"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -50,6 +67,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_182255) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_url"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "brand"
+    t.string "name"
+    t.decimal "price"
+    t.string "price_sign"
+    t.string "currency"
+    t.string "image_link"
+    t.string "product_link"
+    t.string "website"
+    t.text "description"
+    t.string "rating"
+    t.string "category"
+    t.string "product_type"
+    t.string "api_featured_image"
+    t.integer "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

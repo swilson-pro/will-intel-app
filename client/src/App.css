@@ -36,7 +36,7 @@ td {
   text-align: left;
 }
 
-.contacts-table {
+table {
   border-collapse: collapse;
   margin: 25px 0;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -54,6 +54,10 @@ td {
   margin-left: 5px;
 }
 
-.new-contact {
+.new-contact, .new-company {
   margin-left: 5px;
+}
+
+.input {
+  margin: 5px;
 }

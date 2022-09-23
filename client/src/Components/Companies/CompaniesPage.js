@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react"
+import { NavLink } from "react-router-dom"
 
-const CompaniesPage = () => {
+const CompaniesPage = ({compBlackList}) => {
 
-    const blackList = ['description', 'logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
+    // const compBlackList = ['description', 'logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
+
+    const [ownersNames, setOwnersNames] = useState([])
+    const [owner, setOwner] = useState("All")
 
     const [companies, setCompanies] = useState([])
     const [keyArray, setKeyArray] = useState([])
+
+    const [searchTerm, setSearchTerm] = useState("")
+
+    const [sortField, setSortField] = useState('')
+    const [order, setOrder] = useState('')
 
     const fetchCompanies = async () => {
         const response = await fetch(`http://localhost:3000/companies`)
@@ -13,18 +22,35 @@ const CompaniesPage = () => {
 
         let objKeys = Object.keys(companiesArray[0])
 
-        let displayKeys = objKeys.filter((item) => !blackList.includes(item))
+        let displayKeys = objKeys.filter((item) => !compBlackList.includes(item))
 
         companiesArray.map(objectElement => {
-            blackList.map((element) => delete objectElement[element])
+            compBlackList.map((element) => delete objectElement[element])
         })
 
-        let displayCompanies = companiesArray.filter((item) => !blackList.includes(item))
+        let displayCompanies = companiesArray.filter((item) => !compBlackList.includes(item))
 
         setCompanies(displayCompanies)
 
         setKeyArray(displayKeys)
     }
+
+    const newDisplayedCompanies = companies.filter(company => {
+        return company.name.toLowerCase().includes(searchTerm.toLowerCase())
+    })
+
+    const fetchOwnerNames = async () => {
+        const response = await fetch(`http://localhost:3000/users_names`)
+        const ownersNamesArray = await response.json()
+        setOwnersNames(ownersNamesArray)
+    }
+
+    useEffect(() => {
+        fetchCompanies()
+        fetchOwnerNames()
+    }, [])
+
+
 
     let formatter = (str) => {
         let arr = str.split('')
@@ -45,28 +71,72 @@ const CompaniesPage = () => {
         return result
     }
 
-    useEffect(() => {
-        fetchCompanies()
-    }, [])
+    const handleSorting = (sortField, sortOrder) => {
+        console.log('sortField, sortOrder', sortField, sortOrder)
 
+        if (sortField) {
+            const sorted = [...companies].sort((a,b) => {
+                return (
+                    a[sortField]?.toString().localeCompare(b[sortField]?.toString(), 'en', {
+                        numeric: true,
+                    }) * (sortOrder === 'asc' ? 1 : -1)
+                )
+            })
+            setCompanies(sorted)
+        }
+    }
+
+    const handleSortingChange = (field) => {
+        const sortOrder =
+        field === sortField && order === 'asc' ? 'desc' : 'asc'
+
+
+        console.log('field', field)
+        console.log('sortOrder', sortOrder)
+        setSortField(field)
+        setOrder(sortOrder)
+        handleSorting(field, sortOrder)
+
+    }
 
 
     console.log('companies', companies)
     console.log('keyArray', keyArray)
     return(
-        <main>Companies Page
+        <main className="main">
+            <NavLink className='new-company-navlink' to='/companies/new' >
+                <button className='new-company'>Create New Company</button>
+            </NavLink>
+            <div className="filter">
+                <label className='filterLabel'>Choose owner:</label>
+                <select name='ownersNames' id='ownersNames'>
+                    <option value="All">All</option>
+                    {ownersNames.map((ownerName) => {
+                        return <option value={ownerName}>{ownerName}</option>
+                    })}
+                </select>
+                <div className="searchbar">
+                    <input className='searchbox'
+                    type='text'
+                    id='search'
+                    placeholder="search by name"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+            </div>
             <table className="companies-table">
                 <thead>
                     <tr>
                         {keyArray.map((key) => {
                             return (
-                                <th>{formatter(key)}</th>
+                                <th onClick={() => handleSortingChange(key)}>{formatter(key)}</th>
                             )
                         })}
                     </tr>
                 </thead>
                 <tbody>
-                    {companies.map(company=>{
+                    {newDisplayedCompanies.map(company=>{
                         let companyVals = Object.values(company)
 
                         return (

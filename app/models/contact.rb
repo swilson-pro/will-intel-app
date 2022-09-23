@@ -6,3 +6,7 @@ end
 def owner_name
     user.name
 end
+
+def company_products
+    company.products
+end

@@ -99,7 +99,27 @@ companies_csv.each do |row|
         company_legal_name: row['company_legal_name'],
         primary_industry_sector: row['primary_industry_sector'],
         primary_industry_group: row['primary_industry_group'],
-        primary_industry_code: row['primary_industry_code']
+        primary_industry_code: row['primary_industry_code'],
+        verticals: row['verticals'],
+        employees: row['employees'],
+        year_founded: row['year_founded'],
+        primary_contact_pbid: row['primary_contact_pbid'],
+        primary_contact: row['primary_contact'],
+        hq_location: row['hq_location'],
+        hq_address_line_1: row['hq_address_line_1'],
+        hq_address_line_2: row['hq_address_line_2'],
+        hq_city: row['hq_city'],
+        hq_state_or_province: row['hq_state_or_province'],
+        hq_post_code: row['hq_post_code'],
+        hq_country_or_terrirory: row['hq_country_or_terrirory'],
+        hq_phone: row['hq_phone'],
+        hq_email: row['hq_email'],
+        hq_global_region: row['hq_global_region'],
+        hq_global_sub_region: row['hq_global_sub_region'],
+        financing_status_note: row['financing_status_note'],
+
+        
+
     )
     # puts "#{c.user_id}, #{c.name}, #{c.linkedin_company_id}, #{c.linkedin_regularCompanyUrl}, #{c.logoUrl}, #{c.description}, #{c.website} saved"
 
@@ -189,5 +209,35 @@ end
 # contact = Contact.create!(name: "James Madison", pbid: "1", company_name: "Flatiron", position: "CEO", bio: "i lead flatiron", phone: "9199199191", email: "james@gmail.com", location: "USA", twitter_url: "www.twitter.com/james_madison", linkedin_company_url: "linkedin.com/flatiron", user_id: 1)
 
 
+puts 'reading products csv'
 
+products_csv_text = File.read(Rails.root.join('lib', 'seeds', 'makeup_api_seed.csv'))
+
+puts 'parsing products csv'
+
+products_csv = CSV.parse(products_csv_text, :headers => true, :encoding => 'ISO-8859-1')
+
+puts 'seeding products'
+
+products_csv.each do |row|
+
+    company = Company.find_by(website: row['website']) || Company.create!(name: row['brand'], user_id: User.first.id)
+
+    product = Product.create!(
+        brand: row['brand'],
+        name: row['name'],
+        price: row['price'],
+        price_sign: row['price_sign'],
+        currency: row['currency'],
+        image_link: row['image_link'],
+        product_link: row['product_link'],
+        website: row['website'],
+        description: row['description'],
+        rating: row['rating'],
+        category: row['category'],
+        product_type: row['product_type'],
+        api_featured_image: row['api_featured_image'],
+        company_id: company.id,
+    )
+end
 

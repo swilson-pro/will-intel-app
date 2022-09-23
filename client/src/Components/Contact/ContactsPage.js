@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom"
 
-const ContactsPage = ({blackList}) => {
+const ContactsPage = ({conBlackList}) => {
 
     // const blackList = ['bio', 'twitter_url', 'image_url', 'user_id']
 
@@ -22,14 +22,14 @@ const ContactsPage = ({blackList}) => {
 
         let objKeys = Object.keys(contactsArray[0])
 
-        let displayKeys = objKeys.filter((item) => !blackList.includes(item))
+        let displayKeys = objKeys.filter((item) => !conBlackList.includes(item))
 
         contactsArray.map(objectElement => {
 
-            blackList.map((element) => delete objectElement[element])
+            conBlackList.map((element) => delete objectElement[element])
         })
 
-        let displayContacts = contactsArray.filter((item) => !blackList.includes(item))
+        let displayContacts = contactsArray.filter((item) => !conBlackList.includes(item))
 
         if (owner == "All") {
             setContacts(displayContacts)
@@ -123,9 +123,10 @@ const ContactsPage = ({blackList}) => {
                     <input className='searchbox'
                     type='text'
                     id='search'
-                    placeholder='search by keyword'
+                    placeholder='search by name'
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}/>
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    />
                 </div>
             </div>
             <table className='contacts-table'>
