@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
-import { NavLink } from "react-router-dom"
+import { Navigate, NavLink } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const CompaniesPage = ({compBlackList}) => {
 
     // const compBlackList = ['description', 'logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
+
+    let navigate = useNavigate()
 
     const [ownersNames, setOwnersNames] = useState([])
     const [owner, setOwner] = useState("All")
@@ -100,6 +103,10 @@ const CompaniesPage = ({compBlackList}) => {
     }
 
 
+    const handleClick = (id) => {
+        console.log('clicked: ', id)
+        navigate(`/companies/${id}`)
+    }
     console.log('companies', companies)
     console.log('keyArray', keyArray)
     return(
@@ -140,7 +147,7 @@ const CompaniesPage = ({compBlackList}) => {
                         let companyVals = Object.values(company)
 
                         return (
-                            <tr>
+                            <tr onClick={() => handleClick(company.id)}>
                                 {companyVals.map(val => {
                                     return (
                                         <td>{val}</td>

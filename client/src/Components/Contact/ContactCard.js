@@ -54,6 +54,7 @@ const ContactCard = () => {
                             })}
                             <li>Name</li>
                         </ul>
+                        <img className="contact-company-logo" src={contact.company_logo} alt={contact.company_name}></img>
                     </div>
                 </div>
             </div>

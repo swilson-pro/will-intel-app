@@ -4,6 +4,11 @@ class ProductsController < ApplicationController
         render json: products
     end
 
+    def show
+        product = Product.find(params[:id])
+        render json: product
+    end
+
     def create
         # company = Company.find(name: params[input_company_name])
         # company = Company.find_by(input_company_name: params[:input_company_name])

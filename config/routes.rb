@@ -14,8 +14,10 @@ Rails.application.routes.draw do
 
 
   get '/companies', to: 'companies#index'
+  get '/companies/:id', to: 'companies#show'
   post '/companies', to: 'companies#create'
 
   get '/products', to: 'products#index'
+  get '/products/:id', to: 'products#show'
   post '/products', to: 'products#create'
 end
