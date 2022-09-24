@@ -20,6 +20,7 @@ const ContactCard = () => {
 
     console.log('id', id)
     console.log('contact', contact)
+    console.log('contact.company_products', contact.company_products)
     return (
         <div className="contact-card">
             <div className="main">
@@ -41,6 +42,18 @@ const ContactCard = () => {
                         {/* <h4>Position:{contact.position}</h4> */}
                         <h4>Linkedin: {<a href={contact.linkedin_profile_url} target="_blank">{contact.linkedin_profile_url}</a>}</h4>
                         <h4>Bio: {contact.bio}</h4>
+                    </div>
+                    <div className="left-bottom">
+                        <ul className="company-products">
+                            {contact.company_name}
+                            {contact.owner_name}
+                            {contact.company_products?.map((product) => {
+                                return (
+                                    <li>{product.name}</li>
+                                )
+                            })}
+                            <li>Name</li>
+                        </ul>
                     </div>
                 </div>
             </div>

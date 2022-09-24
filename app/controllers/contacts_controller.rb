@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
 
     def index
-        contacts = Contact.all
+        contacts = Contact.all.page params[:page]
         render json: contacts, each_serializer: ContactTableSerializer
     end
 
