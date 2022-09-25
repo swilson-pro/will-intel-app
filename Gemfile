@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem 'kaminari'
+
 gem 'active_model_serializers'
 
 ruby "2.7.4"

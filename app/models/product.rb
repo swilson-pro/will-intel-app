@@ -8,4 +8,8 @@ class Product < ApplicationRecord
     def owner_name
         company.user.name
     end
+
+    def company_contacts
+        company.contacts
+    end
 end

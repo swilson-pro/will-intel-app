@@ -8,8 +8,10 @@ import ContactCard from './Components/Contact/ContactCard';
 import NewContact from './Components/Contact/NewContact';
 import CompaniesPage from './Components/Companies/CompaniesPage';
 import NewCompany from './Components/Companies/NewCompany';
+import CompanyCard from './Components/Companies/CompanyCard';
 import ProductsPage from './Components/Product/ProductsPage';
 import NewProduct from './Components/Product/NewProduct';
+import ProductCard from './Components/Product/ProductCard';
 // import InitiativesPage from './Components/Companies/Initiative/InitiativesPage';
 
 function App() {
@@ -27,8 +29,10 @@ function App() {
           <Route path='/contacts/:id' element={<ContactCard conBlackList={conBlackList} />} />
           <Route path='/contacts' element={<ContactsPage conBlackList={conBlackList} />} />
           <Route path='/companies/new' element={<NewCompany compBlackList={compBlackList} />} />
+          <Route path='/companies/:id' element={<CompanyCard />} />
           <Route path='/companies' element={ <CompaniesPage compBlackList={compBlackList} /> } />
           <Route path='/products/new' element={<NewProduct />} />
+          <Route path='/products/:id' element={<ProductCard />} />
           <Route path='/products' element={ <ProductsPage prodBlackList={prodBlackList} />} />
 
           {/* <Route path='/initiatives' element={ <InitiativesPage />} /> */}

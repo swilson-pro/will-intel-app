@@ -10,3 +10,7 @@ end
 def company_products
     company.products
 end
+
+def company_logo
+    company.logoUrl
+end

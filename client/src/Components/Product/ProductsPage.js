@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProductsPage = ({prodBlackList}) => {
+
+    let navigate = useNavigate()
 
     const [ownersNames, setOwnersNames] = useState([])
     const [owner, setOwner] = useState([])
@@ -103,7 +106,11 @@ const ProductsPage = ({prodBlackList}) => {
         setOwner(e.target.value)
     }
 
-
+    const handleClick = (id) => {
+        console.log('clicked: ', id)
+        navigate(`/products/${id}`)
+        
+    }
     console.log('products', products)
     console.log('keyArray', keyArray)
 
@@ -144,7 +151,7 @@ const ProductsPage = ({prodBlackList}) => {
                         let productVals = Object.values(product)
 
                         return (
-                            <tr>
+                            <tr onClick={() => handleClick(product.id)}>
                                 {productVals.map(val => {
                                     return (
                                         <td>{val}</td>
