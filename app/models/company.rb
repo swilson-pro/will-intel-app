@@ -3,3 +3,7 @@ class Company < ApplicationRecord
   has_many :contacts
   has_many :products
 end
+
+def contacts_count
+  contacts.length
+end
