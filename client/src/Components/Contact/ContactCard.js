@@ -1,7 +1,10 @@
-import { useParams } from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const ContactCard = () => {
+
+    let navigate = useNavigate()
 
     let {id} = useParams()
 
@@ -14,15 +17,33 @@ const ContactCard = () => {
 
     }
 
+    const deleteContact = async (id) => {
+        console.log('clicked', id)
+        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+            method: "DELETE",            
+        })
+        .then(alert("Contact Deleted"))
+        backToContacts()
+    }
+
+    const backToContacts = () => {
+        navigate(`/contacts`)
+    }
+
     useEffect(() => {
         fetchContact()
     }, [])
+
+    const handleProductClick = (id) => {
+        navigate(`/products/${id}`)
+    }
 
     console.log('id', id)
     console.log('contact', contact)
     console.log('contact.company_products', contact.company_products)
     return (
         <div className="contact-card">
+            <button onClick={() => deleteContact(contact.id)}>Delete Contact</button>
             <div className="main">
                 <div className="left">
                     <div className="left-head">
@@ -49,7 +70,7 @@ const ContactCard = () => {
                             {contact.owner_name}
                             {contact.company_products?.map((product) => {
                                 return (
-                                    <li>{product.name}</li>
+                                    <li key={product.id} onClick={() => handleProductClick(product.id)}>{product.name}</li>
                                 )
                             })}
                             <li>Name</li>

@@ -137,6 +137,7 @@ const ContactsPage = ({conBlackList}) => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
+                <h4>Total: {contacts.length}</h4>
             </div>
             </div>
             <div className="fixTableHead">

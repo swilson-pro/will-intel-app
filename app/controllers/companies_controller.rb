@@ -18,6 +18,16 @@ class CompaniesController < ApplicationController
         end
     end
 
+    def destroy
+        company = Company.find_by(id: params[:id])
+        if company
+            company.destroy
+            render json: {}, status: 200
+        else
+            render json: { errors: "Company not found" }, status: 404
+        end
+    end
+
     private
 
     def company_params

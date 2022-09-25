@@ -131,6 +131,7 @@ const CompaniesPage = ({compBlackList}) => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
+                <h4>Total: {companies.length}</h4>
             </div>
             <table className="companies-table">
                 <thead>
