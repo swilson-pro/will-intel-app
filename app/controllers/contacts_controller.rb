@@ -47,12 +47,13 @@ class ContactsController < ApplicationController
         contact = Contact.find_by(id: params[:id])
         if contact
             company = Company.find_or_create_by(name: params[:company_name], user_id: contact.user_id)
+            # company = Company.find_by(name: params[:company_name], user_id: contact.user_id)
+            user = User.find_by(name: params[:input_owner_name])
 
             # params[:name] ? contact.update(name: params[:name]) | contact.update(name: contact.name)
             if params[:name]
                 contact.update(name: params[:name])
             end
-
             if params[:phone]
                 contact.update(phone: params[:phone])
             end
@@ -62,11 +63,24 @@ class ContactsController < ApplicationController
             if params[:image_url]
                 contact.update(image_url: params[:image_url])
             end
+            if params[:input_owner_name]
+                contact.update(user_id: user.id)
+            end
+            if params[:user_id]
+                contact.update(user_id: params[:user_id])
+            end
+            if params[:company_id]
+                contact.update(company_id: params[:company_id])
+            end
             if params[:company_name]
                 contact.update(company_name: params[:company_name])
+                contact.update(company_id: company.id)
             end
             if params[:position]
                 contact.update(position: params[:position])
+            end
+            if params[:linkedin_profile_url]
+                contact.update(linkedin_profile_url: params[:linkedin_profile_url])
             end
             if params[:bio]
                 contact.update(bio: params[:bio])

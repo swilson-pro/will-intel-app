@@ -108,12 +108,11 @@ const ContactsPage = ({conBlackList}) => {
     }
 
     const handleClick = (id) => {
-        console.log('clicked: ', id)
+
         navigate(`/contacts/${id}`)
     }
 
-    console.log('ownersNames', ownersNames)
-    console.log('owner', owner)
+
 
     return(
         <main>
@@ -125,7 +124,7 @@ const ContactsPage = ({conBlackList}) => {
                 <select className="chooseBox" name='ownersNames' id='ownersNames' onChange={updateOwner}>
                     <option value="All">All</option>
                     {ownersNames.map((ownerName) => {
-                        return <option value={ownerName}>{ownerName}</option>
+                        return <option key={ownerName} value={ownerName}>{ownerName}</option>
                     })}
                 </select>
                 <div className="searchbar">
@@ -146,7 +145,7 @@ const ContactsPage = ({conBlackList}) => {
                     <tr>
                         {keyArray.map((key) => {
                             return(
-                                <th onClick={() => handleSortingChange(key)}>{formatter(key)}</th>
+                                <th key={key} onClick={() => handleSortingChange(key)}>{formatter(key)}</th>
                             )
                         })}
                     </tr>
@@ -161,12 +160,12 @@ const ContactsPage = ({conBlackList}) => {
                         // console.log('contactVals', contactVals)
 
                         return (
-                            <tr onClick={() => handleClick(contact.id)}>
-                        {contactVals.map(val => {
+                            <tr key={contact.id} onClick={() => handleClick(contact.id)}>
+                        {contactVals.map((val, index) => {
 
                             // console.log('val', val)
                             return (
-                                <td>{val}</td>
+                                <td key={index}>{val}</td>
                             )
                         })}
                         </tr>)

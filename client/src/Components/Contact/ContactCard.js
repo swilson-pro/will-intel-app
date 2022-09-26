@@ -66,7 +66,9 @@ const ContactCard = () => {
                         <img src={contact.image_url} width='100' height='100'></img>
                         <h2>{contact.name}</h2>
                         <h3>{contact.position}</h3>
-                        <h4 onClick={() => handleCompanyClick(contact.company_id)}>{contact.company_name}</h4>
+                        <h4 onClick={() => handleCompanyClick(contact.company_id)}>{contact.real_company_name}</h4>
+
+                        <h4>Company ID: {contact.company_id}</h4>
                         
                     </div>
                     <hr></hr>
@@ -74,6 +76,7 @@ const ContactCard = () => {
                         <h4>Email: {contact.email}</h4>
                         <h4>Phone: {contact.phone}</h4>
                         <h4>Contact Owner: {contact.owner_name}</h4>
+                        <h4>Contact Owner ID: {contact.user_id}</h4>
                         <h4>Last Note: </h4>
                         {/* <h4>Company: {contact.company_name}</h4> */}
                         {/* <h4>Position:{contact.position}</h4> */}
@@ -82,7 +85,7 @@ const ContactCard = () => {
                     </div>
                     <div className="left-bottom">
                         <ul className="company-products">
-                            {contact.company_name}
+                            {contact.real_company_name}
                             {contact.owner_name}
                             {contact.company_products?.map((product) => {
                                 return (
@@ -91,7 +94,7 @@ const ContactCard = () => {
                             })}
                             <li>Name</li>
                         </ul>
-                        <img className="contact-company-logo" src={contact.company_logo} alt={contact.company_name}></img>
+                        <img className="contact-company-logo" src={contact.company_logo} alt={contact.real_company_name}></img>
                     </div>
                 </div>
             </div>

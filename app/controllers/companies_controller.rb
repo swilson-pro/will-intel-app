@@ -9,6 +9,12 @@ class CompaniesController < ApplicationController
         render json: company, serializer: CompanySerializer
     end
 
+
+    def names
+        companies = Company.all
+        names = companies.pluck(:id, :name)
+        render json: names
+    end
     def create
         company = Company.new(company_params)
         if company.save
