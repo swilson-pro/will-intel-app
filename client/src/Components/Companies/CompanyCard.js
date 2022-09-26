@@ -52,6 +52,7 @@ const CompanyCard = () => {
         <div className="company-card">
             <div className="main">
                 <button onClick={() => deleteCompany(company.id)}>Delete Company</button>
+                <button>Update Company Details</button>
                 <div className="left">
                     <div className="left-head">
                         <img src={company.logoUrl} width='100' height='100'></img>

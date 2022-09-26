@@ -15,9 +15,13 @@ const ContactCard = () => {
     const fetchContact = async() => {
         const response = await fetch(`http://localhost:3000/contacts/${id}`)
         const contactObj = await response.json()
+        console.log('contactObj', contactObj)
         setContact(contactObj)
 
     }
+
+
+
 
     useEffect(() => {
         fetchContact()
@@ -85,8 +89,7 @@ const ContactCard = () => {
                     </div>
                     <div className="left-bottom">
                         <ul className="company-products">
-                            {contact.real_company_name}
-                            {contact.owner_name}
+         
                             {contact.company_products?.map((product) => {
                                 return (
                                     <li key={product.id} onClick={() => handleProductClick(product.id)}>{product.name}</li>

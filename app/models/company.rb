@@ -4,6 +4,10 @@ class Company < ApplicationRecord
   has_many :products
 end
 
+def owner_name
+  user.name
+end
+
 def contacts_count
   contacts.length
 end

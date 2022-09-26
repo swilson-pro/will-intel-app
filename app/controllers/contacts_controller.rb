@@ -46,9 +46,9 @@ class ContactsController < ApplicationController
     def update
         contact = Contact.find_by(id: params[:id])
         if contact
-            company = Company.find_or_create_by(name: params[:company_name], user_id: contact.user_id)
+            # company = Company.find_or_create_by(name: params[:company_name], user_id: contact.user_id)
             # company = Company.find_by(name: params[:company_name], user_id: contact.user_id)
-            user = User.find_by(name: params[:input_owner_name])
+            # user = User.find_by(name: params[:input_owner_name])
 
             # params[:name] ? contact.update(name: params[:name]) | contact.update(name: contact.name)
             if params[:name]
