@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/contacts', to: 'contacts#index'
   get '/contacts/:id', to: 'contacts#show'
   post '/contacts', to: 'contacts#create'
+  patch '/contacts/:id', to: 'contacts#update'
   delete '/contacts/:id', to: 'contacts#destroy'
 
   get '/users', to: 'users#index'
@@ -15,7 +16,9 @@ Rails.application.routes.draw do
 
   get '/companies', to: 'companies#index'
   get '/companies/:id', to: 'companies#show'
+  get '/companies_names', to: 'companies#names'
   post '/companies', to: 'companies#create'
+  patch '/companies/:id', to: 'companies#update'
   delete '/companies/:id', to: 'companies#destroy'
 
   get '/products', to: 'products#index'

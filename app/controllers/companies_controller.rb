@@ -9,12 +9,36 @@ class CompaniesController < ApplicationController
         render json: company, serializer: CompanySerializer
     end
 
+
+    def names
+        companies = Company.all
+        names = companies.pluck(:id, :name)
+        render json: names
+    end
     def create
         company = Company.new(company_params)
         if company.save
             render json: company, status: 201
         else
             render json: { errors: company.errors.full_messages }, status: 422
+        end
+    end
+
+    def update
+        company = Company.find_by(id: params[:id])
+        if company
+            if params[:name]
+                company.update(name: params[:name])
+            end
+            if params[:website]
+                company.update(website: params[:website])
+            end
+            if params[:linkedin_regularCompanyUrl]
+                company.update(linkedin_regularCompanyUrl: params[:linkedin_regularCompanyUrl])
+            end
+            if params[:description]
+                company.update(description: params[:description])
+            end
         end
     end
 

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ContactCard from "../Contact/ContactCard";
 import { useNavigate } from "react-router-dom";
+import EditCompany from "./EditCompany";
 
 const CompanyCard = () => {
 
@@ -9,9 +10,8 @@ const CompanyCard = () => {
 
     let {id} = useParams()
 
-    console.log('id', id)
-
     const [company, setCompany] = useState({})
+    const [isEditClicked, setIsEditClicked] = useState(false)
 
     const fetchCompany = async () => {
         const response = await fetch(`http://localhost:3000/companies/${id}`)
@@ -23,6 +23,10 @@ const CompanyCard = () => {
     useEffect(() => {
         fetchCompany()
     },[])
+
+    const updateCompany = async () => {
+        setIsEditClicked(!isEditClicked)
+    }
 
     const deleteCompany = async (id) => {
         console.log('clicked', id)
@@ -52,6 +56,7 @@ const CompanyCard = () => {
         <div className="company-card">
             <div className="main">
                 <button onClick={() => deleteCompany(company.id)}>Delete Company</button>
+                <button onClick={updateCompany}>Update Company Details</button>
                 <div className="left">
                     <div className="left-head">
                         <img src={company.logoUrl} width='100' height='100'></img>
@@ -73,9 +78,8 @@ const CompanyCard = () => {
                                 })}
                             </ul>
                         </div>
-
-
-
+                        <hr></hr>
+                        {isEditClicked ? <EditCompany id={id} fetchCompany={fetchCompany}/> : null}
                     </div>
                 </div>
             </div>

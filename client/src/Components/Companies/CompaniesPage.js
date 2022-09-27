@@ -33,7 +33,10 @@ const CompaniesPage = ({compBlackList}) => {
 
         let displayCompanies = companiesArray.filter((item) => !compBlackList.includes(item))
 
-        setCompanies(displayCompanies)
+        if (owner == "All") {
+            setCompanies(displayCompanies)
+        } else setCompanies(displayCompanies.filter(company => company.owner_name == owner))
+
 
         setKeyArray(displayKeys)
     }
@@ -51,7 +54,7 @@ const CompaniesPage = ({compBlackList}) => {
     useEffect(() => {
         fetchCompanies()
         fetchOwnerNames()
-    }, [])
+    }, [owner])
 
 
 
@@ -75,7 +78,7 @@ const CompaniesPage = ({compBlackList}) => {
     }
 
     const handleSorting = (sortField, sortOrder) => {
-        console.log('sortField, sortOrder', sortField, sortOrder)
+
 
         if (sortField) {
             const sorted = [...companies].sort((a,b) => {
@@ -94,21 +97,23 @@ const CompaniesPage = ({compBlackList}) => {
         field === sortField && order === 'asc' ? 'desc' : 'asc'
 
 
-        console.log('field', field)
-        console.log('sortOrder', sortOrder)
+
+
         setSortField(field)
         setOrder(sortOrder)
         handleSorting(field, sortOrder)
 
     }
 
+    const updateOwner = (e) => {
+        setOwner(e.target.value)
+    }
+
 
     const handleClick = (id) => {
-        console.log('clicked: ', id)
         navigate(`/companies/${id}`)
     }
-    console.log('companies', companies)
-    console.log('keyArray', keyArray)
+
     return(
         <main className="main">
             <NavLink className='new-company-navlink' to='/companies/new' >
@@ -116,10 +121,10 @@ const CompaniesPage = ({compBlackList}) => {
             </NavLink>
             <div className="filter">
                 <label className='filterLabel'>Choose owner:</label>
-                <select name='ownersNames' id='ownersNames'>
+                <select name='ownersNames' id='ownersNames' onChange={updateOwner}>
                     <option value="All">All</option>
-                    {ownersNames.map((ownerName) => {
-                        return <option value={ownerName}>{ownerName}</option>
+                    {ownersNames.map((ownerName, index) => {
+                        return <option key={index} value={ownerName}>{ownerName}</option>
                     })}
                 </select>
                 <div className="searchbar">
@@ -136,9 +141,9 @@ const CompaniesPage = ({compBlackList}) => {
             <table className="companies-table">
                 <thead>
                     <tr>
-                        {keyArray.map((key) => {
+                        {keyArray.map((key, index) => {
                             return (
-                                <th onClick={() => handleSortingChange(key)}>{formatter(key)}</th>
+                                <th key={index} onClick={() => handleSortingChange(key)}>{formatter(key)}</th>
                             )
                         })}
                     </tr>
@@ -149,9 +154,9 @@ const CompaniesPage = ({compBlackList}) => {
 
                         return (
                             <tr onClick={() => handleClick(company.id)}>
-                                {companyVals.map(val => {
+                                {companyVals.map((val, index) => {
                                     return (
-                                        <td>{val}</td>
+                                        <td key={index}>{val}</td>
                                     )
                                 })}
                             </tr>

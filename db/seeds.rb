@@ -74,10 +74,7 @@ companies_csv = CSV.parse(companies_csv_text, :headers => true, :encoding => 'IS
 
 puts 'seeding companies'
 
-Company.create!(
-    user_id: User.first.id,
-    name: "Unnassigned Products"
-)
+
 
 companies_csv.each do |row|
     # c = Company.new

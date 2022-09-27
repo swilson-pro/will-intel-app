@@ -149,10 +149,12 @@ const ProductsPage = ({prodBlackList}) => {
                 <tbody>
                     {newDisplayedProducts.map(product=>{
                         let productVals = Object.values(product)
-
+                        console.log('product?', product)
+                        console.log('productVals', productVals)
                         return (
                             <tr onClick={() => handleClick(product.id)}>
                                 {productVals.map(val => {
+                                    console.log('val', val)
                                     return (
                                         <td>{val}</td>
                                     )

@@ -5,11 +5,12 @@ const NewCompany = () => {
     const [name, setName] = useState('')
     const [website, setWebsite] = useState('')
     const [logoUrl, setLogoUrl] = useState('')
+    const [description, setDescription] = useState('')
 
     const handleContactSubmit = async (e) => {
         e.preventDefault();
 
-        console.log('Company: ', {name, website, logoUrl})
+        console.log('Company: ', {name, website, logoUrl, description})
 
         let req = await fetch(`http://localhost:3000/companies`, {
             method: "POST",
@@ -20,7 +21,8 @@ const NewCompany = () => {
                 name: name,
                 website: website,
                 logoUrl: logoUrl,
-                user_id: 1
+                user_id: 1,
+                description: description
 
             })
         })
@@ -37,6 +39,7 @@ const NewCompany = () => {
                 <input className='input' type='text' name='name' placeholder='Company Name' value={name} onChange={(e) => setName(e.target.value)}/>
                 <input className='input' type='text' name='website' placeholder='Website' value={website} onChange={(e) => setWebsite(e.target.value)}/>
                 <input className='input' type='text' name='website' placeholder='Logo' value={logoUrl} onChange={(e) => setLogoUrl(e.target.value)}/>
+                <input className='input' type='text' name='description' placeholder='Description' value={description} onChange={(e) => setDescription(e.target.value)}/>
                 <button type='submit'>Save</button>
             </form>
         </div>

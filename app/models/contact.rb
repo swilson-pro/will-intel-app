@@ -14,3 +14,7 @@ end
 def company_logo
     company.logoUrl
 end
+
+def real_company_name
+    company.name
+end
