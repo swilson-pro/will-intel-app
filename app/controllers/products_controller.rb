@@ -34,6 +34,29 @@ class ProductsController < ApplicationController
         end
     end
 
+    def update
+        product = Product.find(params[:id])
+        if params[:name]
+            product.update(name: params[:name])
+        end
+        if params[:brand]
+            product.update(brand: params[:brand])
+        end
+        if params[:company_id]
+            product.update(company_id: params[:company_id])
+        end
+        if params[:product_link]
+            product.update(product_link: params[:product_link])
+        end   
+        if params[:website]
+            product.update(website: params[:website])
+        end          
+        if params[:description]
+            product.update(description: params[:description])
+        end     
+
+    end
+
     def destroy
         product = Product.find(params[:id])
         if product

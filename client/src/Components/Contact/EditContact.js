@@ -244,7 +244,7 @@ const EditContact = ({id, contact, fetchContact}) => {
                 <input type="submit" value="Update Company" />
             </form> */}
             <form onSubmit={updateCompany}>
-                <label>
+
                     <select>
                         {/* {companies.map((company) => {
                             return <option id={company.id} value={company.name}>{company.name}</option>
@@ -255,7 +255,7 @@ const EditContact = ({id, contact, fetchContact}) => {
                     </select>
                     <select></select>
                     <input type="submit" value="Update Company" />
-                </label>
+
             </form>
 
             <form onSubmit={updateOwner}>
