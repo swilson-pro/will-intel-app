@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"
 
 const ProductCard = () => {
 
+    const [isEditClicked, setIsEditClicked] = useState(false)
+
     let {id} = useParams()
 
     let navigate = useNavigate()
@@ -30,10 +32,23 @@ const ProductCard = () => {
         navigate(`/contacts/${id}`)
     }
 
+    const deleteProduct = async (id) => {
+        let req = await fetch(`http://localhost:3000/products/${id}`, {
+            method: "DELETE",
+        })
+        .then(alert("Product Deleted"))
+        backToProducts()
+    }
+
+    const backToProducts = () => {
+        navigate(`/products`)
+    }
+
 console.log('id', id)
 console.log('product', product)
     return (
         <div className="product-card">
+            <button onClick={() => deleteProduct(product.id)}>Delete Product</button>
             <div className="left">
                 <div className="left-head">
                     <img src={product.image_link} alt={product.name} width='100px' height='100px' onClick={() => handleCompanyClick(product.company_id)}></img>

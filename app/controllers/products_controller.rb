@@ -34,6 +34,16 @@ class ProductsController < ApplicationController
         end
     end
 
+    def destroy
+        product = Product.find(params[:id])
+        if product
+            product.destroy
+            render json: {}, status: 200
+        else
+            render json: { errors: "Product not found" }, status: 404
+        end
+    end
+
     private
 
     def product_params
