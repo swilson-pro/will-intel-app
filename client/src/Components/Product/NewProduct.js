@@ -1,18 +1,52 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import NewCompany from "../Companies/NewCompany"
 
 const NewProduct = () => {
 
     const [name, setName] = useState('')
     const [brand, setBrand] = useState('')
-    const [company, setCompany] = useState('')
+    const [companyName, setCompanyName] = useState('Choose Company')
     const [price, setPrice] = useState('')
     const [image, setImage] = useState('')
     const [website, setWebsite] = useState('')
 
+    const [companies, setCompanies] = useState([])
+
+    const fetchCompanies = async () => {
+        let req = await fetch(`http://localhost:3000/companies_names`)
+        let res = await req.json()
+        setCompanies(res)
+
+    }
+
     const handleProductSubmit = async (e) => {
         e.preventDefault()
-        console.log('product: ', {name, brand, company, price, image, website})
+        
+
+        console.log('companies', companies)
+        console.log('e.target', e.target)
+        console.log('e.target[0].value', e.target[0].value)
+        console.log('e.target[1].value', e.target[1].value)
+        console.log('e.target[2].value', e.target[2].value)
+        console.log('e.target[3].value', e.target[3].value)
+        console.log('e.target[4].value', e.target[4].value)
+
+        let newCompany = e.target[2].value
+
+        console.log('newCompany', newCompany)
+
+        const result = companies.find(company => {
+            return company[1] == newCompany
+        })
+
+        let newCompanyID = result[0]
+        let newCompanyName = result[1]
+        console.log('newCompanyID', newCompanyID)
+        console.log('newCompanyName', newCompanyName)
+        
+        console.log('product: ', {name, brand, newCompanyName, price, image, website})
+
+        console.log('result', result)
 
         let req = await fetch(`http://localhost:3000/products`, {
             method: "POST",
@@ -22,7 +56,7 @@ const NewProduct = () => {
             body: JSON.stringify({
                 name: name,
                 brand: brand,
-                input_company_name: company, 
+                input_company_name: newCompanyID, 
                 price: price,
                 image_link: image,
                 website: website,
@@ -30,11 +64,15 @@ const NewProduct = () => {
         })
         setName('')
         setBrand('')
-        setCompany('')
+        setCompanyName('')
         setPrice('')
         setImage('')
         setWebsite('')
     }
+
+    useEffect(() => {
+        fetchCompanies()
+    }, [])
 
     return (
         <div className="new-product-div">
@@ -42,7 +80,13 @@ const NewProduct = () => {
             <form className="new-product-form" onSubmit={handleProductSubmit}>
                 <input className='input' type='text' name='name' placeholder='Name' value={name} onChange={(e) => setName(e.target.value)}/>
                 <input className='input' type='text' name='brand' placeholder='Brand' value={brand} onChange={(e) => setBrand(e.target.value)}/>
-                <input className='input' type='text' name='company' placeholder='Company' value={company} onChange={(e) => setCompany(e.target.value)}/>
+                <select>
+                <option>{companyName}</option>
+                    {companies.map((company) => {
+                        // return <option key={company[0] value={companyName} placeholder='Company' onChange={(e) => setCompanyName(e.target.value)}}>{company[1]}</option>
+                        return <option key={company[0]} value={company[1]}>{company[1]}</option>
+                    })}
+                </select>
                 <input className='input' type='number' name='price' placeholder='Price' value={price} onChange={(e) => setPrice(parseFloat(e.target.value))}/>
                 <input className='input' type='text' name='image' placeholder='Image URL' value={image} onChange={(e) => setImage(e.target.value)}/>
                 <input className='input' type='text' name='website' placeholder='Website' value={website} onChange={(e) => setWebsite(e.target.value)}/>

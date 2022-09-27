@@ -7,7 +7,7 @@ const NewCompany = () => {
     const [logoUrl, setLogoUrl] = useState('')
     const [description, setDescription] = useState('')
 
-    const handleContactSubmit = async (e) => {
+    const handleCompanySubmit = async (e) => {
         e.preventDefault();
 
         console.log('Company: ', {name, website, logoUrl, description})
@@ -35,7 +35,7 @@ const NewCompany = () => {
     return (
         <div className="new-company-div">
             <h2>New Company</h2>
-            <form className="new-company-form" onSubmit={handleContactSubmit}>
+            <form className="new-company-form" onSubmit={handleCompanySubmit}>
                 <input className='input' type='text' name='name' placeholder='Company Name' value={name} onChange={(e) => setName(e.target.value)}/>
                 <input className='input' type='text' name='website' placeholder='Website' value={website} onChange={(e) => setWebsite(e.target.value)}/>
                 <input className='input' type='text' name='website' placeholder='Logo' value={logoUrl} onChange={(e) => setLogoUrl(e.target.value)}/>

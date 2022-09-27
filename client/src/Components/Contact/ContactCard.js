@@ -85,6 +85,7 @@ const ContactCard = () => {
                         <h4>Bio: {contact.bio}</h4>
                     </div>
                     <div className="left-bottom">
+                    <img className="contact-company-logo" src={contact.company_logo} alt={contact.real_company_name} width='100' height='100'></img>
                         <ul className="company-products">
          
                             {contact.company_products?.map((product) => {
@@ -94,7 +95,7 @@ const ContactCard = () => {
                             })}
                             <li>Name</li>
                         </ul>
-                        <img className="contact-company-logo" src={contact.company_logo} alt={contact.real_company_name}></img>
+                        
                     </div>
                 </div>
             </div>
