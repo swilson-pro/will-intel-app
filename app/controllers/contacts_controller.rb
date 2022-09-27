@@ -1,5 +1,30 @@
 class ContactsController < ApplicationController
 
+
+    # this first attempt was a workaround b/c we couldn't get serializer to be respected for the paginated contacts fetch. we ended up getting it working tho
+    # def paginated_contacts
+    #     contacts = Contact.all
+    #     paginated_contacts = contacts.paginate(page: params[:page], per_page: 10)
+    #     x = paginated_contacts.as_json(only: [:id, :name, :company_name, :real_company_name, :position, :phone, :email, :location, :twitter_url, :linkedin_profile_url, :linkedin_company_url, :user_id, :image_url, :owner_name, :company_id])
+
+    #     render json: {
+    #         contacts: x,
+    #         page: paginated_contacts.current_page,
+    #         page_count: paginated_contacts.total_pages
+    #     }
+    # end
+
+    def paginated_contacts
+        contacts = Contact.all
+        paginated_contacts = contacts.paginate(page: params[:page], per_page: 10)
+        render json: {
+            contacts: ActiveModel::Serializer::CollectionSerializer.new(paginated_contacts, serializer: ContactTableSerializer),
+            page: paginated_contacts.current_page,
+            page_count: paginated_contacts.total_pages
+        }
+    end
+
+
     def index
         contacts = Contact.all
         render json: contacts, each_serializer: ContactTableSerializer

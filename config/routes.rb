@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
+
+  # pagination
+  get '/contacts_paginated/:page', to: 'contacts#paginated_contacts'
+
   get '/contacts', to: 'contacts#index'
   get '/contacts/:id', to: 'contacts#show'
   post '/contacts', to: 'contacts#create'

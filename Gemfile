@@ -1,7 +1,9 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'kaminari'
+# gem 'kaminari'
+
+gem 'will_paginate', '~> 3.3'
 
 gem 'active_model_serializers'
 

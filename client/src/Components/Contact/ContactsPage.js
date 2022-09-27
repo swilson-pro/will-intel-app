@@ -19,6 +19,33 @@ const ContactsPage = ({conBlackList}) => {
     const [sortField, setSortField] = useState('')
     const [order, setOrder] = useState('asc')
 
+    const [page, setPage] = useState(1)
+
+
+
+    const fetchPaginatedContacts = async () => {
+        const res = await fetch(`http://localhost:3000/contacts_paginated/${page}`)
+        const contactsPaginatedObject = await res.json()
+        console.log('contactsPaginatedObject', contactsPaginatedObject)
+        console.log('contactsPaginatedObject.page', contactsPaginatedObject.page)
+        console.log('contactsPaginatedObject.page_count', contactsPaginatedObject.page_count)
+
+        const contactsArray = contactsPaginatedObject.contacts
+
+        let objKeys = Object.keys(contactsArray[0])
+
+        let displayKeys = objKeys.filter((item) => !conBlackList.includes(item))
+
+        contactsArray.map(objectElement => {
+            conBlackList.map((element) => delete objectElement[element])
+        })
+
+        let displayContacts = contactsArray.filter((item) => !conBlackList.includes(item))
+
+        console.log('displayContacts(fetchPaginatedContacts', displayContacts)
+
+    }
+
     const fetchContacts = async () => {
         const response = await fetch(`http://localhost:3000/contacts`)
         const contactsArray = await response.json()
@@ -33,6 +60,8 @@ const ContactsPage = ({conBlackList}) => {
         })
 
         let displayContacts = contactsArray.filter((item) => !conBlackList.includes(item))
+
+        console.log('displayContacts', displayContacts)
 
         if (owner == "All") {
             setContacts(displayContacts)
@@ -58,6 +87,7 @@ const ContactsPage = ({conBlackList}) => {
     useEffect(() => {
         fetchContacts()
         fetchOwnersNames()
+        fetchPaginatedContacts()
     }, [owner])
 
     let formatter = (str) => {
