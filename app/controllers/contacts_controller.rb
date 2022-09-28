@@ -15,8 +15,43 @@ class ContactsController < ApplicationController
     # end
 
     def paginated_contacts
-        contacts = Contact.all
+        # puts request.query_parameters["brand"]
+
+        # params.each do |key,value|
+        #     puts "these are the params - #{key}: #{value}"
+        # end
+
+        # puts params
+
+        passed_params = params.select {|k,v| k != "action" and k != "controller" and k != "page" and k != "contact"}
+        puts "passed_params: #{passed_params}"
+
+        # puts passed_params.keys
+
+        params_keys = passed_params.keys
+        puts "params_keys: #{params_keys}"
+
+        params_values = passed_params.values
+        puts "params_values: #{params_values}"
+        
+        # passed_params.each do |k|
+        #     puts "i'm putsing #{k}"
+        # end
+
+        attribute = "#{params_keys.shift}"
+        puts "attribute: #{attribute}"
+        order = "#{params_values.shift}"
+        puts "order: #{order}"
+
+        contacts = Contact.all.order("#{attribute} #{order}")
+        # contacts = Contact.all.order("#{attribute} ASC")
+        # contacts = Contact.all.order("#{attribute} #{order}")
+        # contacts.order(:position)
         paginated_contacts = contacts.paginate(page: params[:page], per_page: 10)
+
+        # if request.query_parameters["brand"]
+            # ?brand=nada ^^
+
         render json: {
             contacts: ActiveModel::Serializer::CollectionSerializer.new(paginated_contacts, serializer: ContactTableSerializer),
             page: paginated_contacts.current_page,

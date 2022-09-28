@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate'
 
 const PaginateContacts = ({pageCount, setPageCount, data, getContactsForPage}) => {
 
-    console.log('pageCount', pageCount)
+
 
     const [currentItems, setCurrentItems] = useState([]);
 
@@ -27,15 +27,15 @@ const PaginateContacts = ({pageCount, setPageCount, data, getContactsForPage}) =
     }
     return (
         <>
-        <div>
+        {/* <div>
             {currentItems.map(contact => {
                 return (
                     <div>
-                        <h3>{contact.name}</h3>
+                        <h3 key={contact.id}>{contact.name}</h3>
                     </div>
                 )
             })}
-        </div>
+        </div> */}
         <ReactPaginate
             breakLabel="..."
             nextLabel="next >"

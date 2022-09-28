@@ -97,7 +97,7 @@ const CompaniesPage = ({compBlackList}) => {
         field === sortField && order === 'asc' ? 'desc' : 'asc'
 
 
-
+        console.log('sortOrder', sortOrder)
 
         setSortField(field)
         setOrder(sortOrder)
