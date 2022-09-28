@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
+import PaginateContacts from "./PaginateContacts"
 
 const ContactsPage = ({conBlackList}) => {
 
@@ -11,26 +12,29 @@ const ContactsPage = ({conBlackList}) => {
     const [ownersNames, setOwnersNames] = useState([])
     const [owner, setOwner] = useState("All")
 
+    const [owners, setOwners] = useState([])
+    const [paginatedOwner, setPaginatedOwner] = useState("All")
+
     const [contacts, setContacts] = useState([])
+
     const [keyArray, setKeyArray] = useState([])
 
-    const [searchTerm, setSearchTerm] = useState("")
-
-    const [sortField, setSortField] = useState('')
-    const [order, setOrder] = useState('asc')
-
     const [page, setPage] = useState(1)
+    const [pageCount, setPageCount] = useState()
 
 
 
-    const fetchPaginatedContacts = async () => {
+    const fetchContacts = async () => {
         const res = await fetch(`http://localhost:3000/contacts_paginated/${page}`)
         const contactsPaginatedObject = await res.json()
         console.log('contactsPaginatedObject', contactsPaginatedObject)
-        console.log('contactsPaginatedObject.page', contactsPaginatedObject.page)
-        console.log('contactsPaginatedObject.page_count', contactsPaginatedObject.page_count)
-
-        const contactsArray = contactsPaginatedObject.contacts
+        const contactsPageDataArray = contactsPaginatedObject.contacts
+        console.log('contactsPageDataArray', contactsPageDataArray)
+        const pagina = contactsPaginatedObject.page
+        console.log('pagina', pagina)
+        const paginaCuenta = contactsPaginatedObject.page_count
+        console.log('paginaCuenta', paginaCuenta)
+        const contactsArray = contactsPageDataArray
 
         let objKeys = Object.keys(contactsArray[0])
 
@@ -40,55 +44,52 @@ const ContactsPage = ({conBlackList}) => {
             conBlackList.map((element) => delete objectElement[element])
         })
 
-        let displayContacts = contactsArray.filter((item) => !conBlackList.includes(item))
-
-        console.log('displayContacts(fetchPaginatedContacts', displayContacts)
-
-    }
-
-    const fetchContacts = async () => {
-        const response = await fetch(`http://localhost:3000/contacts`)
-        const contactsArray = await response.json()
-
-        let objKeys = Object.keys(contactsArray[0])
-
-        let displayKeys = objKeys.filter((item) => !conBlackList.includes(item))
-
-        contactsArray.map(objectElement => {
-
-            conBlackList.map((element) => delete objectElement[element])
-        })
-
-        let displayContacts = contactsArray.filter((item) => !conBlackList.includes(item))
-
-        console.log('displayContacts', displayContacts)
-
-        if (owner == "All") {
-            setContacts(displayContacts)
-        } else setContacts(displayContacts.filter(contact => contact.owner_name == owner))
-
-
-
-        // i want to print out an array with all items
         setKeyArray(displayKeys)
 
+        setContacts(contactsArray)
+
     }
 
-    const newDisplayedContacts = contacts.filter(contact => {
-        return contact.name.toLowerCase().includes(searchTerm.toLowerCase());
-    })
+    const updateOwner = async (e) => {
+
+        console.log('owners', owners)
+        e.preventDefault()
+
+        console.log('e', e)
+        console.log('e.target', e.target)
+        console.log('e.target[0]', e.target[0])
+        console.log('e.target[0].value', e.target[0].value)
+
+        const result = owners.find(owner => {
+            return owner.name == e.target[0].value;
+        })
+
+        console.log('result', result)
+
+        let res = await fetch(`http://localhost:3000/owners_contacts_paginated/${result.id}/${page}`)
+        const contactsPaginatedObject = await res.json()
+        const contactsArray = contactsPaginatedObject.contacts
+        console.log('contactsArray', contactsArray)
+        setContacts(contactsArray)
+
+    
+    }
+
 
     const fetchOwnersNames = async () => {
         const response = await fetch(`http://localhost:3000/users_names`)
         const ownersNamesArray = await response.json()
+        const res = await fetch(`http://localhost:3000/users`)
+        const ownersArray = await res.json()
+        setOwners(ownersArray)
         setOwnersNames(ownersNamesArray)
     }
 
     useEffect(() => {
-        fetchContacts()
+        // fetchContacts()
         fetchOwnersNames()
-        fetchPaginatedContacts()
-    }, [owner])
+        fetchContacts()
+    }, [paginatedOwner, owner])
 
     let formatter = (str) => {
         let arr = str.split('')
@@ -109,34 +110,6 @@ const ContactsPage = ({conBlackList}) => {
         return result
     }
 
-
-    const handleSorting = (sortField, sortOrder) => {
-
-        if (sortField) {
-            const sorted = [...contacts].sort((a,b) => {
-                return (
-                    a[sortField]?.toString().localeCompare(b[sortField]?.toString(), 'en', {
-                        numeric: true,
-                    }) * (sortOrder === 'asc' ? 1 : -1)
-                )
-            })
-            setContacts(sorted)
-        }
-    }
-
-    const handleSortingChange = (field) => {
-        const sortOrder = 
-        field === sortField && order === 'asc' ? 'desc' : 'asc'
-
-        setSortField(field)
-        setOrder(sortOrder)
-        handleSorting(field, sortOrder)
-    }
-
-    const updateOwner = (e) => {
-        setOwner(e.target.value)
-    }
-
     const handleClick = (id) => {
 
         navigate(`/contacts/${id}`)
@@ -148,26 +121,29 @@ const ContactsPage = ({conBlackList}) => {
         <main>
             <div className='top-of-page'>
             <NavLink className='new-contact-navlink' to='/contacts/new' >
+
                 <button className="new-contact">Create Contact</button></NavLink>
+
+{/* PAGINATED FILTERS */}
+
+            <div>
+                <form onSubmit={updateOwner}>
+                    <label>PAGINATE Choose Owner:</label>
+                    <select name='ownersNames' id='ownersNames'>
+                        <option value="All">All</option>
+                        {ownersNames.map((ownerName) => {
+                           return <option key={ownerName} value={ownerName}>{ownerName}</option>
+                        })}
+                    </select>
+                    <input type="submit" value="Update Owner" />
+                </form>
+            </div>
+
             <div className="filter">
-                <label className='filterLabel'>Choose owner:</label>
-                <select className="chooseBox" name='ownersNames' id='ownersNames' onChange={updateOwner}>
-                    <option value="All">All</option>
-                    {ownersNames.map((ownerName) => {
-                        return <option key={ownerName} value={ownerName}>{ownerName}</option>
-                    })}
-                </select>
-                <div className="searchbar">
-                    <input className='searchbox'
-                    type='text'
-                    id='search'
-                    placeholder='search by name'
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                </div>
+
                 <h4>Total: {contacts.length}</h4>
             </div>
+            <PaginateContacts pageCount={pageCount} setPageCount={setPageCount}/>
             </div>
             <div className="fixTableHead">
             <table className='contacts-table'>
@@ -175,14 +151,14 @@ const ContactsPage = ({conBlackList}) => {
                     <tr>
                         {keyArray.map((key) => {
                             return(
-                                <th key={key} onClick={() => handleSortingChange(key)}>{formatter(key)}</th>
+                                <th key={key}>{formatter(key)}</th>
                             )
                         })}
                     </tr>
                 </thead>
                 <tbody>
                     
-                    {newDisplayedContacts.map(contact=>{
+                    {contacts.map(contact=>{
                         // console.log('Object.keys(contact)', Object.keys(contact))
                         let contactKeys = Object.keys(contact)
                         // console.log('contactKeys', contactKeys)

@@ -24,6 +24,34 @@ class ContactsController < ApplicationController
         }
     end
 
+    def owners_contacts_paginated
+        contacts = Contact.where(user_id: params[:user_id])
+        paginated_contacts = contacts.paginate(page: params[:page], per_page: 10)
+        render json: {
+            contacts: ActiveModel::Serializer::CollectionSerializer.new(paginated_contacts, serializer: ContactTableSerializer),
+            page: paginated_contacts.current_page,
+            page_count: paginated_contacts.total_pages
+        }
+    end
+
+    def owners_contacts
+        contacts = Contact.where(user_id: params[:user_id])
+        if contacts
+            render json: contacts, each_serializer: ContactTableSerializer
+        else
+            render json: { errors: contacts.errors.full_messages }, status: 422
+        end
+    end
+
+    # this only finds 1 contact of that owner.
+    # def owners_contacts
+    #     contacts = Contact.find_by(user_id: params[:user_id])
+    #     if contacts
+    #     render json: contacts, each_serializer: ContactTableSerializer
+    #     else
+    #         render json: { errors: contact.errors.full_messages }, status: 422
+    #     end
+    # end
 
     def index
         contacts = Contact.all
