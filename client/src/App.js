@@ -14,6 +14,8 @@ import NewProduct from './Components/Product/NewProduct';
 import ProductCard from './Components/Product/ProductCard';
 // import InitiativesPage from './Components/Companies/Initiative/InitiativesPage';
 
+
+
 function App() {
 
   const conBlackList = ['real_company_name', 'owner_name', 'twitter_url', 'image_url', 'user_id', 'company_id', 'company_products']
