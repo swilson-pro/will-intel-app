@@ -2,7 +2,7 @@ import { Navigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import EditContact from "./EditContact"
-import './ContactCard.css'
+// import './ContactCard.css'
 
 const ContactCard = () => {
 
