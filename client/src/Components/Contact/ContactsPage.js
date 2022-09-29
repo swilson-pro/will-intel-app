@@ -3,6 +3,10 @@ import { Navigate, NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import PaginateContacts from "./PaginateContacts"
 import './paginate.css'
+import '../../Style/Tables.css'
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faPlus} from '@fortawesome/free-solid-svg-icons'
 
 
 const ContactsPage = ({conBlackList}) => {
@@ -114,10 +118,15 @@ const ContactsPage = ({conBlackList}) => {
     return(
         <main>
             <NavLink className='new-contact-navlink' to='/contacts/new' >
-            <button className='new-contact'>Create New Contact</button>
+            <button type='button' className='new-contact'>
+                <span class="button_icon">
+                <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+                </span>
+                <span className="button_text">Person</span>
+                </button>
             </NavLink>
             
-            <table>
+            <table className='contacts-table'>
                 <thead>
                     <tr>
                         {keyArray.map((key, index) => {
