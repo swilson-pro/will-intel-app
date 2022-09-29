@@ -93,6 +93,10 @@
     width: 20px;
 }
 
+.link {
+    text-decoration: none;
+}
+
 /* a {
     color: black;
     font-size: 20px;
