@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { NavLink } from "react-router-dom"
+import { Navigate, NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import PaginateContacts from "./PaginateContacts"
 import './paginate.css'
@@ -7,6 +7,8 @@ import './paginate.css'
 
 const ContactsPage = ({conBlackList}) => {
 
+    let navigate = useNavigate()
+    
     const [contacts, setContacts] = useState([])
     const [keyArray, setKeyArray] = useState([])
 
@@ -18,8 +20,8 @@ const ContactsPage = ({conBlackList}) => {
     const [order, setOrder] = useState('')
 
     useEffect(() => {
-        getContactsForPage(page)
-    }, [])
+        getContactsForPage(page, sortField, order)
+    }, [page, sortField, order])
 
     const getContactsForPage = async (page) => {
         console.log('page', page)
@@ -48,8 +50,8 @@ const ContactsPage = ({conBlackList}) => {
         let displayContacts = contactsDataArray.filter((item) => !conBlackList.includes(item))
 
 
-        console.log('displayKeys', displayKeys)
-        console.log('displayContacts', displayContacts)
+        // console.log('displayKeys', displayKeys)
+        // console.log('displayContacts', displayContacts)
 
         setKeyArray(displayKeys)
         setContacts(displayContacts)
@@ -64,15 +66,15 @@ const ContactsPage = ({conBlackList}) => {
 
 
     const handleSortingChange = (field) => {
-        console.log('field', field)
+        // console.log('field', field)
 
-        console.log('sortField', sortField)
-        console.log('order', order)
+        // console.log('sortField', sortField)
+        // console.log('order', order)
 
         const sortOrder =
         field === sortField && order === 'asc' ? 'desc' : 'asc'
 
-        console.log('sortOrder', sortOrder)
+        // console.log('sortOrder', sortOrder)
         
         setSortField(field)
         setOrder(sortOrder)
@@ -83,17 +85,44 @@ const ContactsPage = ({conBlackList}) => {
 
     }
 
+    let formatter = (str) => {
+        let arr = str.split('')
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] == '_') {
+                arr[i] = " "
+            }
+        }
+        for (let i = 0; i < arr.length; i++) {
+            if (i == 0 || arr[i - 1] == " ") {
+                arr[i] = arr[i].toUpperCase()
+            }
+        }
+        let result = ""
+        for (let i = 0; i < arr.length; i++) {
+            result = result + arr[i]
+        }
+        return result
+    }
+
     console.log('contacts', contacts)
+
+    const handleClick = (id) => {
+        navigate(`/contacts/${id}`)
+    }
 
 
     return(
         <main>
+            <NavLink className='new-contact-navlink' to='/contacts/new' >
+            <button className='new-contact'>Create New Contact</button>
+            </NavLink>
+            
             <table>
                 <thead>
                     <tr>
                         {keyArray.map((key, index) => {
                             return (
-                                <th key={index} onClick={() => handleSortingChange(key)}>{key}</th>
+                                <th key={index} onClick={() => handleSortingChange(key)}>{formatter(key)}</th>
                             )
                         })}
                     </tr>
@@ -102,7 +131,7 @@ const ContactsPage = ({conBlackList}) => {
                     {contacts.map(contact=>{
                         let contactVals = Object.values(contact)
                         return (
-                            <tr>{contactVals.map((val, index) => {
+                            <tr onClick={() => handleClick(contact.id)}>{contactVals.map((val, index) => {
                                 return (
                                     <td key={index}>{val}</td>
                                 )

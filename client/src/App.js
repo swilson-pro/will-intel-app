@@ -16,7 +16,7 @@ import ProductCard from './Components/Product/ProductCard';
 
 function App() {
 
-  const conBlackList = ['twitter_url', 'image_url', 'user_id', 'company_id', 'company_products']
+  const conBlackList = ['real_company_name', 'owner_name', 'twitter_url', 'image_url', 'user_id', 'company_id', 'company_products']
   const compBlackList = ['hq_email', 'hq_address_line_2', 'hq_address_line_1', 'primary_contact_pbid', 'verticals', 'linkedin_regularCompanyUrl', 'year_founded', 'employees', 'linkedin_company_id', 'logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
   const prodBlackList = ['price_sign', 'image_link', 'api_featured_image', 'input_company_name']
 

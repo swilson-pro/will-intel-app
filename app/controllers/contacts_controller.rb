@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+    require 'will_paginate/array'
 
 
     # this first attempt was a workaround b/c we couldn't get serializer to be respected for the paginated contacts fetch. we ended up getting it working tho
@@ -43,7 +44,32 @@ class ContactsController < ApplicationController
         order = "#{params_values.shift}"
         puts "order: #{order}"
 
+        puts "attribute.parameterize.underscore.to_sym: #{attribute.parameterize.underscore.to_sym}"
+        
+
+
+        # def sorter(a,b)
+        #     if a == nil
+        #     return 1
+        #     end
+        #     if b == nil
+        #     return 0
+        #     end
+        #     a <=> b
+
+        # end
+
+        # Contact.all.sort {|a,b| sorter(a,b)}
+
+
+        # @posts = Post.all.sort {|a,b| a.custom_method <=> b.custom_method}
+        # contacts = Contact.all.sort {|a,b| a.name <=> b.name}
+
+        # contacts = Contact.all.sort_by(&:company_name).reverse
         contacts = Contact.all.order("#{attribute} #{order}")
+
+        # contacts = Contact.all.order("company_name asc")
+
         # contacts = Contact.all.order("#{attribute} ASC")
         # contacts = Contact.all.order("#{attribute} #{order}")
         # contacts.order(:position)
