@@ -20,5 +20,9 @@ class Contact < ApplicationRecord
     def real_company_name
         company.name
     end
+
+    def company_contacts
+        company.contacts
+    end
 end
     

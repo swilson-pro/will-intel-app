@@ -1,4 +1,35 @@
-/* .contact-card {
-    font-family: Montserrat;
+.contact-card {
+    padding: 20px 15%;
+    color: #626262;
+}
 
-} */
+.profile-details {
+    margin: 10px;
+    background: red;
+    padding: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.pd-row {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.pd-image {
+    width: 100px;
+    height: 100px;
+}
+
+.pd-row div h3 {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.pd-row div p {
+    font-size: 13px;
+    font-weight: 600;
+}
