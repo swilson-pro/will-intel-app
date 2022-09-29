@@ -1,6 +1,5 @@
 
  .header {
-    background-color: red;
     display: flex;
     /* flex-direction: column; */
     align-items: center;
@@ -8,6 +7,8 @@
 
 .header_left {
     border: solid;
+    padding: 15px;
+
 }
 
 .header_left .logo{
@@ -15,22 +16,24 @@
     object-fit: contain;
     height: 40px;
     margin-right: 10px;
+    padding: 3px;
 }
 
 .header_right{
     border: solid;
+    height: default;
 }
 
 .header {
     width: 100%;
-    position: sticky;
+    /* position: sticky; */
     display: flex;
     top: 0;
     z-index: 999;
     justify-content: space-evenly;
-    border-bottom: 10px solid green;
     padding: 10px;
     background-color: orange;
+    border: solid;
 
 }
 
@@ -48,14 +51,18 @@
     align-items: center;
     border-radius: 5px;
     height: 22px;
-    color: blue;
+    color: lightgray;
     background-color: purple;
+}
+
+.header_search .materials-icons {
+    margin-right: 5px;
 }
 
 .header_search input {
     outline: none;
     border: solid;
-    background: red;
+    background: none;
 }
 
 .headerOption {
@@ -64,7 +71,9 @@
     align-items: center;
     margin-right: 10px;
     margin-left: 10px;
-    color: magenta;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: gray;
     cursor: pointer;
 }
 
@@ -79,7 +88,9 @@
 }
 
 .headerOption_icon {
-    
+    margin-right: default;
+    height: 20px;
+    width: 20px;
 }
 
 /* a {

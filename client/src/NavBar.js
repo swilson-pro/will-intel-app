@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import './Style/NavBar.css'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import {} from '@fortawesome/free-brands-svg-icons'
+import { faSearch, faHome, faUser, faBuilding, faBusinessTime } from '@fortawesome/free-solid-svg-icons'
+import {faYoutube, faGithub} from '@fortawesome/free-brands-svg-icons'
 
 const NavBar = () => {
     return (
@@ -11,23 +11,34 @@ const NavBar = () => {
             <div className='header_left'>
                 <h1 className='logo'>Carlson</h1>
                 <div className='header_search'>
-                    <i className='materials-icons'>search</i>
-                    <FontAwesomeIcon icon={faCoffee}></FontAwesomeIcon>
-                    <i className="fa-solid fa-user"></i>
+                    <i className='materials-icons'></i>
+                    <FontAwesomeIcon className='materials-icons' icon={faSearch}></FontAwesomeIcon>
+                    {/* <i className="fa-solid fa-user"></i> */}
                     <input type='text' />
+                    {/* <FontAwesomeIcon icon={faYoutube}></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> */}
+
                 </div>
             </div>
             <div className='header_right'>
                 <div className='headerOption'>
-                    <i className='material-icons headerOption_icon'></i>
+                    {/* <i className='material-icons headerOption_icon'></i> */}
+                    <FontAwesomeIcon className='materials-icons headerOption_icon' icon={faHome}></FontAwesomeIcon>
+                    <h3>Home</h3>
+                </div>
+                <div className='headerOption'>
+                    {/* <i className='material-icons headerOption_icon'></i> */}
+                    <FontAwesomeIcon className='materials-icons headerOption_icon' icon={faUser}></FontAwesomeIcon>
                     <h3>Contacts</h3>
                 </div>
                 <div className='headerOption'>
-                    <i className='material-icons headerOption_icon'></i>
+                    {/* <i className='material-icons headerOption_icon'></i> */}
+                    <FontAwesomeIcon className='materials-icons headerOption_icon' icon={faBuilding}></FontAwesomeIcon>
                     <h3>Companies</h3>
                 </div>
                 <div className='headerOption'>
-                    <i className='material-icons headerOption_icon'></i>
+                    {/* <i className='material-icons headerOption_icon'></i> */}
+                    <FontAwesomeIcon className='materials-icons headerOption_icon' icon={faBusinessTime}></FontAwesomeIcon>
                     <h3>Products</h3>
                 </div>
             </div>
