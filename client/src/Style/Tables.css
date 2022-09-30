@@ -1,6 +1,23 @@
 
 
 
+.top-of-contacts {
+    /* display:flex; */
+    flex-direction: column;
+    border:solid;
+}
+
+.button-container{
+    border:solid;
+    display: flex;
+    flex-direction: row;
+}
+
+.button-container h1 {
+    position: fixed;
+    left: 40vw;
+}
+
 .contacts-table{
     border-collapse: collapse;
     font-size: .9em;
@@ -43,11 +60,24 @@
     overflow: scroll;
 }
 
+
+.contacts-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.contacts-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.contacts-table tbody tr:hover {
+    background-color: royalblue;
+}
+
 .contacts-table td {
     padding: 12px 15px;
     border: 1px solid black;
-    height: 3rem;
-    max-height: 3rem;
+    height: 2rem;
+    max-height: 2rem;
     overflow: scroll;
 }
 

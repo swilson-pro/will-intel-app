@@ -117,6 +117,7 @@ const ContactsPage = ({conBlackList}) => {
 
     return(
         <main>
+
             <div className="button-container">
             <NavLink className='new-contact-navlink' to='/contacts/new' >
                 
@@ -128,6 +129,9 @@ const ContactsPage = ({conBlackList}) => {
                     </button>
                 
             </NavLink>
+            <h1>Contacts Page</h1>
+
+            
             </div>
             <div className="contacts-table-container">
 

@@ -280,4 +280,10 @@ puts "making notes"
         user_id: User.all.sample.id
     )
 
+    Note.create!(
+        content: "I think this could work.",
+        contact_id: Contact.all.sample.id,
+        user_id: User.all.sample.id
+    )
+
     }

@@ -1,3 +1,7 @@
+/* * {
+    border: solid;
+} */
+
 .delete-contact, .update-contact {
     display: inline-flex;
     height: 50px;
@@ -32,7 +36,7 @@
 .contact-card {
     padding: 10px 1%;
     color: #626262;
-    border: solid;
+    /* border: solid; */
 
 }
 
@@ -40,7 +44,7 @@
     margin: 10px;
     /* background: red; */
     padding: 20px;
-    border: solid;
+    /* border: solid; */
     border-radius: 20px;
     display: flex;
     align-items: flex-start;
@@ -50,8 +54,12 @@
     min-width: 92vw;
 }
 
+.pd-image {
+    border: 3px solid grey;
+}
+
 .pd-left .pd-row .left-body {
-    border: solid;
+    /* border: solid; */
 }
 
 .pd-left .pd-row {
@@ -59,25 +67,25 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 1em;
-    border: solid;
+    /* border: solid; */
 }
 
 .pd-left .pd-row .contact-company {
     cursor: pointer;
-    border: solid;
+    /* border: solid; */
 }
 
 
 img {
     width: 150px;
     height: 150px;
-    border: solid;
+    /* border: solid; */
 }
 
 
 .pd-left .pd-row p {
     font-size: 10px;
-    border: solid;
+    /* border: solid; */
     max-width: 20vw;
 }
 
@@ -85,20 +93,21 @@ img {
     cursor: pointer;
     margin: 5px;
     display: flex;
-    border:solid;
+    /* border:solid; */
     align-items: center;
 
 }
 .pd-left .pd-row .image-div {
-    border:solid;
+    /* border:solid; */
     display:flex;
 
     width: 100%;
 }
 
 .pd-mid{
-    border: solid;
+    /* border: solid; */
     margin: 0 10px;
+    min-width: 50vw;
 }
 
 .note-button {
@@ -139,29 +148,42 @@ img {
 
 .note-input {
     margin: 5px;
-    width: 28vw;
+    min-width: 35vw;
     height: 10vw;
+}
+
+.note-div {
+    margin-top: 10px;
+    background-color: beige;
+    padding: 5px;
+    /* border: 1px solid grey; */
+}
+
+.note-timestamp {
+    margin: 10px;
+    font-size:.7em;
 }
 
 .note {
     list-style: none;
+    margin: 10px;
 }
 
 
 .pd-right .contact-company-logo {
     cursor: pointer;
-    border: solid;
+    /* border: solid; */
 }
 
 .pd-right .company-products {
     cursor: pointer;
-    border: solid;
+    /* border: solid; */
     width: max-content;
     list-style: none;
 }
 .pd-right .colleagues {
     cursor: pointer;
-    border: solid;
+    /* border: solid; */
     list-style: none;
 }
 
@@ -188,13 +210,13 @@ img {
     align-items: flex-start;
     flex-direction: column;
     padding: 10px 10px;
-    border: solid;
+    /* border: solid; */
 }
 
 .pd-right .pd-row .company-name {
     cursor: pointer;
     display: flex;
-    border: solid;
+    /* border: solid; */
     margin:5px;
     vertical-align: middle;
 }

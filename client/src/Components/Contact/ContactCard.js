@@ -8,6 +8,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding, faPencil } from '@fortawesome/free-solid-svg-icons'
 import {faLinkedin} from '@fortawesome/free-brands-svg-icons'
 
+import Moment from 'moment';
+
 const ContactCard = () => {
 
     let user = {id: 1}
@@ -85,15 +87,7 @@ const ContactCard = () => {
         setNewNote("")
     }
 
-    // console.log('id', id)
-    // console.log('contact', contact)
-    // console.log('contact.company_products', contact.company_products)
-
-    // contact.notes.map((note) => {
-    //     console.log('note', note)
-    //     console.log('note.content', note.content)
-    //     console.log('note.id', note.id)
-    // })
+console.log('contact.notes', contact.notes)
 
     return (
         <div className="contact-card">
@@ -153,20 +147,29 @@ const ContactCard = () => {
                             </span>
                             <span className="note_button_text">Add Note</span>
                         </button>
-                        <textarea placeholder="write note" className="note-input" value={newNote} onChange={(e) => setNewNote(e.target.value)}/>
+                        <textarea placeholder=" write note..." className="note-input" value={newNote} onChange={(e) => setNewNote(e.target.value)}/>
                     </form>
                     <h2>Notes</h2>
                     <hr></hr>
-                    <ul className="notes">
-                        {/* {contact.notes?.map((note) => {
-                            return <li className="note" key={note.id}>{note.content}</li>
-                        })} */}
-                        {contact.notes?.map((note) => {
+                    {/* <ul className="notes">
+                    
+                        {contact.notes?.reverse().map((note) => {
                             return (
                                     <li className='note' key={note.id}>{`note created: ${note.created_at} by: ${note.user_id} ${note.content}`}</li>
                             )
                         })}
-                    </ul>
+                    </ul> */}
+                    <div className="notes">
+                        {contact.notes?.map((note) => {
+                            return (
+                            <div className="note-div">
+                                {/* <p className="note-timestamp">{`${note.created_at.substring(0, 10)} | ${note.user_name}`}</p> */}
+                                <p className="note-timestamp">{`${Moment(note.created_at).format('MMMM DD, LT')} | ${note.user_name}`}</p>
+                                <p className='note'>{note.content}</p>
+                            </div>
+                            )
+                        })}
+                    </div>
                 </div>
                 <div className="pd-right">
                     <h3>Organization</h3>
