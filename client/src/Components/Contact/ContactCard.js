@@ -5,10 +5,12 @@ import EditContact from "./EditContact"
 import './ContactCard.css'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding } from '@fortawesome/free-solid-svg-icons'
+import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding, faPencil } from '@fortawesome/free-solid-svg-icons'
 import {faLinkedin} from '@fortawesome/free-brands-svg-icons'
 
 const ContactCard = () => {
+
+    let user = {id: 1}
 
     let navigate = useNavigate()
 
@@ -16,6 +18,8 @@ const ContactCard = () => {
 
     const [contact, setContact] = useState({})
     const [isEditClicked, setIsEditClicked] = useState(false)
+
+    const [newNote, setNewNote] = useState("")
 
     const fetchContact = async() => {
         const response = await fetch(`http://localhost:3000/contacts/${id}`)
@@ -62,6 +66,23 @@ const ContactCard = () => {
     const handleContactClick = (id) => {
         navigate(`/contacts/${id}`)
         window.location.reload()
+    }
+
+    const handleAddNote = async (e) => {
+        e.preventDefault()
+        let req = await fetch(`http://localhost:3000/notes`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content: newNote,
+                contact_id: contact.id,
+                user_id: user.id
+            })
+        })
+        fetchContact()
+        setNewNote("")
     }
 
     // console.log('id', id)
@@ -125,17 +146,22 @@ const ContactCard = () => {
                 </div>
                 <div className="pd-mid">
                     <form className="note-form">
-                        <button className="note-button">Add Note</button>
-                        <textarea placeholder="write note" className="new-note" />
+
+                        <button onClick={handleAddNote} className="note-button">
+                            <span className="note_button_icon">
+                                <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
+                            </span>
+                            <span className="note_button_text">Add Note</span>
+                        </button>
+                        <textarea placeholder="write note" className="note-input" value={newNote} onChange={(e) => setNewNote(e.target.value)}/>
                     </form>
                     <h2>Notes</h2>
                     <hr></hr>
                     <ul className="notes">
-                        <li>test note</li>
                         {/* {contact.notes?.map((note) => {
                             return <li className="note" key={note.id}>{note.content}</li>
                         })} */}
-                        {contact.notes?.reverse().map((note) => {
+                        {contact.notes?.map((note) => {
                             return (
                                     <li className='note' key={note.id}>{`note created: ${note.created_at} by: ${note.user_id} ${note.content}`}</li>
                             )

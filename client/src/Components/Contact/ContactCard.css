@@ -101,7 +101,51 @@ img {
     margin: 0 10px;
 }
 
+.note-button {
+    display: inline-flex;
+    height: 50px;
+    padding: 0;
+    background: #009578;
+    border: none;
+    outline: none;
+    border-radius: 5px; 
+    /* overflow: hidden; */
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-left: 5px;
+}
 
+.note_button_icon, .note_button_text {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 24px;
+    color: white;
+    height: 100%;
+    vertical-align:middle
+}
+
+.note_button_icon {
+    font-size: 1.5em;
+    background: rgba(0, 0, 0, 0.08);
+    vertical-align:middle;
+}
+
+.note-form {
+    display: flex;
+    align-items: center;
+}
+
+.note-input {
+    margin: 5px;
+    width: 28vw;
+    height: 10vw;
+}
+
+.note {
+    list-style: none;
+}
 
 
 .pd-right .contact-company-logo {
@@ -113,10 +157,12 @@ img {
     cursor: pointer;
     border: solid;
     width: max-content;
+    list-style: none;
 }
 .pd-right .colleagues {
     cursor: pointer;
     border: solid;
+    list-style: none;
 }
 
 
