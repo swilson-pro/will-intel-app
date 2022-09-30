@@ -5,7 +5,7 @@ import EditContact from "./EditContact"
 import './ContactCard.css'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding } from '@fortawesome/free-solid-svg-icons'
 import {faLinkedin} from '@fortawesome/free-brands-svg-icons'
 
 const ContactCard = () => {
@@ -67,10 +67,27 @@ const ContactCard = () => {
     // console.log('id', id)
     // console.log('contact', contact)
     // console.log('contact.company_products', contact.company_products)
+
+    // contact.notes.map((note) => {
+    //     console.log('note', note)
+    //     console.log('note.content', note.content)
+    //     console.log('note.id', note.id)
+    // })
+
     return (
         <div className="contact-card">
-            <button onClick={() => deleteContact(contact.id)}>Delete Contact</button>
-            <button onClick={updateContact}>Update Contact Details</button>
+            <button type="button" className="delete-contact" onClick={() => deleteContact(contact.id)}>
+                <span className="button_icon">
+                    <FontAwesomeIcon icon={faEraser}></FontAwesomeIcon>
+                </span>
+                <span className="button_text">Delete</span>
+            </button>
+            <button type="button" className="update-contact" onClick={updateContact}>
+                <span className="button_icon">
+                    <FontAwesomeIcon icon={faUserPen}></FontAwesomeIcon>
+                </span>
+                <span className="button_text">Update</span>
+            </button>
             <div className="profile-details">
                 <div className="pd-left">
                     <div className="pd-row">
@@ -107,14 +124,37 @@ const ContactCard = () => {
                     </div>
                 </div>
                 <div className="pd-mid">
+                    <form className="note-form">
+                        <button className="note-button">Add Note</button>
+                        <textarea placeholder="write note" className="new-note" />
+                    </form>
                     <h2>Notes</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-</p>
+                    <hr></hr>
+                    <ul className="notes">
+                        <li>test note</li>
+                        {/* {contact.notes?.map((note) => {
+                            return <li className="note" key={note.id}>{note.content}</li>
+                        })} */}
+                        {contact.notes?.reverse().map((note) => {
+                            return (
+                                    <li className='note' key={note.id}>{`note created: ${note.created_at} by: ${note.user_id} ${note.content}`}</li>
+                            )
+                        })}
+                    </ul>
                 </div>
                 <div className="pd-right">
                     <h3>Organization</h3>
                     <div className="pd-row">
+                        <div className="company-name">
+                            <span>
+                                <FontAwesomeIcon className="span-icon" icon={faBuilding}></FontAwesomeIcon>
+                            </span>
+                            <span>
+                                <p className="span-content" onClick={() => handleCompanyClick(contact.company_id)}>{contact.company_name}</p>
+                            </span>
+                        
+                        </div>
+                    
                         <img onClick={() => handleCompanyClick(contact.company_id)} className="contact-company-logo" src={contact.company_logo} alt={contact.real_company_name}></img>
 
                                 <details className="company-products">

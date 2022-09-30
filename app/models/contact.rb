@@ -1,6 +1,7 @@
 class Contact < ApplicationRecord
     belongs_to :user
     belongs_to :company
+    has_many :notes
     
     # def page_count
     #     Contact.count / 10

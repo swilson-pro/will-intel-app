@@ -3,21 +3,21 @@
 
 .contacts-table{
     border-collapse: collapse;
-    margin: 5px 0;
     font-size: .9em;
     min-width: 100%;
     max-width: 100%;
     border-radius: 5px 5px 0 0;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    border: solid;
+    border: 1px solid black;
+
 }
 
-.contacts-table .sticky th {
-    position: sticky;
-    top: 0;
+.contacts-table-container{
+    margin-bottom: 2rem;
+    overflow: scroll;
+    /* IMPORTANT CHANGE VIEW BOX HEIGHT */
+    max-height: 70vh;
 }
-
-
 .contacts-table thead tr {
     background-color: #009879;
     color: white;
@@ -25,42 +25,30 @@
     font-weight: bold;
 
 }
-
-.contacts-table thead tr th {
-    border:solid;
-    background: red;
-    /* position: sticky;
-    left: 0;
-    z-index: 10; */
-    
-}
-
-.contacts-table th,
-.contacts-table td {
-    padding: 12px 15px;
-}
-
-.contacts-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+.contacts-table thead {
+    position: sticky;
+    top: 0;
+    border-top: solid white;
 }
 
 .contacts-table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
 
-.contacts-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+.contacts-table th {
+    padding: 12px 15px;
+    border: 1px solid black;
+    height: 3rem;
+    max-height: 5rem;
+    overflow: scroll;
 }
 
-.contacts-table tbody tr:hover {
-    background-color: royalblue;
-}
-
-
-/* new contact button */
-
-.new-contact-navlink {
-    text-decoration: none;
+.contacts-table td {
+    padding: 12px 15px;
+    border: 1px solid black;
+    height: 5rem;
+    max-height: 5rem;
+    overflow: scroll;
 }
 
 .new-contact {
@@ -70,15 +58,73 @@
     background: #009578;
     border: none;
     outline: none;
-    border-radius: 5px;
+    border-radius: 5px; 
     /* overflow: hidden; */
     font-family: sans-serif;
     font-size: 16px;
     font-weight: 500;
     margin-top: 5px;
     margin-left: 5px;
+} 
+
+.button_icon, .button_text {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 24px;
+    color: white;
+    height: 100%;
 }
 
+.button_icon {
+    font-size: 1.5em;
+    background: rgba(0, 0, 0, 0.08)
+}
+.new-contact-navlink {
+    text-decoration: none;
+}
+
+/* 
+.contacts-table thead{
+    position: sticky;
+    top: 0;
+}
+.contacts-table thead tr{
+    position: sticky;
+    top: 0;
+}
+
+
+
+
+.contacts-table thead tr th {
+    border:solid;
+    background: red;
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    
+}
+
+
+
+.contacts-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.contacts-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.contacts-table tbody tr:hover {
+    background-color: royalblue;
+}
+ */
+
+/* new contact button */
+/* 
+
+*/
+/* 
 .new-contact:hover {
     background: #008168;
 }
@@ -102,7 +148,7 @@
 
 .plus-icon {
     margin: 5px;
-}
+} */
 
 /* .fixTableHead {
     overflow-y: auto;

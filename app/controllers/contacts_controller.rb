@@ -87,7 +87,7 @@ class ContactsController < ApplicationController
 
     def owners_contacts_paginated
         contacts = Contact.where(user_id: params[:user_id])
-        paginated_contacts = contacts.paginate(page: params[:page], per_page: 10)
+        paginated_contacts = contacts.paginate(page: params[:page], per_page: 20)
         render json: {
             contacts: ActiveModel::Serializer::CollectionSerializer.new(paginated_contacts, serializer: ContactTableSerializer),
             page: paginated_contacts.current_page,

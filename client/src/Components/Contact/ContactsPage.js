@@ -117,15 +117,20 @@ const ContactsPage = ({conBlackList}) => {
 
     return(
         <main>
+            <div className="button-container">
             <NavLink className='new-contact-navlink' to='/contacts/new' >
-            <button type='button' className='new-contact'>
-                <span className="button_icon">
-                <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-                </span>
-                <span className="button_text">Person</span>
-                </button>
+                
+                    <button type='button' className='new-contact'>
+                        <span className="button_icon">
+                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
+                        </span>
+                        <span className="button_text">Person</span>
+                    </button>
+                
             </NavLink>
-            
+            </div>
+            <div className="contacts-table-container">
+
             <table className='contacts-table'>
                 <thead>
                     <tr>
@@ -136,7 +141,8 @@ const ContactsPage = ({conBlackList}) => {
                         })}
                     </tr>
                 </thead>
-                <tbody>
+
+                <tbody >
                     {contacts.map(contact=>{
                         let contactVals = Object.values(contact)
                         return (
@@ -150,6 +156,7 @@ const ContactsPage = ({conBlackList}) => {
                     })}
                 </tbody>
             </table>
+            </div>
             <PaginateContacts pageCount={pageCount} setPageCount={setPageCount} getContactsForPage={getContactsForPage} data={contacts}/>
 
         </main>

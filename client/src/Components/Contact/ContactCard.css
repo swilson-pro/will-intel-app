@@ -1,12 +1,44 @@
+.delete-contact, .update-contact {
+    display: inline-flex;
+    height: 50px;
+    padding: 0;
+    background: #009578;
+    border: none;
+    outline: none;
+    border-radius: 5px; 
+    /* overflow: hidden; */
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.button_icon, .button_text {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 24px;
+    color: white;
+    height: 100%;
+    vertical-align:middle
+}
+
+.button_icon {
+    font-size: 1.5em;
+    background: rgba(0, 0, 0, 0.08);
+    vertical-align:middle;
+}
+
 .contact-card {
     padding: 10px 1%;
     color: #626262;
     border: solid;
+
 }
 
 .profile-details {
     margin: 10px;
-    background: red;
+    /* background: red; */
     padding: 20px;
     border: solid;
     border-radius: 20px;
@@ -37,20 +69,11 @@
 
 
 img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border: solid;
 }
-/* 
-.pd-left .pd-row div h3 {
-    font-size: 25px;
-    font-weight: 600;
-}
 
-.pd-left .pd-row div p {
-    font-size: 13px;
-    font-weight: 600;
-} */
 
 .pd-left .pd-row p {
     font-size: 10px;
@@ -79,6 +102,8 @@ img {
 }
 
 
+
+
 .pd-right .contact-company-logo {
     cursor: pointer;
     border: solid;
@@ -98,13 +123,13 @@ img {
 
 .pd-right {
 
-    background: blue;
+    /* background: blue; */
     border: solid;
     /* border: 0; */
     outline: 0;
     /* padding: 6px 10px; */
     /* display: inline-flex; */
-    color: white;
+    color: black;
     border-radius: 3px;
     padding: 15px;
     margin-right: 1vw;
@@ -120,3 +145,17 @@ img {
     border: solid;
 }
 
+.pd-right .pd-row .company-name {
+    cursor: pointer;
+    display: flex;
+    border: solid;
+    margin:5px;
+    vertical-align: middle;
+}
+
+.span-icon, .span-content {
+    background-color: red;
+    margin: 5px;
+    vertical-align: middle;
+    align-items: center;
+}
