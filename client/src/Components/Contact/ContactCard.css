@@ -1,35 +1,122 @@
 .contact-card {
-    padding: 20px 15%;
+    padding: 10px 1%;
     color: #626262;
+    border: solid;
 }
 
 .profile-details {
     margin: 10px;
     background: red;
     padding: 20px;
-    border-radius: 4px;
+    border: solid;
+    border-radius: 20px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    flex-direction: row;
+    width: fit-content;
+    min-width: 92vw;
 }
 
-.pd-row {
+.pd-left .pd-row .left-body {
+    border: solid;
+}
+
+.pd-left .pd-row {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    gap: 1em;
+    border: solid;
 }
 
-.pd-image {
+.pd-left .pd-row .contact-company {
+    cursor: pointer;
+    border: solid;
+}
+
+
+img {
     width: 100px;
     height: 100px;
+    border: solid;
 }
-
-.pd-row div h3 {
+/* 
+.pd-left .pd-row div h3 {
     font-size: 25px;
     font-weight: 600;
 }
 
-.pd-row div p {
+.pd-left .pd-row div p {
     font-size: 13px;
     font-weight: 600;
+} */
+
+.pd-left .pd-row p {
+    font-size: 10px;
+    border: solid;
+    max-width: 20vw;
 }
+
+.pd-left .pd-row .materials-icons{
+    cursor: pointer;
+    margin: 5px;
+    display: flex;
+    border:solid;
+    align-items: center;
+
+}
+.pd-left .pd-row .image-div {
+    border:solid;
+    display:flex;
+
+    width: 100%;
+}
+
+.pd-mid{
+    border: solid;
+    margin: 0 10px;
+}
+
+
+.pd-right .contact-company-logo {
+    cursor: pointer;
+    border: solid;
+}
+
+.pd-right .company-products {
+    cursor: pointer;
+    border: solid;
+    width: max-content;
+}
+.pd-right .colleagues {
+    cursor: pointer;
+    border: solid;
+}
+
+
+
+.pd-right {
+
+    background: blue;
+    border: solid;
+    /* border: 0; */
+    outline: 0;
+    /* padding: 6px 10px; */
+    /* display: inline-flex; */
+    color: white;
+    border-radius: 3px;
+    padding: 15px;
+    margin-right: 1vw;
+    margin-top: 1vw;
+
+}
+
+.pd-right .pd-row {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px 10px;
+    border: solid;
+}
+

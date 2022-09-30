@@ -119,7 +119,7 @@ const ContactsPage = ({conBlackList}) => {
         <main>
             <NavLink className='new-contact-navlink' to='/contacts/new' >
             <button type='button' className='new-contact'>
-                <span class="button_icon">
+                <span className="button_icon">
                 <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                 </span>
                 <span className="button_text">Person</span>

@@ -15,8 +15,8 @@ const NavBar = () => {
                     <FontAwesomeIcon className='materials-icons' icon={faSearch}></FontAwesomeIcon>
                     {/* <i className="fa-solid fa-user"></i> */}
                     <input type='text' />
-                    {/* <FontAwesomeIcon icon={faYoutube}></FontAwesomeIcon>
-                    <FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> */}
+                    {/* <FontAwesomeIcon icon={faYoutube}></FontAwesomeIcon> */}
+                    {/* <FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> */}
 
                 </div>
             </div>

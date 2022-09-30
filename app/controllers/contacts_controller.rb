@@ -73,7 +73,7 @@ class ContactsController < ApplicationController
         # contacts = Contact.all.order("#{attribute} ASC")
         # contacts = Contact.all.order("#{attribute} #{order}")
         # contacts.order(:position)
-        paginated_contacts = contacts.paginate(page: params[:page], per_page: 10)
+        paginated_contacts = contacts.paginate(page: params[:page], per_page: 20)
 
         # if request.query_parameters["brand"]
             # ?brand=nada ^^
