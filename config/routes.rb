@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/contacts_paginated/:page', to: 'contacts#paginated_contacts'
   get '/owners_contacts_paginated/:user_id/:page', to: 'contacts#owners_contacts_paginated'
 
+  get '/companies_paginated/:page', to: 'companies#paginated_companies'
+
 
 
   get '/owners_contacts/:user_id', to: 'contacts#owners_contacts'

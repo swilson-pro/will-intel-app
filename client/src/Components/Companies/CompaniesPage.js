@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navigate, NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
+import PaginateCompanies from "./PaginateCompanies"
 
 const CompaniesPage = ({compBlackList}) => {
 
@@ -19,42 +20,100 @@ const CompaniesPage = ({compBlackList}) => {
     const [sortField, setSortField] = useState('')
     const [order, setOrder] = useState('')
 
-    const fetchCompanies = async () => {
-        const response = await fetch(`http://localhost:3000/companies`)
-        const companiesArray = await response.json()
 
-        let objKeys = Object.keys(companiesArray[0])
 
-        let displayKeys = objKeys.filter((item) => !compBlackList.includes(item))
 
-        companiesArray.map(objectElement => {
+
+
+    const [page, setPage] = useState(1)
+
+    const [pageCount, setPageCount] = useState();
+
+
+
+    useEffect(() => {
+        getCompaniesForPage(page, sortField, order)
+    }, [owner, page, sortField, order])
+
+
+    const getCompaniesForPage = async (page) => {
+        console.log('page', page)
+        console.log('order', order)
+        console.log('sortField', sortField)
+        const res = await fetch(`http://localhost:3000/companies_paginated/${page}?${sortField}=${order}`)
+        const companiesPageData = await res.json()
+        console.log('companiesPageData', companiesPageData)
+
+
+        const companiesDataArray = companiesPageData.companies
+        console.log('companiesDataArray', companiesDataArray)
+        const pagina = companiesPageData.page
+        console.log('pagina', pagina)
+        const paginaCuenta = companiesPageData.page_count
+        setPageCount(paginaCuenta)
+        console.log('paginaCuenta', paginaCuenta)
+
+
+        let pObjKeys = Object.keys(companiesDataArray[0])
+        console.log('pObjKeys', pObjKeys)
+
+        let pDisplayKeys = pObjKeys.filter((item) => !compBlackList.includes(item))
+
+        companiesDataArray.map(objectElement => {
             compBlackList.map((element) => delete objectElement[element])
         })
 
-        let displayCompanies = companiesArray.filter((item) => !compBlackList.includes(item))
+        let pDisplayCompanies = companiesDataArray.filter((item) => !compBlackList.includes(item))
 
-        if (owner == "All") {
-            setCompanies(displayCompanies)
-        } else setCompanies(displayCompanies.filter(company => company.owner_name == owner))
+        setKeyArray(pDisplayKeys)
+        setCompanies(pDisplayCompanies)
 
+        console.log('pDisplayKeys', pDisplayKeys)
+        console.log('pDisplayCompanies', pDisplayCompanies)
 
-        setKeyArray(displayKeys)
     }
 
-    const newDisplayedCompanies = companies.filter(company => {
-        return company.name.toLowerCase().includes(searchTerm.toLowerCase())
-    })
 
-    const fetchOwnerNames = async () => {
-        const response = await fetch(`http://localhost:3000/users_names`)
-        const ownersNamesArray = await response.json()
-        setOwnersNames(ownersNamesArray)
-    }
+    
 
-    useEffect(() => {
-        fetchCompanies()
-        fetchOwnerNames()
-    }, [owner])
+
+
+    // const fetchCompanies = async () => {
+    //     const response = await fetch(`http://localhost:3000/companies`)
+    //     const companiesArray = await response.json()
+
+    //     let objKeys = Object.keys(companiesArray[0])
+
+    //     let displayKeys = objKeys.filter((item) => !compBlackList.includes(item))
+
+    //     companiesArray.map(objectElement => {
+    //         compBlackList.map((element) => delete objectElement[element])
+    //     })
+
+    //     let displayCompanies = companiesArray.filter((item) => !compBlackList.includes(item))
+
+    //     if (owner == "All") {
+    //         setCompanies(displayCompanies)
+    //     } else setCompanies(displayCompanies.filter(company => company.owner_name == owner))
+
+
+    //     setKeyArray(displayKeys)
+    // }
+
+    // const newDisplayedCompanies = companies.filter(company => {
+    //     return company.name.toLowerCase().includes(searchTerm.toLowerCase())
+    // })
+
+    // const fetchOwnerNames = async () => {
+    //     const response = await fetch(`http://localhost:3000/users_names`)
+    //     const ownersNamesArray = await response.json()
+    //     setOwnersNames(ownersNamesArray)
+    // }
+
+    // useEffect(() => {
+    //     fetchCompanies()
+    //     fetchOwnerNames()
+    // }, [owner])
 
 
 
@@ -78,18 +137,19 @@ const CompaniesPage = ({compBlackList}) => {
     }
 
     const handleSorting = (sortField, sortOrder) => {
+        console.log('sortField, sortOrder', sortField, sortOrder)
 
 
-        if (sortField) {
-            const sorted = [...companies].sort((a,b) => {
-                return (
-                    a[sortField]?.toString().localeCompare(b[sortField]?.toString(), 'en', {
-                        numeric: true,
-                    }) * (sortOrder === 'asc' ? 1 : -1)
-                )
-            })
-            setCompanies(sorted)
-        }
+        // if (sortField) {
+        //     const sorted = [...companies].sort((a,b) => {
+        //         return (
+        //             a[sortField]?.toString().localeCompare(b[sortField]?.toString(), 'en', {
+        //                 numeric: true,
+        //             }) * (sortOrder === 'asc' ? 1 : -1)
+        //         )
+        //     })
+        //     setCompanies(sorted)
+        // }
     }
 
     const handleSortingChange = (field) => {
@@ -149,7 +209,7 @@ const CompaniesPage = ({compBlackList}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {newDisplayedCompanies.map(company=>{
+                    {companies.map(company=>{
                         let companyVals = Object.values(company)
 
                         return (
@@ -164,6 +224,7 @@ const CompaniesPage = ({compBlackList}) => {
                     })}
                 </tbody>
             </table>
+            <PaginateCompanies pageCount={pageCount} getCompaniesForPage={getCompaniesForPage} data={companies}/>
         </main>
     )
 }

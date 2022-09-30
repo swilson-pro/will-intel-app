@@ -1,4 +1,37 @@
 class CompaniesController < ApplicationController
+    require 'will_paginate/array'
+
+
+
+    def paginated_companies
+
+        puts "params: #{params}"
+        passed_params = params.select {|k,v| k != "action" and k != "controller" and k != "page"}
+
+        puts "passed_params: #{passed_params}"
+
+        params_keys = passed_params.keys
+        puts "params_keys: #{params_keys}"
+
+        params_values = passed_params.values
+        puts "params_values: #{params_values}"
+
+        attribute = "#{params_keys.shift}"
+        puts "attribute: #{attribute}"
+        order = "#{params_values.shift}"
+        puts "order: #{order}"
+
+        puts "attribute.parameterize.underscore.to_sym: #{attribute.parameterize.underscore.to_sym}"
+
+        companies = Company.all.order("#{attribute} #{order}")
+        paginated_companies = companies.paginate(page: params[:page], per_page: 10)
+        render json: {
+            companies: ActiveModel::Serializer::CollectionSerializer.new(paginated_companies, serializer: CompanyTableSerializer),
+            page: paginated_companies.current_page,
+            page_count: paginated_companies.total_pages
+        }
+    end
+
     def index
         companies = Company.all
         render json: companies, each_serializer: CompanyTableSerializer
