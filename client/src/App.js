@@ -3,6 +3,11 @@ import './App.css';
 import HomePage from './Components/HomePage';
 import NavBar from './NavBar';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
+
+import Home from './Components/Companies/Home';
+
 import ContactsPage from './Components/Contact/ContactsPage';
 import ContactCard from './Components/Contact/ContactCard';
 import NewContact from './Components/Contact/NewContact';
@@ -14,11 +19,11 @@ import NewProduct from './Components/Product/NewProduct';
 import ProductCard from './Components/Product/ProductCard';
 // import InitiativesPage from './Components/Companies/Initiative/InitiativesPage';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, forwardRef } from 'react';
 
 import 'rsuite/dist/rsuite.min.css'
 
-import {Button, ButtonToolbar, IconButton, CustomProvider, Navbar, Nav} from 'rsuite'
+import {Button, ButtonToolbar, IconButton, CustomProvider, Navbar, Nav, Container, Header, Content, Footer, List, FlexboxGrid, Col, Avatar, Badge} from 'rsuite'
 
 import {Visible, Unvisible, Others, UserBadge, Plus} from '@rsuite/icons'
 
@@ -37,93 +42,164 @@ function App() {
   const toggleModeFunc = () => {
     setToggleMode(!toggleMode)
   }
+  const NavLink = forwardRef(({ href, children, ...rest }, ref) => (
+    <Link ref={ref} to={href} {...rest}>
+      {children}
+    </Link>
+  ));
   return (
     <div className="App">
       <BrowserRouter>
       <CustomProvider theme={toggleMode ? "dark" : "light"}>
-        
-        <Navbar appearance='subtle'>
-          <Navbar.Brand>Carlson</Navbar.Brand>
-          <Nav>
-            <Nav.Item icon={<Others/>}>
-              Home
-            </Nav.Item>
-            <Nav.Item icon={<Others/>}>
-              Contacts
-            </Nav.Item>
-            <Nav.Item icon={<Others/>}>
-              Companies
-            </Nav.Item>
-            <Nav.Item icon={<Others/>}>
-              Products
-            </Nav.Item>
-            <Nav.Item icon={<Others/>}>
-              Modal
-            </Nav.Item>
-          </Nav>
-          {/* <Nav pullRight>
-            <Nav.Item>
-              <ButtonToolbar>
-                <IconButton onClick={toggleModeFunc} 
-                color="red" 
-                appearance='ghost' 
-                size='lg' 
-                icon={toggleMode ? <Visible /> : <Unvisible />}>{toggleMode ? "Light Mode" : "Dark Mode"}</IconButton>
-              </ButtonToolbar>
-            </Nav.Item>
-          </Nav> */}
-          <Nav pullLeft>
-            <Nav.Menu title="Add New" icon={<Plus/>}>
-              <Nav.Item icon={<UserBadge/>}>
-                Contact
+        <Container style={{minHeight: "100vh"}}>
+          <Header style={{position: "sticky"}}>
+          <Navbar appearance='subtle'>
+            <Navbar.Brand>Carlson</Navbar.Brand>
+            <Nav>
+                <Nav.Item 
+                as={NavLink} 
+                children={<HomePage />} 
+                href="/"
+                icon={<Others/>}>
+                  Home
+                </Nav.Item>
+              <Nav.Item 
+                as={NavLink} 
+                children={<ContactsPage />} 
+                href="/contacts" 
+                icon={<Others/>}>
+                Contacts
               </Nav.Item>
-              <Nav.Item icon={<UserBadge/>}>
-                Company
+              <Nav.Item 
+                as={NavLink} 
+                children={<HomePage />} 
+                href="/companies"
+                icon={<Others/>}>
+                Companies
               </Nav.Item>
-              <Nav.Item icon={<UserBadge/>}>
-                Product
+              <Nav.Item 
+                as={NavLink} 
+                children={<HomePage />} 
+                href="/products"
+                icon={<Others/>}>
+                Products
               </Nav.Item>
-            </Nav.Menu>
-          </Nav>
-          <Nav pullRight>
-            <Nav.Menu title="Settings" icon={<UserBadge/>}>
-            <Nav.Item>
-              <ButtonToolbar>
-                <IconButton onClick={toggleModeFunc} 
-                color="red" 
-                appearance='ghost' 
-                size='xs' 
-                icon={toggleMode ? <Visible /> : <Unvisible />}>{toggleMode ? "Light Mode" : "Dark Mode"}</IconButton>
-              </ButtonToolbar>
-            </Nav.Item>
-            <Nav.Item icon={<Others/>}>
-              Modal
-            </Nav.Item>
-            <Nav.Item icon={<Others/>}>
-              Support
-            </Nav.Item>
-            <Nav.Item icon={<Others/>}>
-              Billing
-            </Nav.Item>
-              
-            </Nav.Menu>
-          </Nav>
-        </Navbar>
-        {/* <NavBar /> */}
-        <Routes>
-          <Route path='/contacts/new' element={<NewContact conBlackList={conBlackList} />} />
-          <Route path='/contacts/:id' element={<ContactCard conBlackList={conBlackList} />} />
-          <Route path='/contacts' element={<ContactsPage conBlackList={conBlackList} />} />
-          <Route path='/companies/new' element={<NewCompany compBlackList={compBlackList} />} />
-          <Route path='/companies/:id' element={<CompanyCard />} />
-          <Route path='/companies' element={ <CompaniesPage compBlackList={compBlackList} /> } />
-          <Route path='/products/new' element={<NewProduct />} />
-          <Route path='/products/:id' element={<ProductCard />} />
-          <Route path='/products' element={ <ProductsPage prodBlackList={prodBlackList} />} />
+              <Nav.Item icon={<Others/>}>
+                Modal
+              </Nav.Item>
+            </Nav>
+            {/* <Nav pullRight>
+              <Nav.Item>
+                <ButtonToolbar>
+                  <IconButton onClick={toggleModeFunc} 
+                  color="red" 
+                  appearance='ghost' 
+                  size='lg' 
+                  icon={toggleMode ? <Visible /> : <Unvisible />}>{toggleMode ? "Light Mode" : "Dark Mode"}</IconButton>
+                </ButtonToolbar>
+              </Nav.Item>
+            </Nav> */}
+            <Nav pullLeft>
+              <Nav.Menu title="Add New" icon={<Plus/>}>
+                <Nav.Item 
+                  as={NavLink}
+                  children={<NewContact />} 
+                  href="/contacts/new"
+                  icon={<UserBadge/>}>
+                  Contact
+                </Nav.Item>
+                <Nav.Item icon={<UserBadge/>}>
+                  Company
+                </Nav.Item>
+                <Nav.Item icon={<UserBadge/>}>
+                  Product
+                </Nav.Item>
+              </Nav.Menu>
+            </Nav>
+            <Nav pullRight>
+              <Nav.Menu title="Settings" icon={<UserBadge/>}>
+              <Nav.Item>
+                <ButtonToolbar>
+                  <IconButton onClick={toggleModeFunc} 
+                  color="red" 
+                  appearance='ghost' 
+                  size='xs' 
+                  icon={toggleMode ? <Visible /> : <Unvisible />}>{toggleMode ? "Light Mode" : "Dark Mode"}</IconButton>
+                </ButtonToolbar>
+              </Nav.Item>
+              <Nav.Item icon={<Others/>}>
+                Modal
+              </Nav.Item>
+              <Nav.Item icon={<Others/>}>
+                Support
+              </Nav.Item>
+              <Nav.Item icon={<Others/>}>
+                Billing
+              </Nav.Item>
+              </Nav.Menu>
+              {/* <Badge content="69">
+                <Avatar size="md" src="https://media-exp1.licdn.com/dms/image/C5103AQFOvyuxg-C8lA/profile-displayphoto-shrink_200_200/0/1517234384465?e=1669852800&v=beta&t=qGk8v75g1irvfxW8at7Tm3BgrwcOzFYtNXorqr1aWVY" alt="@will" />
+              </Badge> */}
 
-          {/* <Route path='/initiatives' element={ <InitiativesPage />} /> */}
-          <Route path='/' element={ <HomePage />} />
-        </Routes>
+            </Nav>
+            {/* <Avatar circle style={{backgroundColor: "orange", fontSize: 14}}>
+                  Sam
+            </Avatar> */}
+            <Nav>
+              
+            </Nav>
+          </Navbar>
+          </Header>
+          {/* <NavBar /> */}
+          <Content>
+            <Routes>
+              <Route path='/contacts/new' element={<NewContact conBlackList={conBlackList} />} />
+              <Route path='/contacts/:id' element={<ContactCard conBlackList={conBlackList} />} />
+              <Route path='/contacts' element={<ContactsPage conBlackList={conBlackList} />} />
+              <Route path='/companies/new' element={<NewCompany compBlackList={compBlackList} />} />
+              <Route path='/companies/:id' element={<CompanyCard />} />
+              <Route path='/companies' element={ <CompaniesPage compBlackList={compBlackList} /> } />
+              <Route path='/products/new' element={<NewProduct />} />
+              <Route path='/products/:id' element={<ProductCard />} />
+              <Route path='/products' element={ <ProductsPage prodBlackList={prodBlackList} />} />
+
+              {/* <Route path='/initiatives' element={ <InitiativesPage />} /> */}
+              <Route exact path='/' element={ <HomePage />} />
+            </Routes>
+          </Content>
+          <Footer>
+            <List>
+              <FlexboxGrid justify='space-between'>
+                <FlexboxGrid.Item style={{ marginButton: 5, display: "flex", justifyContent: "center"}} as={Col} colspan={6}>
+                  <List>
+                    <h6>Lead Nectar</h6>
+                    <List.Item>New York</List.Item>
+                  </List>
+                </FlexboxGrid.Item>
+                <FlexboxGrid.Item style={{ marginButton: 5, display: "flex", justifyContent: "center"}} as={Col} colspan={6}>
+                <List>
+                    <h6>Legal Disclaimer</h6>
+                    <List.Item>Lisbon</List.Item>
+                  </List>
+                </FlexboxGrid.Item>
+                <FlexboxGrid.Item style={{ marginButton: 5, display: "flex", justifyContent: "center"}} as={Col} colspan={6}>
+                <List>
+                    <h6>Intel</h6>
+                    <List.Item>Tulum</List.Item>
+                  </List>
+                </FlexboxGrid.Item>
+              </FlexboxGrid>
+              <FlexboxGrid justify='center'>
+                <FlexboxGrid.Item>
+                  <p>
+                    All Rights Reserved
+                  </p>
+                </FlexboxGrid.Item>
+              </FlexboxGrid>
+            </List>
+          </Footer>
+        
+          </Container>
         </CustomProvider>
       </BrowserRouter>
 
