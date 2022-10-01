@@ -3,10 +3,12 @@ import { Navigate, NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import PaginateCompanies from "./PaginateCompanies"
 import { Button, IconButton, Table } from 'rsuite';
-// import 'rsuite/dist/rsuite.min.css'
+import 'rsuite/dist/rsuite.min.css'
+import '../../Style/CompaniesTable.css'
 
-import 'rsuite/styles/index.less';
-import 'custom-theme.less';
+
+// import 'rsuite/styles/index.less';
+// import 'custom-theme.less';
 
 import PlusIcon from '@rsuite/icons/Plus';
 
@@ -198,14 +200,14 @@ const CompaniesPage = ({compBlackList}) => {
                 <IconButton icon={<PlusIcon />}>Add New Company</IconButton>
             </NavLink>
             <div className="filter">
-                <label className='filterLabel'>Choose owner:</label>
-                <select name='ownersNames' id='ownersNames' onChange={updateOwner}>
+                {/* <label className='filterLabel'>Choose owner:</label> */}
+                {/* <select name='ownersNames' id='ownersNames' onChange={updateOwner}>
                     <option value="All">All</option>
                     {ownersNames.map((ownerName, index) => {
                         return <option key={index} value={ownerName}>{ownerName}</option>
                     })}
-                </select>
-                <div className="searchbar">
+                </select> */}
+                {/* <div className="searchbar">
                     <input className='searchbox'
                     type='text'
                     id='search'
@@ -213,23 +215,27 @@ const CompaniesPage = ({compBlackList}) => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                </div>
+                </div> */}
                 <h4>Total: {companies.length}</h4>
             </div>
             <Table
+                className="table"
                 showHeader={true}
                 height={800}
+                width={1200}
                 data={companies}
                 onRowClick={rowData => {
                     console.log(rowData)
                 }}
                 onSortColumn={handleSortingChange}
+                bordered={true}
+                cellBordered={true}
             >
                 {keyArray.map((key, index) => {
                     return (
-                        <Column width={100} align="left" resizable sortable>
-                            <HeaderCell key={index}>{key}</HeaderCell>
-                            <Cell dataKey={key} />
+                        <Column className="table-column" width={100} align="left" resizable sortable>
+                            <HeaderCell className="table_header" key={index}>{key}</HeaderCell>
+                            <Cell className="table-cell" dataKey={key} />
                         </Column>
                     )
                 })}

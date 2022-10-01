@@ -14,6 +14,9 @@ import NewProduct from './Components/Product/NewProduct';
 import ProductCard from './Components/Product/ProductCard';
 // import InitiativesPage from './Components/Companies/Initiative/InitiativesPage';
 
+import 'rsuite/dist/rsuite.min.css';
+import { Button } from 'rsuite';
+
 
 
 function App() {
