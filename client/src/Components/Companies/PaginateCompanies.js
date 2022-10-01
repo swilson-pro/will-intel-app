@@ -8,7 +8,7 @@ const PaginateCompanies = ({pageCount, setPageCount, data, getCompaniesForPage})
     const [currentItems, setCurrentItems] = useState([]);
 
     const [itemOffset, setItemOffset] = useState(0);
-    const itemsPerPage = 10;
+    const itemsPerPage = 20;
 
     useEffect(() => {
         const endOffset = itemOffset + itemsPerPage;

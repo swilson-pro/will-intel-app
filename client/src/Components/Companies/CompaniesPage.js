@@ -2,9 +2,16 @@ import { useEffect, useState } from "react"
 import { Navigate, NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import PaginateCompanies from "./PaginateCompanies"
-import { Button, IconButton } from 'rsuite';
-import 'rsuite/dist/rsuite.min.css'
+import { Button, IconButton, Table } from 'rsuite';
+// import 'rsuite/dist/rsuite.min.css'
+
+import 'rsuite/styles/index.less';
+import 'custom-theme.less';
+
 import PlusIcon from '@rsuite/icons/Plus';
+
+const {Column, HeaderCell, Cell} = Table
+
 
 const CompaniesPage = ({compBlackList}) => {
 
@@ -34,31 +41,32 @@ const CompaniesPage = ({compBlackList}) => {
 
 
 
+
     useEffect(() => {
         getCompaniesForPage(page, sortField, order)
     }, [owner, page, sortField, order])
 
 
     const getCompaniesForPage = async (page) => {
-        console.log('page', page)
-        console.log('order', order)
-        console.log('sortField', sortField)
+        // console.log('page', page)
+        // console.log('order', order)
+        // console.log('sortField', sortField)
         const res = await fetch(`http://localhost:3000/companies_paginated/${page}?${sortField}=${order}`)
         const companiesPageData = await res.json()
-        console.log('companiesPageData', companiesPageData)
+        // console.log('companiesPageData', companiesPageData)
 
 
         const companiesDataArray = companiesPageData.companies
-        console.log('companiesDataArray', companiesDataArray)
+        // console.log('companiesDataArray', companiesDataArray)
         const pagina = companiesPageData.page
-        console.log('pagina', pagina)
+        // console.log('pagina', pagina)
         const paginaCuenta = companiesPageData.page_count
         setPageCount(paginaCuenta)
-        console.log('paginaCuenta', paginaCuenta)
+        // console.log('paginaCuenta', paginaCuenta)
 
 
         let pObjKeys = Object.keys(companiesDataArray[0])
-        console.log('pObjKeys', pObjKeys)
+        // console.log('pObjKeys', pObjKeys)
 
         let pDisplayKeys = pObjKeys.filter((item) => !compBlackList.includes(item))
 
@@ -71,8 +79,8 @@ const CompaniesPage = ({compBlackList}) => {
         setKeyArray(pDisplayKeys)
         setCompanies(pDisplayCompanies)
 
-        console.log('pDisplayKeys', pDisplayKeys)
-        console.log('pDisplayCompanies', pDisplayCompanies)
+        // console.log('pDisplayKeys', pDisplayKeys)
+        // console.log('pDisplayCompanies', pDisplayCompanies)
 
     }
 
@@ -155,18 +163,25 @@ const CompaniesPage = ({compBlackList}) => {
         // }
     }
 
-    const handleSortingChange = (field) => {
+    const handleSortingChange = (sortColumn) => {
         const sortOrder =
-        field === sortField && order === 'asc' ? 'desc' : 'asc'
+        sortColumn === sortField && order === 'asc' ? 'desc' : 'asc'
 
 
         console.log('sortOrder', sortOrder)
 
-        setSortField(field)
+        setSortField(sortColumn)
         setOrder(sortOrder)
-        handleSorting(field, sortOrder)
+        handleSorting(sortColumn, sortOrder)
 
     }
+
+    // const [sortColumn, setSortColumn] = useState();
+    // const [sortType, setSortType] = useState();
+
+
+    console.log('order', order)
+    console.log('sortField', sortField)
 
     const updateOwner = (e) => {
         setOwner(e.target.value)
@@ -201,7 +216,30 @@ const CompaniesPage = ({compBlackList}) => {
                 </div>
                 <h4>Total: {companies.length}</h4>
             </div>
-            <table className="companies-table">
+            <Table
+                showHeader={true}
+                height={800}
+                data={companies}
+                onRowClick={rowData => {
+                    console.log(rowData)
+                }}
+                onSortColumn={handleSortingChange}
+            >
+                {keyArray.map((key, index) => {
+                    return (
+                        <Column width={100} align="left" resizable sortable>
+                            <HeaderCell key={index}>{key}</HeaderCell>
+                            <Cell dataKey={key} />
+                        </Column>
+                    )
+                })}
+                {/* <Column width={100} align="center" fixed>
+                    <HeaderCell>id</HeaderCell>
+                    <Cell dataKey="id" />
+                </Column> */}
+
+            </Table>
+            {/* <table className="companies-table">
                 <thead>
                     <tr>
                         {keyArray.map((key, index) => {
@@ -226,7 +264,7 @@ const CompaniesPage = ({compBlackList}) => {
                         )
                     })}
                 </tbody>
-            </table>
+            </table> */}
             <PaginateCompanies pageCount={pageCount} getCompaniesForPage={getCompaniesForPage} data={companies}/>
         </main>
     )
