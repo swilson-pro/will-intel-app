@@ -3,7 +3,7 @@ import { Navigate, NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import PaginateContacts from "./PaginateContacts"
 import './paginate.css'
-import '../../Style/Tables.css'
+import '../../Style/ContactsTable.css'
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlus} from '@fortawesome/free-solid-svg-icons'

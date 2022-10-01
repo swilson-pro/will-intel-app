@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import { Navigate, NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import PaginateCompanies from "./PaginateCompanies"
+import { Button, IconButton } from 'rsuite';
+import 'rsuite/dist/rsuite.min.css'
+import PlusIcon from '@rsuite/icons/Plus';
 
 const CompaniesPage = ({compBlackList}) => {
 
@@ -177,7 +180,7 @@ const CompaniesPage = ({compBlackList}) => {
     return(
         <main className="main">
             <NavLink className='new-company-navlink' to='/companies/new' >
-                <button className='new-company'>Create New Company</button>
+                <IconButton icon={<PlusIcon />}>Add New Company</IconButton>
             </NavLink>
             <div className="filter">
                 <label className='filterLabel'>Choose owner:</label>
