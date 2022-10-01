@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import PaginateProducts from "./PaginateProducts";
 
 const ProductsPage = ({prodBlackList}) => {
 
@@ -17,28 +18,77 @@ const ProductsPage = ({prodBlackList}) => {
     const [sortField, setSortField] = useState('')
     const [order, setOrder] = useState('asc')
 
-    const fetchProducts = async () => {
-        const response = await fetch(`http://localhost:3000/products`)
-        const productsArray = await response.json()
 
-        let objKeys = Object.keys(productsArray[0])
 
-        let displayKeys = objKeys.filter((item) => !prodBlackList.includes(item))
 
-        productsArray.map(objectElement => {
+    const [page, setPage] = useState(1)
+
+    const [pageCount, setPageCount] = useState();
+
+
+    useEffect(() => {
+        getProductsForPage(page, sortField, order)
+    }, [page, sortField, order])
+
+
+
+    const getProductsForPage = async (page) => {
+        // console.log('page', page)
+        // console.log('order', order)
+        // console.log('sortField', sortField)
+        const res = await fetch(`http://localhost:3000/products_paginated/${page}?${sortField}=${order}`)
+        const productsPageData = await res.json()
+        // console.log('productsPageData', productsPageData)
+
+        const productsDataArray = productsPageData.products
+        // console.log('productsDataArray', productsDataArray)
+        const pagina = productsPageData.page
+        // console.log('pagina', pagina)
+        const paginaCuenta = productsPageData.page_count
+        setPageCount(paginaCuenta)
+        // console.log('paginaCuenta', paginaCuenta)
+
+        let pObjKeys = Object.keys(productsDataArray[0])
+        // console.log('pObjKeys', pObjKeys)
+
+        let pDisplayKeys = pObjKeys.filter((item) => !prodBlackList.includes(item))
+
+        productsDataArray.map(objectElement => {
             prodBlackList.map((element) => delete objectElement[element])
         })
 
-        let displayProducts = productsArray.filter((item) => !prodBlackList.includes(item))
+        let pDisplayProducts = productsDataArray.filter((item) => !prodBlackList.includes(item))
 
+        setKeyArray(pDisplayKeys)
+        setProducts(pDisplayProducts)
 
-        if (owner == "All") {
-            setProducts(displayProducts)
-        } else setProducts(displayProducts.filter(product => product.owner_name == owner))
-        setProducts(displayProducts)
-
-        setKeyArray(displayKeys)
+        // console.log('pDisplayKeys', pDisplayKeys)
+        // console.log('pDisplayProducts', pDisplayProducts)
     }
+
+
+    // const fetchProducts = async () => {
+    //     const response = await fetch(`http://localhost:3000/products`)
+    //     const productsArray = await response.json()
+
+    //     let objKeys = Object.keys(productsArray[0])
+
+    //     let displayKeys = objKeys.filter((item) => !prodBlackList.includes(item))
+
+    //     productsArray.map(objectElement => {
+    //         prodBlackList.map((element) => delete objectElement[element])
+    //     })
+
+    //     let displayProducts = productsArray.filter((item) => !prodBlackList.includes(item))
+
+
+    //     if (owner == "All") {
+    //         setProducts(displayProducts)
+    //     } else setProducts(displayProducts.filter(product => product.owner_name == owner))
+    //     setProducts(displayProducts)
+
+    //     setKeyArray(displayKeys)
+    // }
 
     const newDisplayedProducts = products. filter(product => {
         return product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -52,7 +102,7 @@ const ProductsPage = ({prodBlackList}) => {
     }
 
     useEffect(() => {
-        fetchProducts()
+        // fetchProducts()
         fetchOwnersNames()
     }, [owner])
 
@@ -77,16 +127,16 @@ const ProductsPage = ({prodBlackList}) => {
     
 
     const handleSorting = (sortField, sortOrder) => {
-        if (sortField) {
-            const sorted = [...products].sort((a,b) => {
-                return (
-                    a[sortField]?.toString().localeCompare(b[sortField]?.toString(), 'en', {
-                        numeric: true,
-                    }) * (sortOrder === 'asc' ? 1 : -1)
-                )
-            })
-            setProducts(sorted)
-        }
+        // if (sortField) {
+        //     const sorted = [...products].sort((a,b) => {
+        //         return (
+        //             a[sortField]?.toString().localeCompare(b[sortField]?.toString(), 'en', {
+        //                 numeric: true,
+        //             }) * (sortOrder === 'asc' ? 1 : -1)
+        //         )
+        //     })
+        //     setProducts(sorted)
+        // }
     }
 
 
@@ -96,7 +146,7 @@ const ProductsPage = ({prodBlackList}) => {
 
         console.log('field', field)
         console.log('sortOrder', sortOrder)
-        console.log('field, sortOrder', field, sortOrder)
+        // console.log('field, sortOrder', field, sortOrder)
         setSortField(field)
         setOrder(sortOrder)
         handleSorting(field, sortOrder)
@@ -107,12 +157,12 @@ const ProductsPage = ({prodBlackList}) => {
     }
 
     const handleClick = (id) => {
-        console.log('clicked: ', id)
+        // console.log('clicked: ', id)
         navigate(`/products/${id}`)
         
     }
-    console.log('products', products)
-    console.log('keyArray', keyArray)
+    // console.log('products', products)
+    // console.log('keyArray', keyArray)
 
     return (
         <main className="main">
@@ -147,14 +197,14 @@ const ProductsPage = ({prodBlackList}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {newDisplayedProducts.map(product=>{
+                    {products.map(product=>{
                         let productVals = Object.values(product)
-                        console.log('product?', product)
-                        console.log('productVals', productVals)
+                        // console.log('product?', product)
+                        // console.log('productVals', productVals)
                         return (
                             <tr onClick={() => handleClick(product.id)}>
                                 {productVals.map(val => {
-                                    console.log('val', val)
+                                    // console.log('val', val)
                                     return (
                                         <td>{val}</td>
                                     )
@@ -164,6 +214,7 @@ const ProductsPage = ({prodBlackList}) => {
                     })}
                 </tbody>
             </table>
+            <PaginateProducts pageCount={pageCount} getProductsForPage={getProductsForPage} data={products}/>
         </main>
     )
 }

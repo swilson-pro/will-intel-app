@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get '/companies_paginated/:page', to: 'companies#paginated_companies'
 
+  get '/products_paginated/:page', to: 'products#paginated_products'
 
 
   get '/owners_contacts/:user_id', to: 'contacts#owners_contacts'
