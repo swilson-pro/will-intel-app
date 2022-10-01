@@ -7,6 +7,9 @@ import 'rsuite/dist/rsuite.min.css'
 import '../../Style/CompaniesTable.css'
 
 
+
+
+
 // import 'rsuite/styles/index.less';
 // import 'custom-theme.less';
 
