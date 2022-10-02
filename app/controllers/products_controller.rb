@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
 
 
         products = Product.all.order("#{attribute} #{order}")
-        paginated_products = products.paginate(page: params[:page], per_page: 10)
+        paginated_products = products.paginate(page: params[:page], per_page: 20)
         render json: {
             products: ActiveModel::Serializer::CollectionSerializer.new(paginated_products, serializer: ProductTableSerializer),
             page: paginated_products.current_page,

@@ -3,6 +3,11 @@ import { Navigate, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import PaginateProducts from "./PaginateProducts";
 
+import { Button, IconButton, Table } from 'rsuite';
+import 'rsuite/dist/rsuite.min.css'
+
+const {Column, HeaderCell, Cell} = Table
+
 const ProductsPage = ({prodBlackList}) => {
 
     let navigate = useNavigate()
@@ -24,6 +29,8 @@ const ProductsPage = ({prodBlackList}) => {
     const [page, setPage] = useState(1)
 
     const [pageCount, setPageCount] = useState();
+
+    console.log('pageCount', pageCount)
 
 
     useEffect(() => {
@@ -62,8 +69,8 @@ const ProductsPage = ({prodBlackList}) => {
         setKeyArray(pDisplayKeys)
         setProducts(pDisplayProducts)
 
-        // console.log('pDisplayKeys', pDisplayKeys)
-        // console.log('pDisplayProducts', pDisplayProducts)
+        console.log('pDisplayKeys', pDisplayKeys)
+        console.log('pDisplayProducts', pDisplayProducts)
     }
 
 
@@ -140,29 +147,29 @@ const ProductsPage = ({prodBlackList}) => {
     }
 
 
-    const handleSortingChange = (field) => {
+    const handleSortingChange = (sortColumn) => {
         const sortOrder =
-        field === sortField && order === 'asc' ? 'desc' : 'asc'
+        sortColumn === sortField && order === 'asc' ? 'desc' : 'asc'
 
-        console.log('field', field)
+
         console.log('sortOrder', sortOrder)
-        // console.log('field, sortOrder', field, sortOrder)
-        setSortField(field)
+
+        setSortField(sortColumn)
         setOrder(sortOrder)
-        handleSorting(field, sortOrder)
+        handleSorting(sortColumn, sortOrder)
     }
 
     const updateOwner = (e) => {
         setOwner(e.target.value)
     }
 
-    const handleClick = (id) => {
+    const handleClick = (rowData) => {
         // console.log('clicked: ', id)
-        navigate(`/products/${id}`)
+        navigate(`/products/${rowData.id}`)
         
     }
-    // console.log('products', products)
-    // console.log('keyArray', keyArray)
+    console.log('products', products)
+    console.log('keyArray', keyArray)
 
     return (
         <main className="main">
@@ -186,7 +193,30 @@ const ProductsPage = ({prodBlackList}) => {
                 />
                 </div>
             </div>
-            <table className="products-table">
+            <Table
+            className="table"
+            showHeader={true}
+            height={850}
+            data={products}
+            onRowClick={rowData => {
+                handleClick(rowData)
+            }}
+            onSortColumn={handleSortingChange}
+            bordered={true}
+            cellBordered={true}
+            fluid
+            >
+            {keyArray.map((key, index) => {
+                return (
+                    <Column className="table-column" width={150} align="left" resizable sortable>
+                        <HeaderCell className="table_header" key={index}>{key}</HeaderCell>
+                        <Cell className="table-cell" dataKey={key} />
+                    </Column>
+                )
+            })}                
+
+            </Table>
+            {/* <table className="products-table">
                 <thead>
                     <tr>
                         {keyArray.map((key) => {
@@ -213,7 +243,7 @@ const ProductsPage = ({prodBlackList}) => {
                         )
                     })}
                 </tbody>
-            </table>
+            </table> */}
             <PaginateProducts pageCount={pageCount} getProductsForPage={getProductsForPage} data={products}/>
         </main>
     )

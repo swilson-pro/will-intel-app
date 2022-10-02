@@ -168,6 +168,10 @@ const CompaniesPage = ({compBlackList}) => {
         // }
     }
 
+    console.log('companies', companies)
+    console.log('keyArray', keyArray)
+
+
     const handleSortingChange = (sortColumn) => {
         const sortOrder =
         sortColumn === sortField && order === 'asc' ? 'desc' : 'asc'
