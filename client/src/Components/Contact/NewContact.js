@@ -1,8 +1,10 @@
-import {Form, Input, Button, ButtonToolbar, Schema} from 'rsuite'
+import {Form, Input, Button, ButtonToolbar, SelectPicker } from 'rsuite'
 
 import { useState, useEffect, forwardRef, useRef } from "react"
 
 import {SchemaModel, StringType} from "schema-typed"
+
+
 
 
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
@@ -23,37 +25,48 @@ const NewContact = () => {
     const [companies, setCompanies] =useState([])
 
 
+    const [companiesNames, setCompaniesNames] = useState([])
+
 
     const fetchCompanies = async () => {
+        let companiesArray = []
         let req = await fetch(`http://localhost:3000/companies_names`)
         let res = await req.json()
+
         setCompanies(res)
 
+        res.map((company) => {
+            companiesArray.push(company[1])
+        })
+
+        setCompaniesNames(companiesArray)
     }
+
+    const data = companiesNames.map(item => ({label: item, value: item}))
+
+
+
 
     const handleContactSubmit = async (e) => {
         e.preventDefault();
-        // console.log(e.target.value[0].value)
         
-
         // dealing with company name
 
-        console.log('companies', companies)
-        console.log('e.target', e.target)
-        console.log('e.target[0].value', e.target[0].value)
-        console.log('e.target[1].value', e.target[1].value)
-        console.log('e.target[2].value', e.target[2].value)
-        console.log('e.target[3].value', e.target[3].value)
-        console.log('e.target[4].value', e.target[4].value)
+        // console.log('companies', companies)
+        // console.log('e.target', e.target)
+        // console.log('e.target[0].value', e.target[0].value)
+        // console.log('e.target[1].value', e.target[1].value)
+        // console.log('e.target[2].value', e.target[2].value)
+        // console.log('e.target[3].value', e.target[3].value)
+        // console.log('e.target[4].value', e.target[4].value)
 
         let newCompany = e.target[1].value
 
-        console.log('newCompany', newCompany)
+        // console.log('newCompany', newCompany)
         // console.log('company[1]', company[1])
         // const result = companies.find(company => {
         //     console.log(company[1] == newCompany)
         // })
-
 
         const result = companies.find(company => {
             return company[1] == newCompany
@@ -61,16 +74,15 @@ const NewContact = () => {
         })
 
         let newCompanyName = result[1]
-        console.log('result', result)
-        console.log('result[0]', result[0])
-        console.log('result[1]', result[1])
+        // console.log('result', result)
+        // console.log('result[0]', result[0])
+        // console.log('result[1]', result[1])
 
         let newCompanyID = result[0]
         
+        // console.log('newCompanyName', newCompanyName)
 
-        console.log('newCompanyName', newCompanyName)
-
-        console.log('Contact: ', {name, newCompanyName, position, phone, email, location, linkedin, image})
+        // console.log('Contact: ', {name, newCompanyName, position, phone, email, location, linkedin, image})
 
         let req = await fetch(`http://localhost:3000/contacts`, {
             method: "POST",
@@ -89,8 +101,6 @@ const NewContact = () => {
                 linkedin_profile_url: linkedin,
                 image_url: image
                 // user_id: 1
-
-
             })
         })
 
@@ -108,11 +118,9 @@ const NewContact = () => {
         fetchCompanies()
     }, [name])
 
-
     // R Suite Form
 
-
-
+    const [value, setValue] = useState(null)
 
     const [formValue, setFormValue] = useState({
         name: "",
@@ -121,7 +129,6 @@ const NewContact = () => {
         textarea: ""
     })
     const formRef = useRef()
-
 
     const model = SchemaModel({
         name: StringType().isRequired("Full name required!"),
@@ -138,6 +145,7 @@ const NewContact = () => {
         let fName = formValue.name
         let fCompany = formValue.company_name
         let fEmail = formValue.email
+        console.log('value', value)
         console.log('form has been submitted')
         console.log('formValue', formValue)
         console.log('fName', fName)
@@ -156,40 +164,7 @@ const NewContact = () => {
                 company_id: 1
             })
         })
-
-        
-        // setName(formValue.name)
-        // setCompanyName(formValue.company_name)
-        // setEmail(formValue.email)
-        // console.log(formValue, 'FORM VALUE')
-        // console.log('formValue.name', formValue.name)
-        // console.log('formValue.company_name', formValue.company_name)
-
-        // handleNewContact(formValue)
-        // THIS IS HAPPENING ASYNCRONYSLY, THEREFORE IT'S NOT REGISTERING
-        // THE CHANGE.
     }
-
-    // const handleNewContact = async (formValue) => {
-    //     console.log('realFormValue', formValue)
-    //     let req = await fetch(`http://localhost:3000/contacts`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             name: name,
-    //             user_id: 1,
-    //             company_id: 1,
-    //             email: email
-    //         })
-    //     })
-    // }
-    // console.log('name', name)
-    // console.log('companyName', companyName)
-    // console.log('email', email)
-
-
 
     return (
         <Form 
@@ -204,6 +179,7 @@ const NewContact = () => {
                 <Form.Control name="name" />
                 <Form.HelpText tooltip>Full Name is required</Form.HelpText>
             </Form.Group>
+            <SelectPicker value={value} onChange={setValue} label="Choose Company " data={data} block />
             <Form.Group controlId="company_name">
                 <Form.ControlLabel>Company Name</Form.ControlLabel>
                 <Form.Control name="company_name" />
