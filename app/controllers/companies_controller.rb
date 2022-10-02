@@ -1,8 +1,6 @@
 class CompaniesController < ApplicationController
     require 'will_paginate/array'
 
-
-
     def paginated_companies
 
         puts "params: #{params}"

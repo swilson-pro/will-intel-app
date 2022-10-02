@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
 
         puts "params: #{params}"
 
-        passed_params = params.select {|k,v| k != "controller" and k != "action" and k != "page"}
+        passed_params = params.select {|k,v| k != "action" and k != "controller" and k != "page"}
 
         puts "passed_params: #{passed_params}"
 
