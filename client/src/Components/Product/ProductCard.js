@@ -3,6 +3,12 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import EditProduct from "./EditProduct"
 
+import {Button, ButtonToolbar, IconButton} from 'rsuite';
+import {Visible, Unvisible, Others, UserBadge, Plus} from '@rsuite/icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding, faPencil } from '@fortawesome/free-solid-svg-icons'
+import {faLinkedin} from '@fortawesome/free-brands-svg-icons'
+
 const ProductCard = () => {
 
     const [isEditClicked, setIsEditClicked] = useState(false)
@@ -53,25 +59,87 @@ console.log('id', id)
 console.log('product', product)
     return (
         <div className="product-card">
-            <button onClick={() => deleteProduct(product.id)}>Delete Product</button>
-            <button onClick={() => updateProduct(product.id)}>Update Product</button>
-            <div className="left">
-                <div className="left-head">
-                    <img src={product.image_link} alt={product.name} width='100px' height='100px' onClick={() => handleCompanyClick(product.company_id)}></img>
-                    <h2>Product: {product.name}</h2>
-                    <h2>Brand: {product.brand}</h2>
-                    <h2 onClick={() => handleCompanyClick(product.company_id)}>Company: {product.company_name}</h2>
-                    <h2>{<a href={product.product_link} target="_blank">{product.product_link}</a>}</h2>
-                    <h2>{<a href={product.website} target="_blank">{product.website}</a>}</h2>
-                    <p>{product.description}</p>
-                    <ul>associated contacts
-                        {product.company_contacts?.map((contact) => {
-                            return <li key={contact.id} onClick={() => handleContactClick(contact.id)}>{contact.name}</li>
-                        })}
-                    </ul>
+            <ButtonToolbar>
+                <IconButton
+                    color="blue"
+                    appearance="ghost"
+                    size="md"
+                    icon={<Plus/>}
+                    onClick={() => deleteProduct(product.id)}
+                    >
+                        Delete Product
+                </IconButton>
+                <IconButton
+                    color="blue"
+                    appearance="ghost"
+                    size="md"
+                    icon={<Plus/>}
+                    onClick={() => updateProduct(product.id)}
+                    >
+                        Edit Product
+                </IconButton>
+            </ButtonToolbar>
+            {/* <button onClick={() => deleteProduct(product.id)}>Delete Product</button>
+            <button onClick={() => updateProduct(product.id)}>Update Product</button> */}
+            <div className="profile-details">
+                <div className="pd-left">
+                    <div className="pd-row">
+                        <img className='pd-image' src={product.image_link} alt={product.name} onClick={() => handleCompanyClick(product.company_id)}></img>
+                        <div>
+                            <h3>{product.name}</h3>
+                            <h3>Brand: {product.brand}</h3>
+                            <h3 onClick={() => handleCompanyClick(product.company_id)}>{product.company_name}</h3>
+                            <h4>{<a href={product.website} target="_blank">{product.website}</a>}</h4>
+                            <h4>{<a href={product.product_link} target="_blank">{product.product_link}</a>}</h4>
+                        </div>
+                        <div className="left-body">
+                            <details>
+                                <summary>Product Description</summary>
+                                <p>Description: {product.description}</p>
+                            </details>
+                        </div>
+                    </div>
+
+
                     <hr></hr>
                     {isEditClicked ? <EditProduct id={id} fetchProduct={fetchProduct} /> : null}
                 </div>
+                <div className="pd-mid">
+                        <form className="note-form">
+                            <button className="note-button">
+                                <span className="note_button_icon">
+                                    <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
+                                </span>
+                            </button>
+                            <textarea placeholder=" write note..." className="note-input" />
+                        </form>
+                        <h2>Note</h2>
+                        <hr></hr>
+                        <div className="notes">
+                        <div className="note-div">
+                            <p className="note-timestamp">march 11, 2021, 3PM | Ben</p>
+                            <p className="note">Here's your note...</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="pd-right">
+                    <h3>More Info</h3>
+                    <div className="pd-row">
+                        <details className="colleagues">
+                            <summary>Associated Contacts</summary>
+                            {product.company_contacts?.map((contact) => {
+                                return <li key={contact.id} onClick={() => handleContactClick(contact.id)}>{contact.name}</li>
+                            })}
+                        </details>
+                        <details className="company-products">
+                            <summary>Other Products this company</summary>
+                            {product.company_products?.map((contact) => {
+                                return <li key={contact.id} onClick={() => handleContactClick(contact.id)}>{contact.name}</li>
+                            })}
+                        </details>
+                    </div>
+                </div>
+
             </div>
         </div>
     )

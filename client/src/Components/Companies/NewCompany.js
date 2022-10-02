@@ -84,6 +84,13 @@ const NewCompany = () => {
                 user_id: 1
             })
         })
+        setFormValue(defaultFormValue)
+        toaster.push(message)
+    }
+
+    const defaultFormValue = {
+        name: '',
+        description: ''
     }
 
     return (
@@ -107,9 +114,16 @@ const NewCompany = () => {
                 <Form.HelpText tooltip>Optional</Form.HelpText>
             </Form.Group>
             <ButtonToolbar>
+                <Whisper
+                    placement='right'
+                    trigger='active'
+                    speaker={<Popover arrow={false}>Clicked</Popover>}>
                 <Button appearance='ghost' type='submit'>
                     Submit
                 </Button>
+
+                </Whisper>
+
             </ButtonToolbar>
             
         </Form>

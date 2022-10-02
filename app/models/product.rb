@@ -12,4 +12,8 @@ class Product < ApplicationRecord
     def company_contacts
         company.contacts
     end
+
+    def company_products
+        company.products
+    end
 end

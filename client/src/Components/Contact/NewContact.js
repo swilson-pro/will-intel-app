@@ -221,20 +221,15 @@ const NewContact = () => {
                 <Form.HelpText tooltip>Full Name is required</Form.HelpText>
             </Form.Group>
             <SelectPicker value={value} onChange={setValue} label="Choose Company " data={data} block />
-            <Form.Group controlId="company_name">
-                <Form.ControlLabel>Company Name</Form.ControlLabel>
-                <Form.Control name="company_name" />
-                <Form.HelpText tooltip>Company Name is required</Form.HelpText>
-            </Form.Group>
             <Form.Group controlId="email">
                 <Form.ControlLabel>Email</Form.ControlLabel>
                 <Form.Control name="email" />
-                <Form.HelpText>Email is required</Form.HelpText>
+                <Form.HelpText tooltip>Email is required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="position">
                 <Form.ControlLabel>Position/Role</Form.ControlLabel>
                 <Form.Control name="position" />
-                <Form.HelpText>Email is required</Form.HelpText>
+                <Form.HelpText tooltip>Email is required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="textarea">
                 <Form.ControlLabel>Contact Description</Form.ControlLabel>

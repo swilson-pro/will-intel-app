@@ -81,13 +81,13 @@ const CompanyCard = () => {
         <div className="company-card">
             <ButtonToolbar>
                 <IconButton
-                color="blue"
-                appearance='ghost'
-                size='md'
-                icon={<Plus/>}
-                onClick={() => deleteCompany(company.id)}
-                >
-                    Delete Company
+                    color="blue"
+                    appearance='ghost'
+                    size='md'
+                    icon={<Plus/>}
+                    onClick={() => deleteCompany(company.id)}
+                    >
+                        Delete Company
 
                 </IconButton>
                   <IconButton
