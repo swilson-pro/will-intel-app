@@ -108,7 +108,11 @@ function App() {
                   icon={<UserBadge/>}>
                   Contact
                 </Nav.Item>
-                <Nav.Item icon={<UserBadge/>}>
+                <Nav.Item
+                  as={NavLink} 
+                  children={<NewCompany />} 
+                  href="/companies/new"
+                  icon={<UserBadge/>}>
                   Company
                 </Nav.Item>
                 <Nav.Item icon={<UserBadge/>}>

@@ -2,6 +2,10 @@
     border: solid;
 } */
 
+.form-header {
+    align-items: center;
+}
+
 .delete-contact, .update-contact {
     display: inline-flex;
     height: 50px;

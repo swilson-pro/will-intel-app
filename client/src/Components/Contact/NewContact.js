@@ -245,7 +245,7 @@ const NewContact = () => {
                     placement="right"
                     trigger="active"
                     speaker={<Popover arrow={false}>Clicked</Popover>}>
-                <Button appearance='primary' type='submit' >
+                <Button appearance='ghost' type='submit' >
                     Submit
                 </Button>
                 </Whisper>
