@@ -193,15 +193,17 @@ const CompaniesPage = ({compBlackList}) => {
     }
 
 
-    const handleClick = (id) => {
-        navigate(`/companies/${id}`)
+    const handleClick = (rowData) => {
+        console.log('rowData', rowData)
+        console.log('rowData.id', rowData.id)
+        navigate(`/companies/${rowData.id}`)
     }
 
     return(
         <main className="main">
-            <NavLink className='new-company-navlink' to='/companies/new' >
+            {/* <NavLink className='new-company-navlink' to='/companies/new' >
                 <IconButton icon={<PlusIcon />}>Add New Company</IconButton>
-            </NavLink>
+            </NavLink> */}
             <div className="filter">
                 {/* <label className='filterLabel'>Choose owner:</label> */}
                 {/* <select name='ownersNames' id='ownersNames' onChange={updateOwner}>
@@ -228,7 +230,7 @@ const CompaniesPage = ({compBlackList}) => {
                 width={1200}
                 data={companies}
                 onRowClick={rowData => {
-                    console.log(rowData)
+                    handleClick(rowData)
                 }}
                 onSortColumn={handleSortingChange}
                 bordered={true}
@@ -236,7 +238,7 @@ const CompaniesPage = ({compBlackList}) => {
             >
                 {keyArray.map((key, index) => {
                     return (
-                        <Column className="table-column" width={100} align="left" resizable sortable>
+                        <Column className="table-column" width={150} align="left" resizable sortable>
                             <HeaderCell className="table_header" key={index}>{key}</HeaderCell>
                             <Cell className="table-cell" dataKey={key} />
                         </Column>
