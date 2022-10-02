@@ -4,7 +4,9 @@ import { useState, useEffect, forwardRef, useRef } from "react"
 
 import {SchemaModel, StringType} from "schema-typed"
 
+import { Popover, Whisper } from 'rsuite';
 
+import {Message, useToaster} from 'rsuite'
 
 
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
@@ -120,21 +122,31 @@ const NewContact = () => {
 
     // R Suite Form
 
+    const toaster = useToaster()
+
+    const message = (
+        <Message showIcon type="success">
+            Contact Created
+        </Message>
+    )
+
     const [value, setValue] = useState(null)
+
+    
 
     const [formValue, setFormValue] = useState({
         name: "",
-        company_name: "",
         email: "",
+        position: "",
         textarea: ""
     })
     const formRef = useRef()
 
     const model = SchemaModel({
-        name: StringType().isRequired("Full name required!"),
-        company_name: StringType().isRequired("Company Name Required"),
-        email: StringType().isEmail("Email must be valid!").isRequired("THIS IS REQUIRED"),
-        textarea: StringType().isRequired("A MESSAGE MUST BE ENTERED!")
+        name: StringType().isRequired("Full name is required"),
+        // company_name: StringType().isRequired("Company Name Required"),
+        email: StringType().isEmail("Valid Email Address is required").isRequired("wtf"),
+        // textarea: StringType().isRequired("A MESSAGE MUST BE ENTERED!")
     })
 
     const formClick = async () => {
@@ -143,14 +155,30 @@ const NewContact = () => {
             return;
         }
         let fName = formValue.name
-        let fCompany = formValue.company_name
         let fEmail = formValue.email
+        let fPosition = formValue.position
+        let valueID
+        let findValue = companies.find(company => {
+            return company[1] == value
+        })
+
+        if (value == null) {valueID = null} else {
+            valueID = findValue[0]
+        }
+        
         console.log('value', value)
+        console.log('companies', companies)
+        console.log('findValue', findValue)
+        console.log('valueID', valueID)
+
+
         console.log('form has been submitted')
         console.log('formValue', formValue)
         console.log('fName', fName)
-        console.log('fCompany', fCompany)
         console.log('fEmail', fEmail)
+        console.log('fPosition', fPosition)
+
+        console.log("New Contact: ", `name: ${fName}`,`Email: ${fEmail}`, `company_id: ${valueID}`, `company_name: ${value}` )
         let req = await fetch(`http://localhost:3000/contacts`, {
             method: "POST",
             headers: {
@@ -158,19 +186,32 @@ const NewContact = () => {
             },
             body: JSON.stringify({
                 name: fName,
-                company_name: fCompany,
                 email: fEmail,
+                position: fPosition,
                 user_id: 1,
-                company_id: 1
+                company_id: valueID
             })
         })
+        setFormValue(defaultFormValue)
+        // alert("New Contact Created")
+        toaster.push(message)
+        // window.location.reload(false)
     }
+
+    const defaultFormValue = {
+        name: '',
+        company_name: '',
+        email: '',
+        position: '',
+        textarea: ''
+      };
 
     return (
         <Form 
         ref={formRef} 
         model={model}
-        onChange={setFormValue}
+        formValue={formValue}
+        onChange={formValue => setFormValue(formValue)}
         onSubmit={formClick} 
         fluid
         >
@@ -190,14 +231,25 @@ const NewContact = () => {
                 <Form.Control name="email" />
                 <Form.HelpText>Email is required</Form.HelpText>
             </Form.Group>
+            <Form.Group controlId="position">
+                <Form.ControlLabel>Position/Role</Form.ControlLabel>
+                <Form.Control name="position" />
+                <Form.HelpText>Email is required</Form.HelpText>
+            </Form.Group>
             <Form.Group controlId="textarea">
-                <Form.ControlLabel>Enter a message</Form.ControlLabel>
+                <Form.ControlLabel>Contact Description</Form.ControlLabel>
                 <Form.Control name="textarea" rows={10} accepter={Textarea}></Form.Control>
             </Form.Group>
             <ButtonToolbar>
-                <Button appearance='primary' type='submit'>
+                <Whisper
+                    placement="right"
+                    trigger="active"
+                    speaker={<Popover arrow={false}>Clicked</Popover>}>
+                <Button appearance='primary' type='submit' >
                     Submit
                 </Button>
+                </Whisper>
+                {/* <Button onClick={() => toaster.push(message)}>TESTING TOASTER</Button> */}
             </ButtonToolbar>
         </Form>
         // <div className="new-contact-div">
