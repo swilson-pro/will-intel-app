@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
     belongs_to :user
-    belongs_to :company
+    belongs_to :company, optional: true
     has_many :notes
     
     # def page_count
@@ -11,19 +11,19 @@ class Contact < ApplicationRecord
     end
     
     def company_products
-        company.products
+        company&.products
     end
     
     def company_logo
-        company.logoUrl
+        company&.logoUrl
     end
     
     def real_company_name
-        company.name
+        company&.name
     end
 
     def company_contacts
-        company.contacts
+        company&.contacts
     end
 end
     

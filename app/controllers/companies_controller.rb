@@ -24,7 +24,7 @@ class CompaniesController < ApplicationController
         puts "attribute.parameterize.underscore.to_sym: #{attribute.parameterize.underscore.to_sym}"
 
         companies = Company.all.order("#{attribute} #{order}")
-        paginated_companies = companies.paginate(page: params[:page], per_page: 10)
+        paginated_companies = companies.paginate(page: params[:page], per_page: 20)
         render json: {
             companies: ActiveModel::Serializer::CollectionSerializer.new(paginated_companies, serializer: CompanyTableSerializer),
             page: paginated_companies.current_page,
