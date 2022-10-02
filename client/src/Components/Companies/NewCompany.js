@@ -95,6 +95,7 @@ const NewCompany = () => {
 
     return (
         <>
+        <h2 className='new-contact'>New Company</h2>
         <Form
         ref={formRef}
         model={model}

@@ -115,7 +115,11 @@ function App() {
                   icon={<UserBadge/>}>
                   Company
                 </Nav.Item>
-                <Nav.Item icon={<UserBadge/>}>
+                <Nav.Item 
+                  as={NavLink} 
+                  children={<NewProduct />}
+                  href="/products/new"
+                  icon={<UserBadge/>}>
                   Product
                 </Nav.Item>
               </Nav.Menu>

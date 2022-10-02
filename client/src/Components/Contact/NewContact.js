@@ -8,6 +8,8 @@ import { Popover, Whisper } from 'rsuite';
 
 import {Message, useToaster} from 'rsuite'
 
+import {Container, Header} from 'rsuite'
+
 
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
@@ -207,6 +209,9 @@ const NewContact = () => {
       };
 
     return (
+        <>
+        <h2 className='new-contact'>New Contact</h2>
+
         <Form 
         ref={formRef} 
         model={model}
@@ -247,6 +252,7 @@ const NewContact = () => {
                 {/* <Button onClick={() => toaster.push(message)}>TESTING TOASTER</Button> */}
             </ButtonToolbar>
         </Form>
+        </>
         // <div className="new-contact-div">
         //     <h2>New Contact</h2>
         //     <form className='new-contact-form' onSubmit={handleContactSubmit}>
