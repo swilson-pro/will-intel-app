@@ -67,7 +67,7 @@ const ContactCard = () => {
 
     const handleContactClick = (id) => {
         navigate(`/contacts/${id}`)
-        window.location.reload()
+        window.location.reload(false)
     }
 
     const handleAddNote = async (e) => {

@@ -55,6 +55,12 @@ const ProductCard = () => {
         navigate(`/products`)
     }
 
+    const handleProductClick = (id) => {
+        console.log('clicked', id)
+        navigate(`/products/${id}`)
+        window.location.reload(false)
+    }
+
 console.log('id', id)
 console.log('product', product)
     return (
@@ -132,10 +138,24 @@ console.log('product', product)
                             })}
                         </details>
                         <details className="company-products">
-                            <summary>Other Products this company</summary>
-                            {product.company_products?.map((contact) => {
-                                return <li key={contact.id} onClick={() => handleContactClick(contact.id)}>{contact.name}</li>
+                            <summary>Other Products from this company</summary>
+
+                            {console.log('product', product)}
+                            {console.log('product.id', product.id)}
+                            {console.log('product.company_products', product.company_products)}
+                            {/* {product.company_products?.map(item => {
+                                console.log('item', item)
+                            })} */}
+                            {product.company_products?.filter(item => item.id !== product.id).map(filteredProduct => {
+                                console.log('filteredProduct.id', filteredProduct.id)
+                                // console.log('filteredProduct.name', filteredProduct.name)
+                                return (
+                                    <li key={filteredProduct.id} onClick={() => handleProductClick(filteredProduct.id)}>{filteredProduct.name}</li>
+                                )
                             })}
+                            {/* {product.company_products?.map(item => 
+                                console.log('item', item)
+                            )} */}
                         </details>
                     </div>
                 </div>
