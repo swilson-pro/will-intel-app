@@ -35,7 +35,6 @@
 
 .contact-card {
     padding: 10px 1%;
-    color: #626262;
     /* border: solid; */
 
 }
@@ -108,6 +107,7 @@ img {
     /* border: solid; */
     margin: 0 10px;
     min-width: 50vw;
+
 }
 
 .note-button {
@@ -130,7 +130,6 @@ img {
     display: inline-flex;
     align-items: center;
     padding: 0 24px;
-    color: white;
     height: 100%;
     vertical-align:middle
 }
@@ -150,6 +149,8 @@ img {
     margin: 5px;
     min-width: 35vw;
     height: 10vw;
+    color: black;
+
 }
 
 .note-div {
@@ -162,11 +163,13 @@ img {
 .note-timestamp {
     margin: 10px;
     font-size:.7em;
+    color: black;
 }
 
 .note {
     list-style: none;
     margin: 10px;
+    color: black;
 }
 
 
@@ -197,7 +200,6 @@ img {
     outline: 0;
     /* padding: 6px 10px; */
     /* display: inline-flex; */
-    color: black;
     border-radius: 3px;
     padding: 15px;
     margin-right: 1vw;
@@ -222,7 +224,6 @@ img {
 }
 
 .span-icon, .span-content {
-    background-color: red;
     margin: 5px;
     vertical-align: middle;
     align-items: center;

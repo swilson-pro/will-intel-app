@@ -52,7 +52,7 @@ function App() {
       <BrowserRouter>
       <CustomProvider theme={toggleMode ? "dark" : "light"}>
         <Container style={{minHeight: "100vh"}}>
-          <Header style={{position: "sticky"}}>
+          <Header className="header">
           <Navbar appearance='subtle'>
             <Navbar.Brand>Carlson</Navbar.Brand>
             <Nav>

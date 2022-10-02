@@ -226,8 +226,8 @@ const CompaniesPage = ({compBlackList}) => {
             <Table
                 className="table"
                 showHeader={true}
-                height={800}
-                width={1200}
+                height={850}
+                // width={1200}
                 data={companies}
                 onRowClick={rowData => {
                     handleClick(rowData)
@@ -235,6 +235,7 @@ const CompaniesPage = ({compBlackList}) => {
                 onSortColumn={handleSortingChange}
                 bordered={true}
                 cellBordered={true}
+                fluid
             >
                 {keyArray.map((key, index) => {
                     return (

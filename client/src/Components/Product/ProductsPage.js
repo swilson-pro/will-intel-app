@@ -15,7 +15,7 @@ const ProductsPage = ({prodBlackList}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
-    const [sortField, setSortField] = useState('')
+    const [sortField, setSortField] = useState('id')
     const [order, setOrder] = useState('asc')
 
 

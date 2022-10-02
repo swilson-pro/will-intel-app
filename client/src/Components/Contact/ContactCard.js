@@ -140,7 +140,6 @@ console.log('contact.notes', contact.notes)
                 </div>
                 <div className="pd-mid">
                     <form className="note-form">
-
                         <button onClick={handleAddNote} className="note-button">
                             <span className="note_button_icon">
                                 <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
@@ -165,7 +164,7 @@ console.log('contact.notes', contact.notes)
                             <div className="note-div">
                                 {/* <p className="note-timestamp">{`${note.created_at.substring(0, 10)} | ${note.user_name}`}</p> */}
                                 <p className="note-timestamp">{`${Moment(note.created_at).format('MMMM DD, LT')} | ${note.user_name}`}</p>
-                                <p className='note'>{note.content}</p>
+                                <p className="note">{note.content}</p>
                             </div>
                             )
                         })}
@@ -203,8 +202,6 @@ console.log('contact.notes', contact.notes)
                                         )
                                         })}
                                 </details>
-
-
                     </div>
                 </div>
             </div>
