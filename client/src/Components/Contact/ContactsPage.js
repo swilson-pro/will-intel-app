@@ -8,6 +8,11 @@ import '../../Style/ContactsTable.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlus} from '@fortawesome/free-solid-svg-icons'
 
+import { Button, IconButton, Table } from 'rsuite';
+import 'rsuite/dist/rsuite.min.css'
+
+const {Column, HeaderCell, Cell} = Table
+
 
 const ContactsPage = ({conBlackList}) => {
 
@@ -69,21 +74,21 @@ const ContactsPage = ({conBlackList}) => {
 
 
 
-    const handleSortingChange = (field) => {
+    const handleSortingChange = (sortColumn) => {
         // console.log('field', field)
 
         // console.log('sortField', sortField)
         // console.log('order', order)
 
         const sortOrder =
-        field === sortField && order === 'asc' ? 'desc' : 'asc'
+        sortColumn === sortField && order === 'asc' ? 'desc' : 'asc'
 
         // console.log('sortOrder', sortOrder)
         
-        setSortField(field)
+        setSortField(sortColumn)
         setOrder(sortOrder)
 
-        handleSorting(field, sortOrder)
+        handleSorting(sortColumn, sortOrder)
         
 
 
@@ -110,8 +115,8 @@ const ContactsPage = ({conBlackList}) => {
 
     console.log('contacts', contacts)
 
-    const handleClick = (id) => {
-        navigate(`/contacts/${id}`)
+    const handleClick = (rowData) => {
+        navigate(`/contacts/${rowData.id}`)
     }
 
 
@@ -133,7 +138,28 @@ const ContactsPage = ({conBlackList}) => {
 
             
             </div>
-            <div className="contacts-table-container">
+
+            <Table 
+            className="table"
+            showHeader={true}
+            height={850}
+            data={contacts}
+            onRowClick={rowData => {
+                handleClick(rowData)
+            }}
+            onSortColumn={handleSortingChange}
+            fluid
+            >
+                {keyArray.map((key, index) => {
+                    return (
+                        <Column className="table-column" width={150} align="left" resizable sortable>
+                            <HeaderCell className="table_header" key={index}>{key}</HeaderCell>
+                            <Cell className="table-cell" dataKey={key} />
+                        </Column>
+                    )
+                })}
+            </Table>
+            {/* <div className="contacts-table-container">
 
             <table className='contacts-table'>
                 <thead>
@@ -160,7 +186,7 @@ const ContactsPage = ({conBlackList}) => {
                     })}
                 </tbody>
             </table>
-            </div>
+            </div> */}
             <PaginateContacts pageCount={pageCount} setPageCount={setPageCount} getContactsForPage={getContactsForPage} data={contacts}/>
 
         </main>
