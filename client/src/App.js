@@ -32,6 +32,8 @@ import {Visible, Unvisible, Others, UserBadge, Plus} from '@rsuite/icons'
 
 function App() {
 
+  const [globalUser, setGlobalUser] = useState({})
+
   const conBlackList = ['real_company_name', 'owner_name', 'twitter_url', 'image_url', 'user_id', 'company_id', 'company_products']
   const compBlackList = ['owner_name', 'description', 'hq_email', 'hq_address_line_2', 'hq_address_line_1', 'primary_contact_pbid', 'verticals', 'linkedin_regularCompanyUrl', 'year_founded', 'employees', 'linkedin_company_id', 'logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
   const prodBlackList = ['price_sign', 'image_link', 'api_featured_image', 'input_company_name']
@@ -169,7 +171,7 @@ function App() {
               <Route path='/products/:id' element={<ProductCard />} />
               <Route path='/products' element={ <ProductsPage prodBlackList={prodBlackList} />} />
 
-              <Route path='/login' element={<Login />} />
+              <Route path='/login' element={<Login globalUser={globalUser} setGlobalUser={setGlobalUser} />} />
 
               {/* <Route path='/initiatives' element={ <InitiativesPage />} /> */}
               <Route exact path='/' element={ <HomePage />} />
