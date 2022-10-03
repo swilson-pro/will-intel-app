@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Login = ({globalUser, setGlobalUser}) => {
+const Login = () => {
 
     const [user, setUser] = useState({name: ""});
     const [form, setForm] = useState({});
@@ -26,10 +26,7 @@ const Login = ({globalUser, setGlobalUser}) => {
               name: data.user.email,
               id: data.user.id
             });
-            setGlobalUser({
-            name: data.user.email,
-            id: data.user.id
-            })
+
           });
       };
 
@@ -62,7 +59,7 @@ const Login = ({globalUser, setGlobalUser}) => {
 
     //   console.log('form', form)
       console.log('user', user)
-      console.log('globalUser', globalUser)
+
 
     return (
         <div>
