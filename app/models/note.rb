@@ -1,6 +1,7 @@
 class Note < ApplicationRecord
-    belongs_to :contact
     belongs_to :user
+    belongs_to :notable, polymorphic: true
+    
 
     def user_name
         user.name

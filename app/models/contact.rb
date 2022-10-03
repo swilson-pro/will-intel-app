@@ -1,7 +1,7 @@
 class Contact < ApplicationRecord
     belongs_to :user
     belongs_to :company, optional: true
-    has_many :notes
+    has_many :notes, as: :notable
     
     # def page_count
     #     Contact.count / 10
