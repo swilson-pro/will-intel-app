@@ -114,9 +114,16 @@ class ContactsController < ApplicationController
     #     end
     # end
 
+
+
     def index
         contacts = Contact.all
         render json: contacts, each_serializer: ContactTableSerializer
+    end
+
+    def count
+        contacts = Contact.all.length
+        render json: contacts
     end
 
     def show

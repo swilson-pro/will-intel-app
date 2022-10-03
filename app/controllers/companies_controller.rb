@@ -35,6 +35,11 @@ class CompaniesController < ApplicationController
         render json: companies, each_serializer: CompanyTableSerializer
     end
 
+    def count
+        companies = Company.all.length
+        render json: companies
+    end
+
     def show
         company = Company.find(params[:id])
         render json: company, serializer: CompanySerializer

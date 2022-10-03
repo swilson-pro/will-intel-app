@@ -54,7 +54,7 @@ function App() {
         <Container style={{minHeight: "100vh"}}>
           <Header className="header">
           <Navbar appearance='subtle'>
-            <Navbar.Brand>Carlson</Navbar.Brand>
+            <Navbar.Brand className="brand">Carlson</Navbar.Brand>
             <Nav>
                 <Nav.Item 
                 as={NavLink} 
@@ -84,9 +84,6 @@ function App() {
                 icon={<Others/>}>
                 Products
               </Nav.Item>
-              <Nav.Item icon={<Others/>}>
-                Modal
-              </Nav.Item>
             </Nav>
             {/* <Nav pullRight>
               <Nav.Item>
@@ -99,7 +96,7 @@ function App() {
                 </ButtonToolbar>
               </Nav.Item>
             </Nav> */}
-            <Nav pullLeft>
+            <Nav pullRight>
               <Nav.Menu title="Add New" icon={<Plus/>}>
                 <Nav.Item 
                   as={NavLink}

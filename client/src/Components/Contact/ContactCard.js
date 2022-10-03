@@ -116,7 +116,7 @@ console.log('contact.notes', contact.notes)
                             <h3 className="contact-name">{contact.name}</h3>
                             <h4 className="contact-position">{contact.position}</h4>
                             <h4 className="contact-company" onClick={() => handleCompanyClick(contact.company_id)}>{contact.real_company_name}</h4>
-                            <h4 className="company-id">Company ID: {contact.company_id}</h4>
+                            {/* <h4 className="company-id">Company ID: {contact.company_id}</h4> */}
                             
                         </div>
                         {/* <hr></hr> */}
@@ -132,7 +132,7 @@ console.log('contact.notes', contact.notes)
                             {/* <h4>Position:{contact.position}</h4> */}
                             <details>
                                 <summary>Bio</summary>
-                                <p>Bio: {contact.bio}</p>  
+                                <p>{contact.bio}</p>  
                             </details>  
                         </div>
                         

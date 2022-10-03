@@ -173,9 +173,10 @@ const ProductsPage = ({prodBlackList}) => {
 
     return (
         <main className="main">
-            <NavLink className='new-product-navlink' to='/products/new' >
-                <button className='new-product'>Add Product</button></NavLink>
-            <div className="filter">
+            <h1>Products</h1>
+            {/* <NavLink className='new-product-navlink' to='/products/new' >
+                <button className='new-product'>Add Product</button></NavLink> */}
+            {/* <div className="filter">
                 <label className='filterLabel'>Choose owner:</label>
                 <select name='ownersNames' id='ownersNames' onChange={updateOwner}>
                     <option value="All">All</option>
@@ -192,7 +193,7 @@ const ProductsPage = ({prodBlackList}) => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 </div>
-            </div>
+            </div> */}
             <Table
             className="table"
             showHeader={true}

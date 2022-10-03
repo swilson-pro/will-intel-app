@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
 
   get '/contacts', to: 'contacts#index'
+  get '/count_contacts', to: 'contacts#count'
   get '/contacts/:id', to: 'contacts#show'
   post '/contacts', to: 'contacts#create'
   patch '/contacts/:id', to: 'contacts#update'
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
 
 
   get '/companies', to: 'companies#index'
+  get '/count_companies', to: 'companies#count'
   get '/companies/:id', to: 'companies#show'
   get '/companies_names', to: 'companies#names'
   post '/companies', to: 'companies#create'
@@ -35,6 +37,7 @@ Rails.application.routes.draw do
   delete '/companies/:id', to: 'companies#destroy'
 
   get '/products', to: 'products#index'
+  get '/count_products', to: 'products#count'
   get '/products/:id', to: 'products#show'
   post '/products', to: 'products#create'
   patch '/products/:id', to: 'products#update'

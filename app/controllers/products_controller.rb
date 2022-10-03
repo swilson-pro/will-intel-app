@@ -37,6 +37,11 @@ class ProductsController < ApplicationController
         render json: products, each_serializer: ProductTableSerializer
     end
 
+    def count
+        products = Product.all.length
+        render json: products
+    end
+
     def show
         product = Product.find(params[:id])
         render json: product, serializer: ProductSerializer

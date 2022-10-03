@@ -1,11 +1,19 @@
-/* 
+.brand {
+    font-size: 2em;
+    color: red;
+}
+
+.nav {
+    color: red;
+    background-color: red;
+}
+
  .header {
     display: flex;
     align-items: center;
     margin-bottom: 50px;
-    color: red;
 }
-
+/* 
 .header_left {
     border: solid;
     padding: 15px;

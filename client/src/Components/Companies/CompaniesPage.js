@@ -32,7 +32,7 @@ const CompaniesPage = ({compBlackList}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
-    const [sortField, setSortField] = useState('')
+    const [sortField, setSortField] = useState('primary_contact')
     const [order, setOrder] = useState('')
 
 
@@ -205,6 +205,7 @@ const CompaniesPage = ({compBlackList}) => {
 
     return(
         <main className="main">
+            <h1>Companies</h1>
             {/* <NavLink className='new-company-navlink' to='/companies/new' >
                 <IconButton icon={<PlusIcon />}>Add New Company</IconButton>
             </NavLink> */}
@@ -225,7 +226,6 @@ const CompaniesPage = ({compBlackList}) => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div> */}
-                <h4>Total: {companies.length}</h4>
             </div>
             <Table
                 className="table"

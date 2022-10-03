@@ -124,7 +124,7 @@ const ContactsPage = ({conBlackList}) => {
         <main>
 
             <div className="button-container">
-            <NavLink className='new-contact-navlink' to='/contacts/new' >
+            {/* <NavLink className='new-contact-navlink' to='/contacts/new' >
                 
                     <button type='button' className='new-contact'>
                         <span className="button_icon">
@@ -133,8 +133,8 @@ const ContactsPage = ({conBlackList}) => {
                         <span className="button_text">Person</span>
                     </button>
                 
-            </NavLink>
-            <h1>Contacts Page</h1>
+            </NavLink> */}
+            <h1>Contacts</h1>
 
             
             </div>
