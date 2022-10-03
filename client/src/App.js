@@ -18,6 +18,8 @@ import ProductsPage from './Components/Product/ProductsPage';
 import NewProduct from './Components/Product/NewProduct';
 import ProductCard from './Components/Product/ProductCard';
 import Login from './Components/User/Login';
+import MockLogin from './Components/User/MockLogin';
+import Profile from './Components/User/Profile';
 
 
 // import InitiativesPage from './Components/Companies/Initiative/InitiativesPage';
@@ -174,6 +176,9 @@ function App() {
               <Route path='/products' element={ <ProductsPage prodBlackList={prodBlackList} />} />
 
               <Route path='/login' element={<Login />} />
+              <Route path='/mocklogin' element={<MockLogin />} />
+
+              <Route path='/profile' element={<Profile />} />
               
 
               {/* <Route path='/initiatives' element={ <InitiativesPage />} /> */}

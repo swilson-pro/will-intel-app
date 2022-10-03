@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import {login, logout} from '../../features/user/user'
 
-const Login = () => {
+const MockLogin = () => {
 
     const user = useSelector((state) => state.user.value);
 
@@ -104,5 +104,5 @@ const Login = () => {
         </div>
     )
 }
-export default Login
 
+export default MockLogin
