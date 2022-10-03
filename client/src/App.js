@@ -18,7 +18,7 @@ import ProductsPage from './Components/Product/ProductsPage';
 import NewProduct from './Components/Product/NewProduct';
 import ProductCard from './Components/Product/ProductCard';
 import Login from './Components/User/Login';
-import MockLogin from './Components/User/MockLogin';
+
 import Profile from './Components/User/Profile';
 
 
@@ -30,7 +30,7 @@ import 'rsuite/dist/rsuite.min.css'
 
 import {Button, ButtonToolbar, IconButton, CustomProvider, Navbar, Nav, Container, Header, Content, Footer, List, FlexboxGrid, Col, Avatar, Badge} from 'rsuite'
 
-import {Visible, Unvisible, Others, UserBadge, Plus} from '@rsuite/icons'
+import {Visible, Unvisible, Others, UserBadge, Plus, userTimes, Minus} from '@rsuite/icons'
 
 
 
@@ -140,13 +140,21 @@ function App() {
                 </ButtonToolbar>
               </Nav.Item>
               <Nav.Item icon={<Others/>}>
-                Modal
-              </Nav.Item>
-              <Nav.Item icon={<Others/>}>
                 Support
               </Nav.Item>
               <Nav.Item icon={<Others/>}>
                 Billing
+              </Nav.Item>
+              <Nav.Item>
+                <ButtonToolbar>
+                  <IconButton
+                    appearance='ghost'
+                    size='xs'
+                    icon={<Minus />}
+                    >
+                      Log out
+                  </IconButton>
+                </ButtonToolbar>
               </Nav.Item>
               </Nav.Menu>
               {/* <Badge content="69">
@@ -176,7 +184,6 @@ function App() {
               <Route path='/products' element={ <ProductsPage prodBlackList={prodBlackList} />} />
 
               <Route path='/login' element={<Login />} />
-              <Route path='/mocklogin' element={<MockLogin />} />
 
               <Route path='/profile' element={<Profile />} />
               
