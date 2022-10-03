@@ -17,6 +17,7 @@ import CompanyCard from './Components/Companies/CompanyCard';
 import ProductsPage from './Components/Product/ProductsPage';
 import NewProduct from './Components/Product/NewProduct';
 import ProductCard from './Components/Product/ProductCard';
+import Login from './Components/User/Login';
 // import InitiativesPage from './Components/Companies/Initiative/InitiativesPage';
 
 import { useEffect, useState, forwardRef } from 'react';
@@ -167,6 +168,8 @@ function App() {
               <Route path='/products/new' element={<NewProduct />} />
               <Route path='/products/:id' element={<ProductCard />} />
               <Route path='/products' element={ <ProductsPage prodBlackList={prodBlackList} />} />
+
+              <Route path='/login' element={<Login />} />
 
               {/* <Route path='/initiatives' element={ <InitiativesPage />} /> */}
               <Route exact path='/' element={ <HomePage />} />
