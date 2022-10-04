@@ -197,7 +197,7 @@ const ProductsPage = ({prodBlackList}) => {
             <Table
             className="table"
             showHeader={true}
-            height={850}
+            height={1000}
             data={products}
             onRowClick={rowData => {
                 handleClick(rowData)

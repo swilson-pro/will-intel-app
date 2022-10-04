@@ -25,7 +25,7 @@ const ContactsPage = ({conBlackList}) => {
 
     const [pageCount, setPageCount] = useState();
 
-    const [sortField, setSortField] = useState('')
+    const [sortField, setSortField] = useState('phone')
     const [order, setOrder] = useState('')
 
     useEffect(() => {
@@ -142,7 +142,7 @@ const ContactsPage = ({conBlackList}) => {
             <Table 
             className="table"
             showHeader={true}
-            height={850}
+            height={1000}
             data={contacts}
             onRowClick={rowData => {
                 handleClick(rowData)

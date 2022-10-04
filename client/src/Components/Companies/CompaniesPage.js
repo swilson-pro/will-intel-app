@@ -230,7 +230,7 @@ const CompaniesPage = ({compBlackList}) => {
             <Table
                 className="table"
                 showHeader={true}
-                height={850}
+                height={1000}
                 // width={1200}
                 data={companies}
                 onRowClick={rowData => {

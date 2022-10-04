@@ -34,9 +34,13 @@ import {Button, ButtonToolbar, IconButton, CustomProvider, Navbar, Nav, Containe
 import {Visible, Unvisible, Others, UserBadge, Plus, userTimes, Minus} from '@rsuite/icons'
 
 
+import {setUser, logout} from './features/user/user'
+import {useSelector, useDispatch} from 'react-redux'
 
 function App() {
 
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch()
 
   const conBlackList = ['real_company_name', 'owner_name', 'twitter_url', 'image_url', 'user_id', 'company_id', 'company_products']
   const compBlackList = ['owner_name', 'description', 'hq_email', 'hq_address_line_2', 'hq_address_line_1', 'primary_contact_pbid', 'verticals', 'linkedin_regularCompanyUrl', 'year_founded', 'employees', 'linkedin_company_id', 'logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
@@ -163,6 +167,10 @@ function App() {
               <Nav.Item>
                 <ButtonToolbar>
                   <IconButton
+                    onClick={() => {
+                      localStorage.clear();
+                      dispatch(logout())
+                  }}
                     appearance='ghost'
                     size='xs'
                     icon={<Minus />}
@@ -181,7 +189,8 @@ function App() {
             {/* <Avatar circle style={{backgroundColor: "orange", fontSize: 14}}>
                   Sam
             </Avatar> */}
-            <Nav>
+            <Nav pullRight>
+              <Navbar.Brand className="user">{user.profile.email}</Navbar.Brand>
               
             </Nav>
           </Navbar>
