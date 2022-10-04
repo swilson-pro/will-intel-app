@@ -64,12 +64,19 @@
 .pd-image {
     border: 3px solid grey;
     border-radius: 20px;
-    width: 300px;
-    height: 300px;
+    width: 30rem;
+    height: auto;
 }
 
 .pd-left .pd-row .left-body {
-    /* border: solid; */
+    border: solid;
+    width: 300px;
+}
+
+.pd-left .pd-row .left-body p{
+    border: solid;
+    min-width: 100%;
+
 }
 
 .pd-left .pd-row {
@@ -85,18 +92,13 @@
     /* border: solid; */
 }
 
-
-img {
-    width: 150px;
-    height: 150px;
-    /* border: solid; */
-}
-
-
 .pd-left .pd-row p {
     font-size: 10px;
     /* border: solid; */
     max-width: 20vw;
+}
+.bio {
+    font-size:xx-large
 }
 
 .pd-left .pd-row .materials-icons{
@@ -110,9 +112,20 @@ img {
 .pd-left .pd-row .image-div {
     /* border:solid; */
     display:flex;
-
-    width: 100%;
+    position: relative;
 }
+
+.a-tag-div{
+display: flex;
+position: absolute;
+bottom: 0;
+right: 2rem;
+font-size: 1.5rem;
+
+}
+
+
+
 
 .pd-mid{
     /* border: solid; */
@@ -189,6 +202,9 @@ img {
 .pd-right .contact-company-logo {
     cursor: pointer;
     /* border: solid; */
+    width: 20rem;
+    height: auto;
+    
 }
 
 .pd-right .company-products {

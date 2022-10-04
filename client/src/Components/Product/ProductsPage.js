@@ -20,7 +20,7 @@ const ProductsPage = ({prodBlackList}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
-    const [sortField, setSortField] = useState('id')
+    const [sortField, setSortField] = useState('name')
     const [order, setOrder] = useState('asc')
 
 
@@ -210,7 +210,7 @@ const ProductsPage = ({prodBlackList}) => {
             {keyArray.map((key, index) => {
                 return (
                     <Column className="table-column" width={150} align="left" resizable sortable>
-                        <HeaderCell className="table_header" key={index}>{key}</HeaderCell>
+                        <HeaderCell className="table_header" key={index}>{formatter(key)}</HeaderCell>
                         <Cell className="table-cell" dataKey={key} />
                     </Column>
                 )
