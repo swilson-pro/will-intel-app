@@ -234,7 +234,7 @@ const NewContact = () => {
             <Form.Group controlId="position">
                 <Form.ControlLabel>Position/Role</Form.ControlLabel>
                 <Form.Control name="position" />
-                <Form.HelpText tooltip>Email is required</Form.HelpText>
+                <Form.HelpText tooltip>Position is required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="textarea">
                 <Form.ControlLabel>Contact Description</Form.ControlLabel>

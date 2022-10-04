@@ -152,7 +152,14 @@ function App() {
                   href="/login"
                   icon={<UserBadge/>}>
                   Login
-                </Nav.Item>
+              </Nav.Item>
+              <Nav.Item
+                  as={NavLink} 
+                  children={<NewUser />} 
+                  href="/newuser"
+                  icon={<UserBadge/>}>
+                  Create Account
+              </Nav.Item>
               <Nav.Item>
                 <ButtonToolbar>
                   <IconButton
@@ -164,6 +171,7 @@ function App() {
                   </IconButton>
                 </ButtonToolbar>
               </Nav.Item>
+              
               </Nav.Menu>
               {/* <Badge content="69">
                 <Avatar size="md" src="https://media-exp1.licdn.com/dms/image/C5103AQFOvyuxg-C8lA/profile-displayphoto-shrink_200_200/0/1517234384465?e=1669852800&v=beta&t=qGk8v75g1irvfxW8at7Tm3BgrwcOzFYtNXorqr1aWVY" alt="@will" />
