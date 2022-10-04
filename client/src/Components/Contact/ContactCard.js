@@ -10,9 +10,13 @@ import {faLinkedin} from '@fortawesome/free-brands-svg-icons'
 
 import Moment from 'moment';
 
+import {useSelector} from 'react-redux'
+
 const ContactCard = () => {
 
-    let user = {id: 1}
+    const user = useSelector((state) => state.user).profile;
+
+    console.log('user', user)
 
     let navigate = useNavigate()
 
@@ -21,6 +25,7 @@ const ContactCard = () => {
     const [contact, setContact] = useState({})
     const [isEditClicked, setIsEditClicked] = useState(false)
 
+    const [notes, setNotes] = useState([])
     const [newNote, setNewNote] = useState("")
 
     const fetchContact = async() => {
@@ -28,6 +33,8 @@ const ContactCard = () => {
         const contactObj = await response.json()
         console.log('contactObj', contactObj)
         setContact(contactObj)
+        let reverseOrderNotes = contactObj.notes.reverse()
+        setNotes(reverseOrderNotes)
 
     }
 
@@ -79,8 +86,10 @@ const ContactCard = () => {
             },
             body: JSON.stringify({
                 content: newNote,
-                contact_id: contact.id,
+                notable_id: contact.id,
+                notable_type: "Contact",
                 user_id: user.id
+
             })
         })
         fetchContact()
@@ -159,9 +168,9 @@ console.log('contact.notes', contact.notes)
                         })}
                     </ul> */}
                     <div className="notes">
-                        {contact.notes?.map((note) => {
+                        {notes?.map((note) => {
                             return (
-                            <div className="note-div">
+                            <div key={note.id} className="note-div">
                                 {/* <p className="note-timestamp">{`${note.created_at.substring(0, 10)} | ${note.user_name}`}</p> */}
                                 <p className="note-timestamp">{`${Moment(note.created_at).format('MMMM DD, LT')} | ${note.user_name}`}</p>
                                 <p className="note">{note.content}</p>

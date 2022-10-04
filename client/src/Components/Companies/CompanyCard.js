@@ -17,7 +17,11 @@ import GroupIcon from '@rsuite/icons/legacy/Group';
 import MagicIcon from '@rsuite/icons/legacy/Magic';
 import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
 
+import Moment from 'moment';
+
 const CompanyCard = () => {
+
+    let user = {id: 1}
 
     let navigate = useNavigate()
 
@@ -26,11 +30,15 @@ const CompanyCard = () => {
     const [company, setCompany] = useState({})
     const [isEditClicked, setIsEditClicked] = useState(false)
 
+    const [notes, setNotes] = useState([])
+    const [newNote, setNewNote] = useState("")
+
     const fetchCompany = async () => {
         const response = await fetch(`http://localhost:3000/companies/${id}`)
         const companyObj = await response.json()
-        // console.log('companyObj', companyObj)
         setCompany(companyObj)
+        let reverseOrderNotes = companyObj.notes.reverse()
+        setNotes(reverseOrderNotes)
     }
 
     useEffect(() => {
@@ -62,6 +70,25 @@ const CompanyCard = () => {
     const handleContactClick = (id) => {
         console.log('clicked', id)
         navigate(`/contacts/${id}`)
+    }
+
+    const handleAddNote = async (e) => {
+        e.preventDefault()
+        let req = await fetch(`http://localhost:3000/notes`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content: newNote,
+                notable_id: company.id,
+                notable_type: "Company",
+                user_id: user.id
+
+            })
+        })
+        fetchCompany()
+        setNewNote("")
     }
 
 // for rsuite sidebar attempt
@@ -126,17 +153,29 @@ const CompanyCard = () => {
                         </div>
                     </div>
                         <div className="pd-mid">
-                            <form className="note-form">
-                                <button className="note-button">
-                                    <span className="note_button_icon">
+                        <form className="note-form">
+                            <button onClick={handleAddNote} className="note-button">
+                                <span className="note_button_icon">
                                     <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
-                                    </span>
-                                    <span className="note_button_text">Add Note</span>
-                                </button>
-                                <textarea placeholder=" write note..." className="note-input" />
-                            </form>
+                                </span>
+                                <span className="note_button_text">Add Note</span>
+                            </button>
+                            <textarea placeholder=" write note..." className="note-input" value={newNote} onChange={(e) => setNewNote(e.target.value)}/>
+                        </form>
                             <h2>Notes</h2>
                             <hr></hr>
+                            <div className="notes">
+                                {notes?.map((note) => {
+                                return (
+                                <div key={note.id} className="note-div">
+                                    {/* <p className="note-timestamp">{`${note.created_at.substring(0, 10)} | ${note.user_name}`}</p> */}
+                                    <p className="note-timestamp">{`${Moment(note.created_at).format('MMMM DD, LT')} | ${note.user_name}`}</p>
+                                    <p className="note">{note.content}</p>
+                                </div>
+                                )
+                            })}
+
+                            </div>
                             <div className="notes">
                                 <div className="note-div">
                                     <p className="note-timestamp">jan 12, 2022, 3PM | Alex</p>

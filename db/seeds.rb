@@ -246,44 +246,111 @@ end
 puts "making notes"
 
 300.times{
-    Note.create!(
-        content: "Seems like they're intersted!",
-        contact_id: Contact.all.sample.id,
-        user_id: User.all.sample.id
-    )
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "Very good opportunity here!")
 
-    Note.create!(
-        content: "This could be a great opportunity.",
-        contact_id: Contact.all.sample.id,
-        user_id: User.all.sample.id
+    Note.create(
+        notable: Company.all.sample,
+        user: User.all.sample,
+        content: "This company has a lot of potential, I think they'd be interested in working with us."
     )
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "Seems like they're intersted!")
 
-    Note.create!(
-        content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        contact_id: Contact.all.sample.id,
-        user_id: User.all.sample.id
-    )
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "This could be a great opportunity.")
 
-    Note.create!(
-        content: "Think they're a good fit.",
-        contact_id: Contact.all.sample.id,
-        user_id: User.all.sample.id
-    )
-    Note.create!(
-        content: "Impressive experience.",
-        contact_id: Contact.all.sample.id,
-        user_id: User.all.sample.id
-    )
-    Note.create!(
-        content: "Outstanding background.",
-        contact_id: Contact.all.sample.id,
-        user_id: User.all.sample.id
-    )
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "Think they're a good fit")
 
-    Note.create!(
-        content: "I think this could work.",
-        contact_id: Contact.all.sample.id,
-        user_id: User.all.sample.id
-    )
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "Impressive experience")
 
-    }
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "Outstanding background.")
+
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "I think this could work")
+        
+    Note.create(
+        notable: Company.all.sample, 
+        user: User.all.sample, 
+        content: "This organization seems to be in need of our services.")
+
+    Note.create(
+        notable: Company.all.sample, 
+        user: User.all.sample, 
+        content: "Great organization with great people. I think we're going to be able to help them a lot.")        
+
+    Note.create(
+        notable: Product.all.sample, 
+        user: User.all.sample, 
+        content: "This is an amazing product.")
+
+    Note.create(
+        notable: Product.all.sample, 
+        user: User.all.sample, 
+        content: "This product is selling like hot pockets!")
+
+        
+
+}
+
+
+
+# 300.times{
+#     Note.create!(
+#         content: "Seems like they're intersted!",
+#         contact_id: Contact.all.sample.id,
+#         user_id: User.all.sample.id
+#     )
+
+#     Note.create!(
+#         content: "This could be a great opportunity.",
+#         contact_id: Contact.all.sample.id,
+#         user_id: User.all.sample.id
+#     )
+
+#     Note.create!(
+#         content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+#         contact_id: Contact.all.sample.id,
+#         user_id: User.all.sample.id
+#     )
+
+#     Note.create!(
+#         content: "Think they're a good fit.",
+#         contact_id: Contact.all.sample.id,
+#         user_id: User.all.sample.id
+#     )
+#     Note.create!(
+#         content: "Impressive experience.",
+#         contact_id: Contact.all.sample.id,
+#         user_id: User.all.sample.id
+#     )
+#     Note.create!(
+#         content: "Outstanding background.",
+#         contact_id: Contact.all.sample.id,
+#         user_id: User.all.sample.id
+#     )
+
+#     Note.create!(
+#         content: "I think this could work.",
+#         contact_id: Contact.all.sample.id,
+#         user_id: User.all.sample.id
+#     )
+
+#     }

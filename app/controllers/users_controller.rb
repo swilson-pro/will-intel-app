@@ -43,4 +43,6 @@ class UsersController < ApplicationController
         users = User.all.pluck(:name)
         render json: users
     end
+
+
 end

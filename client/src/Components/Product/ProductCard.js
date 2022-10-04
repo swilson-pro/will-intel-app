@@ -9,7 +9,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding, faPencil } from '@fortawesome/free-solid-svg-icons'
 import {faLinkedin} from '@fortawesome/free-brands-svg-icons'
 
+import Moment from 'moment';
+
 const ProductCard = () => {
+
+    let user = {id: 1}
 
     const [isEditClicked, setIsEditClicked] = useState(false)
 
@@ -19,11 +23,16 @@ const ProductCard = () => {
 
     const [product, setProduct] = useState({})
 
+    const [notes, setNotes] = useState([])
+    const [newNote, setNewNote] = useState("")
+
     const fetchProduct = async() => {
         const response = await fetch(`http://localhost:3000/products/${id}`)
         const productObj = await response.json()
         console.log(productObj)
         setProduct(productObj)
+        let reverseOrderNotes = productObj.notes.reverse()
+        setNotes(reverseOrderNotes)
     }
 
     useEffect(() => {
@@ -59,6 +68,25 @@ const ProductCard = () => {
         console.log('clicked', id)
         navigate(`/products/${id}`)
         window.location.reload(false)
+    }
+
+    const handleAddNote = async (e) => {
+        e.preventDefault()
+        let req = await fetch(`http://localhost:3000/notes`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content: newNote,
+                notable_id: product.id,
+                notable_type: "Product",
+                user_id: user.id
+
+            })
+        })
+        fetchProduct()
+        setNewNote("")
     }
 
 console.log('id', id)
@@ -111,21 +139,35 @@ console.log('product', product)
                     {isEditClicked ? <EditProduct id={id} fetchProduct={fetchProduct} /> : null}
                 </div>
                 <div className="pd-mid">
-                        <form className="note-form">
-                            <button className="note-button">
-                                <span className="note_button_icon">
-                                    <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
-                                </span>
-                            </button>
-                            <textarea placeholder=" write note..." className="note-input" />
-                        </form>
+                    <form className="note-form">
+                        <button onClick={handleAddNote} className="note-button">
+                            <span className="note_button_icon">
+                                <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
+                            </span>
+                            <span className="note_button_text">Add Note</span>
+                        </button>
+                        <textarea placeholder=" write note..." className="note-input" value={newNote} onChange={(e) => setNewNote(e.target.value)}/>
+                    </form>
                         <h2>Note</h2>
                         <hr></hr>
                         <div className="notes">
-                        <div className="note-div">
-                            <p className="note-timestamp">march 11, 2021, 3PM | Ben</p>
-                            <p className="note">Here's your note...</p>
+                        {notes?.map((note) => {
+                                return (
+                                <div key={note.id} className="note-div">
+                                    {/* <p className="note-timestamp">{`${note.created_at.substring(0, 10)} | ${note.user_name}`}</p> */}
+                                    <p className="note-timestamp">{`${Moment(note.created_at).format('MMMM DD, LT')} | ${note.user_name}`}</p>
+                                    <p className="note">{note.content}</p>
+                                </div>
+                                )
+                            })}
+
+
                         </div>
+                        <div className="notes">
+                            <div className="note-div">
+                                <p className="note-timestamp">march 11, 2021, 3PM | Ben</p>
+                                <p className="note">Here's your note...</p>
+                            </div>
                     </div>
                 </div>
                 <div className="pd-right">

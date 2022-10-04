@@ -18,6 +18,7 @@ import ProductsPage from './Components/Product/ProductsPage';
 import NewProduct from './Components/Product/NewProduct';
 import ProductCard from './Components/Product/ProductCard';
 import Login from './Components/User/Login';
+import NewUser from './Components/User/NewUser';
 
 import Profile from './Components/User/Profile';
 
@@ -145,6 +146,13 @@ function App() {
               <Nav.Item icon={<Others/>}>
                 Billing
               </Nav.Item>
+              <Nav.Item
+                  as={NavLink} 
+                  children={<Login />} 
+                  href="/login"
+                  icon={<UserBadge/>}>
+                  Login
+                </Nav.Item>
               <Nav.Item>
                 <ButtonToolbar>
                   <IconButton
@@ -183,7 +191,9 @@ function App() {
               <Route path='/products/:id' element={<ProductCard />} />
               <Route path='/products' element={ <ProductsPage prodBlackList={prodBlackList} />} />
 
+              <Route path='/newuser' element={<NewUser />} />
               <Route path='/login' element={<Login />} />
+              
 
               <Route path='/profile' element={<Profile />} />
               

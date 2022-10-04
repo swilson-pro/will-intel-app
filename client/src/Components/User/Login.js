@@ -2,11 +2,15 @@ import {useSelector} from 'react-redux'
 import {useDispatch} from 'react-redux'
 import { useEffect, useState } from 'react'
 
-import {login, logout} from '../../features/user/user'
+import { useNavigate } from "react-router-dom"
+
+import {setUser, logout} from '../../features/user/user'
 
 const Login = () => {
 
-    const user = useSelector((state) => state.user.value);
+    const user = useSelector((state) => state.user);
+
+    let navigate = useNavigate()
 
     const dispatch = useDispatch()
     const [form, setForm] = useState({})
@@ -23,9 +27,8 @@ const Login = () => {
           })
           .then((res) => res.json())
           .then((data) => {
-            console.log('data', data)
             localStorage.setItem("jwt", data.token);
-            dispatch(login({name: data.name, email: data.email}))
+            dispatch(setUser(data.user))
           });
     };
 
@@ -40,7 +43,7 @@ const Login = () => {
 
     useEffect(() => {
         let token = localStorage.getItem("jwt");
-        if (token && !user.name) {
+        if (token && !user.isLoggedin) {
             fetch("http://localhost:3000/profile", {
                 headers: {
                     token: token,
@@ -50,19 +53,23 @@ const Login = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log('dispatch from useEffect engaged')
-                dispatch(login({name: data.name, email: data.email}))
+                dispatch(setUser(data))
             });
         }
-    }, [user])
+    }, [])
 
     console.log('form', form)
     console.log('user', user)
+
+    const handleClick = () => {
+        navigate(`/newuser`)
+    }
     
 
     return (
         <div>
-            <h1>Name: {user.name}</h1>
-            <h1>Email: {user.email}</h1>
+            <h1>Name: {user.profile.name}</h1>
+            <h1>Email: {user.profile.email}</h1>
             {/* <button
                 onClick={(e) => {
                     e.preventDefault()
@@ -100,7 +107,9 @@ const Login = () => {
                     placeholder="password"
                     />
                 <input type="submit" />
+                
             </form>
+            <button onClick={handleClick}>Create New Account</button>
         </div>
     )
 }

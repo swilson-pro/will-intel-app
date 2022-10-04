@@ -72,12 +72,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_225855) do
 
   create_table "notes", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "contact_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "notable_id"
     t.string "notable_type"
+    t.index ["notable_id", "notable_type"], name: "index_notes_on_notable_id_and_notable_type"
   end
 
   create_table "products", force: :cascade do |t|

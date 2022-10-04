@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
     belongs_to :company
+    has_many :notes, as: :notable
 
     def company_name
         company.name

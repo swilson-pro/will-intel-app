@@ -5,17 +5,25 @@ const initialStateValue = {name: "", email: ""}
 
 export const userSlice = createSlice({
     name: "user",
-    initialState: {value: initialStateValue},
+    initialState: {
+        profile: {
+        },
+        isLoggedin:  false
+    },
     reducers: {
-        login: (state, action) => {
-            state.value = action.payload
+        setUser: (state,action)=>{
+            state.profile = {... action.payload}
+            state.isLoggedin = true
         },
         logout: (state) => {
-            state.value = initialStateValue
+            localStorage.clear()
+            state.profile = {}
+            state.isLoggedin = false
+
         }
     },
 });
 
-export const {login, logout} = userSlice.actions;
+export const {setUser, logout} = userSlice.actions;
 
 export default userSlice.reducer
