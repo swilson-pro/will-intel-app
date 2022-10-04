@@ -8,15 +8,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
+import {Visible, Unvisible, Others, UserBadge, Plus, Calendar, Trash, Edit } from '@rsuite/icons'
+
 import BioModal from "./BioModal"
 
 import Moment from 'moment';
 
 import { useSelector } from 'react-redux'
 
-import { Form, Input, Button, ButtonToolbar, SelectPicker, Popover, Whisper } from 'rsuite'
+import { Form, Input, Button, IconButton, ButtonToolbar, SelectPicker, Popover, Whisper } from 'rsuite'
 import { useRef, forwardRef } from "react"
 import { SchemaModel, StringType } from "schema-typed"
+
+import ProductsDrawer from "../Product/ProductsDrawer"
+import ContactsDrawer from "./ContactsDrawer"
 
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
@@ -147,18 +152,28 @@ const ContactCard = () => {
 
     return (
         <div className="contact-card">
-            <button type="button" className="delete-contact" onClick={() => deleteContact(contact.id)}>
-                <span className="button_icon">
-                    <FontAwesomeIcon icon={faEraser}></FontAwesomeIcon>
-                </span>
-                <span className="button_text">Delete</span>
-            </button>
-            <button type="button" className="update-contact" onClick={updateContact}>
-                <span className="button_icon">
-                    <FontAwesomeIcon icon={faUserPen}></FontAwesomeIcon>
-                </span>
-                <span className="button_text">Update</span>
-            </button>
+            <ButtonToolbar>
+                <IconButton
+                    className="card-button"
+                    color="blue"
+                    appearance="ghost"
+                    size="md"
+                    icon={<Trash/>}
+                    onClick={() => deleteContact(contact.id)}
+                    >
+                        Delete Contact
+                </IconButton>
+                <IconButton
+                    className="card-button"
+                    color="blue"
+                    appearance="ghost"
+                    size="md"
+                    icon={<Edit/>}
+                    onClick={() => updateContact(contact.id)}
+                    >
+                        Edit Contact
+                </IconButton>
+            </ButtonToolbar>
             <div className="profile-details">
                 <div className="pd-left">
                     <div className="pd-row">
@@ -169,11 +184,15 @@ const ContactCard = () => {
                                 <a className="materials-icons" href={contact.phone}><FontAwesomeIcon icon={faPhone}></FontAwesomeIcon></a>
                                 <a className="materials-icons" href={contact.linkedin_profile_url} target="_blank"><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></a>
                             </div>
+                            <div className="bio-modal-div">
+                            <BioModal contact={contact} />
+                            </div>
                         </div>
-                        <div>
+                        <div className="general-info">
                             <h3 className="contact-name">{contact.name}</h3>
                             <h4 className="contact-position">{contact.position}</h4>
                             <h4 className="contact-company" onClick={() => handleCompanyClick(contact.company_id)}>{contact.real_company_name}</h4>
+                            
                             {/* <h4 className="company-id">Company ID: {contact.company_id}</h4> */}
 
                         </div>
@@ -193,7 +212,7 @@ const ContactCard = () => {
                                 <p>{contact.bio}</p>
                             </details> */}
                             {/* <p>{contact.bio}</p> */}
-                            <BioModal contact={contact} />
+                            
                         </div>
 
                     </div>
@@ -205,6 +224,7 @@ const ContactCard = () => {
                         formValue={formValue}
                         onChange={formValue => setFormValue(formValue)}
                         onSubmit={formClick}
+                        style={{margin: 10}}
                         fluid
                     >
                         <Form.Group controlId="textarea">
@@ -257,6 +277,9 @@ const ContactCard = () => {
                 <div className="pd-right">
                     <h3>Organization</h3>
                     <div className="pd-row">
+
+
+                        <img onClick={() => handleCompanyClick(contact.company_id)} className="contact-company-logo" src={contact.company_logo} alt={contact.real_company_name}></img>
                         <div className="company-name">
                             <span>
                                 <FontAwesomeIcon className="span-icon" icon={faBuilding}></FontAwesomeIcon>
@@ -266,10 +289,8 @@ const ContactCard = () => {
                             </span>
 
                         </div>
-
-                        <img onClick={() => handleCompanyClick(contact.company_id)} className="contact-company-logo" src={contact.company_logo} alt={contact.real_company_name}></img>
-
-                        <details className="company-products">
+                        <ProductsDrawer contact={contact} handleProductClick={handleProductClick}/>
+                        {/* <details className="company-products">
                             <summary>Company Products</summary>
 
                             {contact.company_products?.map((product) => {
@@ -277,15 +298,17 @@ const ContactCard = () => {
                                     <li key={product.id} onClick={() => handleProductClick(product.id)}>{product.name}</li>
                                 )
                             })}
-                        </details>
-                        <details className="colleagues">
+                        </details> */}
+                        <ContactsDrawer contact={contact} handleContactClick={handleContactClick}/>
+                        {/* <details className="colleagues">
                             <summary>Colleagues</summary>
                             {contact.company_contacts?.filter(colleague => colleague.name !== contact.name).map(filteredColleague => {
                                 return (
                                     <li key={filteredColleague.id} onClick={() => handleContactClick(filteredColleague.id)}>{filteredColleague.name}</li>
                                 )
                             })}
-                        </details>
+                        </details> */}
+
                     </div>
                 </div>
             </div>

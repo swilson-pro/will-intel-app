@@ -147,7 +147,7 @@ const NewContact = () => {
     const model = SchemaModel({
         name: StringType().isRequired("Full name is required"),
         // company_name: StringType().isRequired("Company Name Required"),
-        email: StringType().isEmail("Valid Email Address is required").isRequired("wtf"),
+        email: StringType().isEmail("Valid Email Address is required").isRequired("Input Email Address"),
         // textarea: StringType().isRequired("A MESSAGE MUST BE ENTERED!")
     })
 

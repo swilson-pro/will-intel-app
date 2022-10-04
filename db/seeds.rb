@@ -259,7 +259,7 @@ puts "making notes"
     Note.create(
         notable: Contact.all.sample, 
         user: User.all.sample, 
-        content: "Seems like they're intersted!")
+        content: "Seems like they're interested!")
 
     Note.create(
         notable: Contact.all.sample, 

@@ -31,7 +31,7 @@ import 'rsuite/dist/rsuite.min.css'
 
 import {Button, ButtonToolbar, IconButton, CustomProvider, Navbar, Nav, Container, Header, Content, Footer, List, FlexboxGrid, Col, Avatar, Badge} from 'rsuite'
 
-import {Visible, Unvisible, Others, UserBadge, Plus, userTimes, Minus} from '@rsuite/icons'
+import {Visible, Unvisible, Others, UserBadge, Plus, userTimes, Minus, Site, Peoples, PeoplesCostomize, Storage, Gear} from '@rsuite/icons'
 
 
 import {setUser, logout} from './features/user/user'
@@ -64,36 +64,38 @@ function App() {
       <CustomProvider theme={toggleMode ? "dark" : "light"}>
         <Container style={{minHeight: "100vh"}}>
           
-          <Header className="header">
-          <Navbar appearance='subtle'>
+          <Header className="header" style={{
+    display: 'flex', width: 3000, paddingLeft: 30, height: 70, fontSize: 20
+    }}>
+          <Navbar appearance='default'>
             <Navbar.Brand className="brand">Carlson</Navbar.Brand>
             <Nav>
                 <Nav.Item 
                 as={NavLink} 
                 children={<HomePage />} 
                 href="/"
-                icon={<Others/>}>
+                icon={<Site/>}>
                   Home
                 </Nav.Item>
               <Nav.Item 
                 as={NavLink} 
                 children={<ContactsPage />} 
                 href="/contacts" 
-                icon={<Others/>}>
+                icon={<UserBadge/>}>
                 Contacts
               </Nav.Item>
               <Nav.Item 
                 as={NavLink} 
                 children={<HomePage />} 
                 href="/companies"
-                icon={<Others/>}>
+                icon={<PeoplesCostomize/>}>
                 Companies
               </Nav.Item>
               <Nav.Item 
                 as={NavLink} 
                 children={<HomePage />} 
                 href="/products"
-                icon={<Others/>}>
+                icon={<Storage/>}>
                 Products
               </Nav.Item>
             </Nav>
@@ -109,7 +111,7 @@ function App() {
               </Nav.Item>
             </Nav> */}
             <Nav pullRight>
-              <Nav.Menu title="Add New" icon={<Plus/>}>
+              <Nav.Menu title="Add New" icon={<Plus/>} >
                 <Nav.Item 
                   as={NavLink}
                   children={<NewContact />} 
@@ -121,26 +123,26 @@ function App() {
                   as={NavLink} 
                   children={<NewCompany />} 
                   href="/companies/new"
-                  icon={<UserBadge/>}>
+                  icon={<PeoplesCostomize/>}>
                   Company
                 </Nav.Item>
                 <Nav.Item 
                   as={NavLink} 
                   children={<NewProduct />}
                   href="/products/new"
-                  icon={<UserBadge/>}>
+                  icon={<Storage/>}>
                   Product
                 </Nav.Item>
               </Nav.Menu>
             </Nav>
             <Nav pullRight>
-              <Nav.Menu title="Settings" icon={<UserBadge/>}>
+              <Nav.Menu title="Settings" icon={<Gear/>}>
               <Nav.Item>
                 <ButtonToolbar>
                   <IconButton onClick={toggleModeFunc} 
                   color="red" 
                   appearance='ghost' 
-                  size='xs' 
+                  size='lg' 
                   icon={toggleMode ? <Visible /> : <Unvisible />}>{toggleMode ? "Light Mode" : "Dark Mode"}</IconButton>
                 </ButtonToolbar>
               </Nav.Item>
@@ -189,8 +191,12 @@ function App() {
             {/* <Avatar circle style={{backgroundColor: "orange", fontSize: 14}}>
                   Sam
             </Avatar> */}
+
+
             <Nav pullRight>
-              <Navbar.Brand className="user">{user.profile.email}</Navbar.Brand>
+
+              { user ? <Navbar.Brand className="user">{user.profile.email}</Navbar.Brand> : <Navbar.Brand className="user">Logged Out</Navbar.Brand>}
+              {/* <Navbar.Brand className="user">{user.profile.email}</Navbar.Brand> */}
               
             </Nav>
           </Navbar>

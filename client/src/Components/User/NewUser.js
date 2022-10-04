@@ -118,13 +118,14 @@ const NewUser = () => {
 
 
     return (
+        <>
+        <h1 style={{textAlign: "center", marginBottom: 20}}>New Account</h1>
         <Form
             ref={formRef}
             model={model}
             formValue={formValue}
             onChange={formValue => setFormValue(formValue)}
             onSubmit={formClick}
-            layout="horizontal"
             fluid
             
         >
@@ -148,11 +149,13 @@ const NewUser = () => {
         </Form.Group> */}
         <Form.Group>
           <ButtonToolbar>
-            <Button appearance="primary" type='submit'>Submit</Button>
-            <Button appearance="default">Cancel</Button>
+            <Button appearance="ghost" type='submit'>Submit</Button>
+            <Button appearance="ghost">Cancel</Button>
           </ButtonToolbar>
         </Form.Group>
       </Form>
+
+      </>
 
         // <div>
         //     <h1>new user form</h1>

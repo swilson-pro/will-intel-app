@@ -2,6 +2,9 @@
     border: solid;
 } */
 
+.card-button {
+    margin: 10px;
+}
 
 .new-contact {
     text-align: center;
@@ -69,14 +72,12 @@
 }
 
 .pd-left .pd-row .left-body {
-    border: solid;
+
     width: 300px;
 }
 
-.pd-left .pd-row .left-body p{
-    border: solid;
-    min-width: 100%;
-
+.pd-left .pd-row .left-body h4{
+    margin: 1.1rem;
 }
 
 .pd-left .pd-row {
@@ -98,7 +99,7 @@
     max-width: 20vw;
 }
 .bio {
-    font-size:xx-large
+    font-size:x-large
 }
 
 .pd-left .pd-row .materials-icons{
@@ -119,13 +120,22 @@
 display: flex;
 position: absolute;
 bottom: 0;
-right: 2rem;
+left: 1rem;
 font-size: 1.5rem;
-
+margin: 1rem;
 }
 
 
+.bio-modal-div {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    right: 1rem;
+}
 
+.pd-row .general-info {
+    margin: 1rem;
+}
 
 .pd-mid{
     /* border: solid; */
@@ -181,6 +191,7 @@ font-size: 1.5rem;
 .note-div {
     margin-top: 10px;
     background-color: beige;
+    margin: 10px;
     padding: 5px;
     /* border: 1px solid grey; */
     border-radius: 5px;
@@ -256,4 +267,8 @@ font-size: 1.5rem;
     margin: 5px;
     vertical-align: middle;
     align-items: center;
+}
+
+.products-list {
+    cursor: pointer;
 }

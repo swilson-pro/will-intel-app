@@ -13,7 +13,7 @@ const BioModal = ({contact}) => {
     return (
         <div>
         <ButtonToolbar>
-            <Button size='lg' onClick={handleOpen}>Read Bio</Button>
+            <Button style={{margin: '1.1em'}}appearance='ghost' color="blue" size='lg' onClick={handleOpen}>Read Bio</Button>
         </ButtonToolbar>
         <Modal size='lg' overflow={overflow} open={open} onClose={handleClose}>
         <Modal.Header>
@@ -23,10 +23,10 @@ const BioModal = ({contact}) => {
             <p className='bio'>{contact.bio}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleClose} appearance="primary">
+          <Button onClick={handleClose} appearance="ghost">
             Ok
           </Button>
-          <Button onClick={handleClose} appearance="subtle">
+          <Button onClick={handleClose} appearance="ghost">
             Cancel
           </Button>
         </Modal.Footer>

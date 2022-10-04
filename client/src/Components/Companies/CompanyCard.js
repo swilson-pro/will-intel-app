@@ -108,6 +108,7 @@ const CompanyCard = () => {
         <div className="company-card">
             <ButtonToolbar>
                 <IconButton
+                    className="card-button"
                     color="blue"
                     appearance='ghost'
                     size='md'
@@ -118,6 +119,7 @@ const CompanyCard = () => {
 
                 </IconButton>
                   <IconButton
+                  className="card-button"
                   color="blue" 
                   appearance='ghost' 
                   size='md' 

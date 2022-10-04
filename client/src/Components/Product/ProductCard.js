@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import EditProduct from "./EditProduct"
 
 import {Button, ButtonToolbar, IconButton} from 'rsuite';
-import {Visible, Unvisible, Others, UserBadge, Plus} from '@rsuite/icons'
+import {Visible, Unvisible, Others, UserBadge, Plus, Calendar, Trash, Edit } from '@rsuite/icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding, faPencil } from '@fortawesome/free-solid-svg-icons'
 import {faLinkedin} from '@fortawesome/free-brands-svg-icons'
@@ -95,19 +95,21 @@ console.log('product', product)
         <div className="product-card">
             <ButtonToolbar>
                 <IconButton
+                    className="card-button"
                     color="blue"
                     appearance="ghost"
                     size="md"
-                    icon={<Plus/>}
+                    icon={<Trash/>}
                     onClick={() => deleteProduct(product.id)}
                     >
                         Delete Product
                 </IconButton>
                 <IconButton
+                    className="card-button"
                     color="blue"
                     appearance="ghost"
                     size="md"
-                    icon={<Plus/>}
+                    icon={<Edit/>}
                     onClick={() => updateProduct(product.id)}
                     >
                         Edit Product
@@ -173,6 +175,7 @@ console.log('product', product)
                 <div className="pd-right">
                     <h3>More Info</h3>
                     <div className="pd-row">
+                    <img onClick={() => handleCompanyClick(product.company_id)} className="product-company-logo" src={product.company_logo} alt={product.company_name}></img>
                         <details className="colleagues">
                             <summary>Associated Contacts</summary>
                             {product.company_contacts?.map((contact) => {
