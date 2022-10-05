@@ -32,6 +32,7 @@ const ContactCard = () => {
     const formRef = useRef()
 
     console.log('user', user)
+    console.log('user.isLoggedIn', user.isLoggedIn)
 
     let navigate = useNavigate()
 

@@ -22,6 +22,8 @@ import NewUser from './Components/User/NewUser';
 
 import Profile from './Components/User/Profile';
 
+import PrivateRoute from './PrivateRoute';
+
 
 // import InitiativesPage from './Components/Companies/Initiative/InitiativesPage';
 
@@ -40,6 +42,14 @@ import {useSelector, useDispatch} from 'react-redux'
 function App() {
 
   const user = useSelector((state) => state.user);
+
+  console.log(user ? "user exists" : "user doesn't exist")
+
+  console.log(user ? user : "user doesn't exist")
+
+  console.log(!user.isLoggedin ? "You are not logged in" : "user logged in")
+
+
   const dispatch = useDispatch()
 
   const conBlackList = ['real_company_name', 'owner_name', 'twitter_url', 'image_url', 'user_id', 'company_id', 'company_products']
@@ -208,8 +218,17 @@ function App() {
           {/* <NavBar /> */}
           <Content>
             <Routes>
-              <Route path='/contacts/new' element={<NewContact conBlackList={conBlackList} />} />
-              <Route path='/contacts/:id' element={<ContactCard conBlackList={conBlackList} />} />
+              <Route path='/contacts/new' element={
+                <PrivateRoute>
+                  <NewContact conBlackList={conBlackList} />
+                </PrivateRoute>
+            }
+               />
+              <Route path='/contacts/:id' element={
+                <PrivateRoute>
+                  <ContactCard conBlackList={conBlackList} />
+                </PrivateRoute>
+              } />
               <Route path='/contacts' element={<ContactsPage conBlackList={conBlackList} />} />
               <Route path='/companies/new' element={<NewCompany compBlackList={compBlackList} />} />
               <Route path='/companies/:id' element={<CompanyCard />} />

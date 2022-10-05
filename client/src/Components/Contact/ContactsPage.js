@@ -11,10 +11,16 @@ import {faPlus} from '@fortawesome/free-solid-svg-icons'
 import { Button, IconButton, Table } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css'
 
+import {useSelector} from 'react-redux'
+
 const {Column, HeaderCell, Cell} = Table
 
 
 const ContactsPage = ({conBlackList}) => {
+
+    const user = useSelector((state) => state.user);
+
+    console.log('user', user)
 
     let navigate = useNavigate()
     
@@ -25,7 +31,7 @@ const ContactsPage = ({conBlackList}) => {
 
     const [pageCount, setPageCount] = useState();
 
-    const [sortField, setSortField] = useState('name')
+    const [sortField, setSortField] = useState('id')
     const [order, setOrder] = useState('')
 
     useEffect(() => {
@@ -33,14 +39,14 @@ const ContactsPage = ({conBlackList}) => {
     }, [page, sortField, order])
 
     const getContactsForPage = async (page) => {
-        console.log('page', page)
+        // console.log('page', page)
         const res = await fetch(`http://localhost:3000/contacts_paginated/${page}?${sortField}=${order}`)
         const contactsPageData = await res.json()
-        console.log('contactsPageData', contactsPageData)
+        // console.log('contactsPageData', contactsPageData)
 
 
         const contactsDataArray = contactsPageData.contacts
-        console.log('contactsDataArray', contactsDataArray)
+        // console.log('contactsDataArray', contactsDataArray)
         const pagina = contactsPageData.page
         // console.log('pagina', pagina)
         const paginaCuenta = contactsPageData.page_count
@@ -48,7 +54,7 @@ const ContactsPage = ({conBlackList}) => {
         // console.log('paginaCuenta', paginaCuenta)
 
         let objKeys = Object.keys(contactsDataArray[0])
-        console.log('objKeys', objKeys)
+        // console.log('objKeys', objKeys)
 
         let displayKeys = objKeys.filter((item) => !conBlackList.includes(item))
 
@@ -69,7 +75,7 @@ const ContactsPage = ({conBlackList}) => {
 
 
     const handleSorting = (sortField, sortOrder) => {
-        console.log('sortField, sortOrder', sortField, sortOrder)
+        // console.log('sortField, sortOrder', sortField, sortOrder)
     }
 
 
@@ -113,7 +119,7 @@ const ContactsPage = ({conBlackList}) => {
         return result
     }
 
-    console.log('contacts', contacts)
+    // console.log('contacts', contacts)
 
     const handleClick = (rowData) => {
         navigate(`/contacts/${rowData.id}`)

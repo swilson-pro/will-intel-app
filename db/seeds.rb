@@ -11,58 +11,7 @@ user1 = User.create!(name: "Bill", email: "bill@gmail.com", username: "bill", pa
 user2 = User.create!(name: "Alex", email: "alex@gmail.com", username: "alex", password_digest: "alex")
 user3 = User.create!(name: "Ben", email: "ben@gmail.com", username: "ben", password_digest: "ben")
 
-puts 'reading contacts csv'
 
-# reads csv file into a variable
-contacts_csv_text = File.read(Rails.root.join('lib', 'seeds', 'contacts_consolidated.csv'))
-# puts contacts_csv_text
-
-puts 'parsing contacts csv'
-# converts csv file into a structure that ruby can read. :headers => true tesll the parser to ignore the first line of the csv file.
-contacts_csv = CSV.parse(contacts_csv_text, :headers => true, :encoding => 'ISO-8859-1')
-# puts csv
-
-puts 'seeding contacts'
-
-# # looops through the csv and converts each row into a has. headers of the csv file will be used as keys for the hash b/c we added the :headers => true option in previous step.
-# contacts_csv.each do |row|
-#     # c = Contact.new
-#     # c.name = row['name']
-#     # c.pbid = row['pbid']
-#     # c.company_name = row['company_name']
-#     # c.position = row['position']
-#     # c.bio = row['bio']
-#     # c.phone = row['phone']
-#     # c.email = row['email']
-#     # c.location = row['location']
-#     # c.twitter_url = row['twitter_url']
-#     # c.linkedin_profile_url = row['linkedin_profile_url']
-#     # c.linkedin_company_url = row['linkedin_company_url']
-#     # c.user_id = row['user_id']
-#     # c.image_url = row['image_url']
-    
-#     # c.save
-
-#     Contact.create!(
-#         name: row['name'],
-#         pbid: row['pbid'],
-#         company_name: row['company_name'],
-#         position: row['position'],
-#         bio: row['bio'],
-#         phone: row['phone'],
-#         email: row['email'],
-#         location: row['location'],
-#         twitter_url: row['twitter_url'],
-#         linkedin_profile_url: row['linkedin_profile_url'],
-#         linkedin_company_url: row['linkedin_company_url'],
-#         user_id: User.first.id,
-#         image_url: row['image_url'],
-        
-#     )
-    
-#     # puts "#{c.name}, #{c.pbid}, #{c.company_name}, #{c.position}, #{c.bio}, #{c.phone}, #{c.email}, #{c.location}, #{c.twitter_url}, #{c.linkedin_profile_url}, #{c.linkedin_company_url}, #{c.user_id}, #{c.image_url} saved"
-
-# end
 
 puts 'reading companies csv'
 
@@ -77,16 +26,7 @@ puts 'seeding companies'
 
 
 companies_csv.each do |row|
-    # c = Company.new
-    # c.user_id = row['user_id']
-    # c.name = row['name']
-    # c.linkedin_company_id = row['linkedin_company_id']
-    # c.linkedin_regularCompanyUrl = row['linkedin_regularCompanyUrl']
-    # c.logoUrl = row['logoUrl']
-    # c.description = row['description']
-    # c.website = row['website']
-    
-    # c.save
+
     Company.create!(
         user_id: User.first.id,
         name: row['name'],
@@ -123,36 +63,38 @@ companies_csv.each do |row|
         
 
     )
-    # puts "#{c.user_id}, #{c.name}, #{c.linkedin_company_id}, #{c.linkedin_regularCompanyUrl}, #{c.logoUrl}, #{c.description}, #{c.website} saved"
 
 end
 
 
 
+# puts 'reading contacts csv'
 
-# looops through the csv and converts each row into a has. headers of the csv file will be used as keys for the hash b/c we added the :headers => true option in previous step.
+
+# contacts_csv_text = File.read(Rails.root.join("lib", "seeds", "10_5_22_contacts_seed.csv"))
+
+
+# # reads csv file into a variable
+
+contacts_csv_text = File.read(Rails.root.join("lib", "seeds", "10_5_22_contacts_seed.csv"))
+# puts contacts_csv_text
+
+puts 'parsing contacts csv'
+# # converts csv file into a structure that ruby can read. :headers => true tesll the parser to ignore the first line of the csv file.
+contacts_csv = CSV.parse(contacts_csv_text, :headers => true, :encoding => 'ISO-8859-1')
+# puts contacts_csv
+
+puts 'seeding contacts'
+
+
+# # looops through the csv and converts each row into a has. headers of the csv file will be used as keys for the hash b/c we added the :headers => true option in previous step.
 contacts_csv.each do |row|
-    # c = Contact.new
-    # c.name = row['name']
-    # c.pbid = row['pbid']
-    # c.company_name = row['company_name']
-    # c.position = row['position']
-    # c.bio = row['bio']
-    # c.phone = row['phone']
-    # c.email = row['email']
-    # c.location = row['location']
-    # c.twitter_url = row['twitter_url']
-    # c.linkedin_profile_url = row['linkedin_profile_url']
-    # c.linkedin_company_url = row['linkedin_company_url']
-    # c.user_id = row['user_id']
-    # c.image_url = row['image_url']
-    
-    # c.save
-    # note to self - if it can't find the company, create a new company
+
+    # puts "#{row[0]}, #{row['company_name']}"
     company = Company.find_by(name: row['company_name']) || Company.create!(name: row['company_name'], user_id: User.first.id)
-    # if !company Company.create(name: row['name']) 
-    Contact.create!(
-        name: row['name'],
+
+    c = Contact.create!(
+        name: row[0],
         pbid: row['pbid'],
         company_name: row['company_name'],
         position: row['position'],
@@ -167,6 +109,7 @@ contacts_csv.each do |row|
         image_url: row['image_url'],
         company_id: company.id,
     )
+
     
     # puts "#{c.name}, #{c.pbid}, #{c.company_name}, #{c.position}, #{c.bio}, #{c.phone}, #{c.email}, #{c.location}, #{c.twitter_url}, #{c.linkedin_profile_url}, #{c.linkedin_company_url}, #{c.user_id}, #{c.image_url} saved"
 
@@ -187,30 +130,6 @@ end
 
 
 
-
-
-
-# puts 'making fake contacts...'
-
-# 50.times {
-#     Contact.create!(
-#         name: Faker::Name.name,
-#         pbid: rand(1..50),
-#         company_name: Faker::Company.name,
-#         position: "CEO",
-#         bio: "I'm the CEO of my company!",
-#         phone: Faker::PhoneNumber.cell_phone,
-#         email: Faker::Internet.email,
-#         location: Faker::Address.full_address,
-#         twitter_url: "www.twitter.com",
-#         linkedin_profile_url: "linkedin.com",
-#         linkedin_company_url: "linkedin.com",
-#         user_id: User.all.sample.id
-#     )
-# }
-# contact = Contact.create!(name: "James Madison", pbid: "1", company_name: "Flatiron", position: "CEO", bio: "i lead flatiron", phone: "9199199191", email: "james@gmail.com", location: "USA", twitter_url: "www.twitter.com/james_madison", linkedin_company_url: "linkedin.com/flatiron", user_id: 1)
-
-
 puts 'reading products csv'
 
 products_csv_text = File.read(Rails.root.join('lib', 'seeds', 'makeup_api_seed.csv'))
@@ -223,7 +142,7 @@ puts 'seeding products'
 
 products_csv.each do |row|
 
-    company = Company.find_by(website: row['website']) || Company.create!(name: row['brand'], user_id: User.first.id)
+    company = Company.find_by(website: row['website']) || Company.create!(name: row['brand'], user_id: User.first.id, website: row['website'])
 
     product = Product.create!(
         brand: row['brand'],
@@ -243,114 +162,70 @@ products_csv.each do |row|
     )
 end
 
-puts "making notes"
-
-300.times{
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "Very good opportunity here!")
-
-    Note.create(
-        notable: Company.all.sample,
-        user: User.all.sample,
-        content: "This company has a lot of potential, I think they'd be interested in working with us."
-    )
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "Seems like they're interested!")
-
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "This could be a great opportunity.")
-
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "Think they're a good fit")
-
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "Impressive experience")
-
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "Outstanding background.")
-
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "I think this could work")
-        
-    Note.create(
-        notable: Company.all.sample, 
-        user: User.all.sample, 
-        content: "This organization seems to be in need of our services.")
-
-    Note.create(
-        notable: Company.all.sample, 
-        user: User.all.sample, 
-        content: "Great organization with great people. I think we're going to be able to help them a lot.")        
-
-    Note.create(
-        notable: Product.all.sample, 
-        user: User.all.sample, 
-        content: "This is an amazing product.")
-
-    Note.create(
-        notable: Product.all.sample, 
-        user: User.all.sample, 
-        content: "This product is selling like hot pockets!")
-
-        
-
-}
-
-
+# puts "making notes"
 
 # 300.times{
-#     Note.create!(
-#         content: "Seems like they're intersted!",
-#         contact_id: Contact.all.sample.id,
-#         user_id: User.all.sample.id
-#     )
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "Very good opportunity here!")
 
-#     Note.create!(
-#         content: "This could be a great opportunity.",
-#         contact_id: Contact.all.sample.id,
-#         user_id: User.all.sample.id
+#     Note.create(
+#         notable: Company.all.sample,
+#         user: User.all.sample,
+#         content: "This company has a lot of potential, I think they'd be interested in working with us."
 #     )
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "Seems like they're interested!")
 
-#     Note.create!(
-#         content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-#         contact_id: Contact.all.sample.id,
-#         user_id: User.all.sample.id
-#     )
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "This could be a great opportunity.")
 
-#     Note.create!(
-#         content: "Think they're a good fit.",
-#         contact_id: Contact.all.sample.id,
-#         user_id: User.all.sample.id
-#     )
-#     Note.create!(
-#         content: "Impressive experience.",
-#         contact_id: Contact.all.sample.id,
-#         user_id: User.all.sample.id
-#     )
-#     Note.create!(
-#         content: "Outstanding background.",
-#         contact_id: Contact.all.sample.id,
-#         user_id: User.all.sample.id
-#     )
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "Think they're a good fit")
 
-#     Note.create!(
-#         content: "I think this could work.",
-#         contact_id: Contact.all.sample.id,
-#         user_id: User.all.sample.id
-#     )
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "Impressive experience")
 
-#     }
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "Outstanding background.")
+
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "I think this could work")
+        
+#     Note.create(
+#         notable: Company.all.sample, 
+#         user: User.all.sample, 
+#         content: "This organization seems to be in need of our services.")
+
+#     Note.create(
+#         notable: Company.all.sample, 
+#         user: User.all.sample, 
+#         content: "Great organization with great people. I think we're going to be able to help them a lot.")        
+
+#     Note.create(
+#         notable: Product.all.sample, 
+#         user: User.all.sample, 
+#         content: "This is an amazing product.")
+
+#     Note.create(
+#         notable: Product.all.sample, 
+#         user: User.all.sample, 
+#         content: "This product is selling like hot pockets!")
+
+        
+
+# }
+
