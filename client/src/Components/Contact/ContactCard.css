@@ -3,7 +3,7 @@
 } */
 
 .card-button {
-    margin: 10px;
+    margin: 2rem;
 }
 
 .new-contact {
@@ -44,9 +44,9 @@
     vertical-align:middle;
 }
 
-.contact-card {
+.card {
     padding: 10px 1%;
-    /* border: solid; */
+
 
 }
 
@@ -54,7 +54,7 @@
     margin: 10px;
     /* background: red; */
     padding: 20px;
-    /* border: solid; */
+
     border-radius: 20px;
     display: flex;
     align-items: flex-start;
@@ -70,32 +70,24 @@
     width: 30rem;
     height: auto;
 }
-
-.pd-left .pd-row .left-body {
-
-    width: 300px;
+.pd-left {
+    margin: 1rem;
 }
 
-.pd-left .pd-row .left-body h4{
-    margin: 1.1rem;
-}
 
 .pd-left .pd-row {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     gap: 1em;
-    /* border: solid; */
 }
 
 .pd-left .pd-row .contact-company {
     cursor: pointer;
-    /* border: solid; */
 }
 
 .pd-left .pd-row p {
     font-size: 10px;
-    /* border: solid; */
     max-width: 20vw;
 }
 .bio {
@@ -106,12 +98,10 @@
     cursor: pointer;
     margin: 5px;
     display: flex;
-    /* border:solid; */
     align-items: center;
 
 }
 .pd-left .pd-row .image-div {
-    /* border:solid; */
     display:flex;
     position: relative;
 }
@@ -126,7 +116,7 @@ margin: 1rem;
 }
 
 
-.bio-modal-div {
+.modal-div {
     display: flex;
     position: absolute;
     bottom: 0;
@@ -138,7 +128,6 @@ margin: 1rem;
 }
 
 .pd-mid{
-    /* border: solid; */
     margin: 0 10px;
     min-width: 50vw;
 
@@ -193,7 +182,6 @@ margin: 1rem;
     background-color: beige;
     margin: 10px;
     padding: 5px;
-    /* border: 1px solid grey; */
     border-radius: 5px;
 }
 
@@ -209,10 +197,19 @@ margin: 1rem;
     color: black;
 }
 
+.pd-right {
+
+
+    outline: 0;
+    border-radius: 3px;
+    padding: 15px;
+    margin: 1rem;
+
+}
+
 
 .pd-right .contact-company-logo {
     cursor: pointer;
-    /* border: solid; */
     width: 20rem;
     height: auto;
     
@@ -220,45 +217,28 @@ margin: 1rem;
 
 .pd-right .company-products {
     cursor: pointer;
-    /* border: solid; */
     width: max-content;
     list-style: none;
 }
 .pd-right .colleagues {
     cursor: pointer;
-    /* border: solid; */
     list-style: none;
 }
 
 
 
-.pd-right {
 
-    /* background: blue; */
-    border: solid;
-    /* border: 0; */
-    outline: 0;
-    /* padding: 6px 10px; */
-    /* display: inline-flex; */
-    border-radius: 3px;
-    padding: 15px;
-    margin-right: 1vw;
-    margin-top: 1vw;
-
-}
 
 .pd-right .pd-row {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     padding: 10px 10px;
-    /* border: solid; */
 }
 
 .pd-right .pd-row .company-name {
     cursor: pointer;
     display: flex;
-    /* border: solid; */
     margin:5px;
     vertical-align: middle;
 }

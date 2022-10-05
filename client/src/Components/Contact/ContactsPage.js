@@ -152,41 +152,13 @@ const ContactsPage = ({conBlackList}) => {
             >
                 {keyArray.map((key, index) => {
                     return (
-                        <Column className="table-column" width={150} align="left" resizable sortable>
+                        <Column className="table-column" width={250} align="left" resizable sortable>
                             <HeaderCell className="table_header" key={index}>{formatter(key)}</HeaderCell>
                             <Cell className="table-cell" dataKey={key} />
                         </Column>
                     )
                 })}
             </Table>
-            {/* <div className="contacts-table-container">
-
-            <table className='contacts-table'>
-                <thead>
-                    <tr>
-                        {keyArray.map((key, index) => {
-                            return (
-                                <th key={index} onClick={() => handleSortingChange(key)}>{formatter(key)}</th>
-                            )
-                        })}
-                    </tr>
-                </thead>
-
-                <tbody >
-                    {contacts.map(contact=>{
-                        let contactVals = Object.values(contact)
-                        return (
-                            <tr onClick={() => handleClick(contact.id)}>{contactVals.map((val, index) => {
-                                return (
-                                    <td key={index}>{val}</td>
-                                )
-                            })}
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-            </div> */}
             <PaginateContacts pageCount={pageCount} setPageCount={setPageCount} getContactsForPage={getContactsForPage} data={contacts}/>
 
         </main>

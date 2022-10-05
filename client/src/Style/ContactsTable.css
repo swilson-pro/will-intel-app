@@ -34,6 +34,10 @@
     /* IMPORTANT CHANGE VIEW BOX HEIGHT */
     max-height: 70vh;
 }
+
+.table {
+    cursor:pointer;
+}
 /* 
 .contacts-table thead tr {
     background-color: #009879;

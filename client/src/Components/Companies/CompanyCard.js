@@ -1,31 +1,47 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import EditCompany from "./EditCompany";
 
 import './CompanyCard.css'
 
-import {Button, ButtonToolbar, IconButton} from 'rsuite';
-import {Visible, Unvisible, Others, UserBadge, Plus} from '@rsuite/icons'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding, faPencil } from '@fortawesome/free-solid-svg-icons'
-import {faLinkedin} from '@fortawesome/free-brands-svg-icons'
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
-import {Container, Sidebar, Content, Sidenav, Nav} from 'rsuite';
+import { Container, Sidebar, Content, Sidenav, Nav, Form, Input, Button, ButtonToolbar, IconButton, Popover, Whisper } from 'rsuite';
+
 import DashboardIcon from '@rsuite/icons/Dashboard';
 import GroupIcon from '@rsuite/icons/legacy/Group';
 import MagicIcon from '@rsuite/icons/legacy/Magic';
 import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
 
+import { Visible, Unvisible, Others, UserBadge, Plus, Calendar, Trash, Edit } from '@rsuite/icons'
+
+import { SchemaModel, StringType } from "schema-typed"
+
 import Moment from 'moment';
+
+import { useSelector } from 'react-redux'
+
+import DescriptionModal from "./DescriptionModal";
+
+import CompProductsDrawer from "./CompProductsDrawer";
+import CompContactsDrawer from "./CompContactsDrawer";
+
+const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
 const CompanyCard = () => {
 
-    let user = {id: 1}
+    const user = useSelector((state) => state.user).profile;
+
+    const formRef = useRef()
+
+    console.log('user', user)
 
     let navigate = useNavigate()
 
-    let {id} = useParams()
+    let { id } = useParams()
 
     const [company, setCompany] = useState({})
     const [isEditClicked, setIsEditClicked] = useState(false)
@@ -43,7 +59,7 @@ const CompanyCard = () => {
 
     useEffect(() => {
         fetchCompany()
-    },[])
+    }, [])
 
     const updateCompany = async () => {
         setIsEditClicked(!isEditClicked)
@@ -54,7 +70,7 @@ const CompanyCard = () => {
         let req = await fetch(`http://localhost:3000/companies/${id}`, {
             method: "DELETE",
         })
-        .then(alert("Company Deleted"))
+            .then(alert("Company Deleted"))
         backToCompanies()
     }
 
@@ -91,126 +107,141 @@ const CompanyCard = () => {
         setNewNote("")
     }
 
-// for rsuite sidebar attempt
-    // const [expand, setExpand] = useState(true)
+    const model = SchemaModel({
+        textarea: StringType().isRequired("Note must have content.")
+    })
 
-    // const headerStyles = {
-    //     padding: 18,
-    //     fontSize: 16,
-    //     height: 56,
-    //     background: '#34c3ff',
-    //     color: ' #fff',
-    //     whiteSpace: 'nowrap',
-    //     overflow: 'hidden'
-    //   };
+    const formClick = async () => {
+        if (!formRef.current.check()) {
+            console.error("FORM ERROR!");
+            return;
+        }
+        console.log('formValue', formValue)
+        let req = await fetch(`http://localhost:3000/notes`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                content: formValue.textarea,
+                notable_id: company.id,
+                notable_type: "Company",
+                user_id: user.id
+
+            })
+        })
+        fetchCompany()
+        setFormValue(defaultFormValue)
+    }
+
+    const defaultFormValue = {
+        textarea: ''
+    };
+
+    const [formValue, setFormValue] = useState({
+        textarea: ""
+    })
+
     console.log('company', company)
     return (
-        <div className="company-card">
+        <div className="card">
             <ButtonToolbar>
                 <IconButton
                     className="card-button"
                     color="blue"
                     appearance='ghost'
                     size='md'
-                    icon={<Plus/>}
+                    icon={<Trash />}
                     onClick={() => deleteCompany(company.id)}
-                    >
-                        Delete Company
+                >
+                    Delete Company
 
                 </IconButton>
-                  <IconButton
-                  className="card-button"
-                  color="blue" 
-                  appearance='ghost' 
-                  size='md' 
-                  icon={<Plus />}
-                  onClick={updateCompany}
+                <IconButton
+                    className="card-button"
+                    color="blue"
+                    appearance='ghost'
+                    size='md'
+                    icon={<Edit />}
+                    onClick={updateCompany}
                 >
                     Edit Company Details
                 </IconButton>
-                </ButtonToolbar>
-                {/* <button onClick={() => deleteCompany(company.id)}>Delete Company</button>
-                <button onClick={updateCompany}>Update Company Details</button> */}
-                <div className="profile-details">
-                    <div className="pd-left">
-                        <div className="pd-row">
-                            <div className="image-div">
-                                <img className='pd-image' src={company.logoUrl} alt={company.name}></img>
+            </ButtonToolbar>
+
+            <div className="profile-details">
+                <div className="pd-left">
+                    <div className="pd-row">
+                        <div className="image-div">
+                            {!company.logoUrl ?
+                                <img className='pd-image' src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={company.name}></img>
+                                : <img className='pd-image' src={company.logoUrl} alt={company.name}></img>}
+                            <div className="a-tag-div">
                                 <a className="materials-icons" href={company.linkedin_regularCompanyUrl} target="_blank"><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></a>
                                 <a className="materials-icons" href={company.hq_email}><FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon></a>
                                 <a className="materials-icons" href={company.hq_phone}><FontAwesomeIcon icon={faPhone}></FontAwesomeIcon></a>
                             </div>
-                            <div>
-                                <h3>{company.name}</h3>
-                                <h4>{<a href={company.website} target="_blank">{company.website}</a>}</h4>
-                            </div>
-                            <div className="left-body">
-                                <h4>Company Owner: {company.owner_name}</h4>
-                                <h4>Company Owner ID: {company.user_id}</h4>
-                                <details>
-                                    <summary>Company Description</summary>
-                                    <p>Description: {company.description}</p>
-                                </details>
+                            <div className="modal-div">
+                                {!company.description ? null : <DescriptionModal company={company} />}
+
                             </div>
                         </div>
+                        <div className="general-info">
+                            <h3>{company.name}</h3>
+                            <h4>{<a href={company.website} target="_blank">{company.website}</a>}</h4>
+                            <h4>Company Owner: {company.owner_name}</h4>
+                        </div>
                     </div>
-                        <div className="pd-mid">
-                        <form className="note-form">
-                            <button onClick={handleAddNote} className="note-button">
-                                <span className="note_button_icon">
-                                    <FontAwesomeIcon icon={faPencil}></FontAwesomeIcon>
-                                </span>
-                                <span className="note_button_text">Add Note</span>
-                            </button>
-                            <textarea placeholder=" write note..." className="note-input" value={newNote} onChange={(e) => setNewNote(e.target.value)}/>
-                        </form>
-                            <h2>Notes</h2>
-                            <hr></hr>
-                            <div className="notes">
-                                {notes?.map((note) => {
-                                return (
+                </div>
+                <div className="pd-mid">
+                    <Form
+                        ref={formRef}
+                        model={model}
+                        formValue={formValue}
+                        onChange={formValue => setFormValue(formValue)}
+                        onSubmit={formClick}
+                        style={{ margin: 10 }}
+                        fluid
+                    >
+
+                        <Form.Group controlId="textarea">
+                            <Form.ControlLabel>Note</Form.ControlLabel>
+                            <Form.Control name="textarea" rows={10} accepter={Textarea} placeholder="write note..." ></Form.Control>
+                        </Form.Group>
+                        <ButtonToolbar>
+                            <Whisper
+                                placement="right"
+                                trigger="active"
+                                speaker={<Popover arrow={false}>Clicked</Popover>}>
+                                <Button appearance='ghost' type='submit' >
+                                    Submit
+                                </Button>
+                            </Whisper>
+                        </ButtonToolbar>
+                    </Form>
+                    <h2>Notes</h2>
+                    <hr></hr>
+                    <div className="notes">
+                        {notes?.map((note) => {
+                            return (
                                 <div key={note.id} className="note-div">
                                     {/* <p className="note-timestamp">{`${note.created_at.substring(0, 10)} | ${note.user_name}`}</p> */}
                                     <p className="note-timestamp">{`${Moment(note.created_at).format('MMMM DD, LT')} | ${note.user_name}`}</p>
                                     <p className="note">{note.content}</p>
                                 </div>
-                                )
-                            })}
-
-                            </div>
-                            <div className="notes">
-                                <div className="note-div">
-                                    <p className="note-timestamp">jan 12, 2022, 3PM | Alex</p>
-                                    <p className="note">Here's a note for you!</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="pd-right">
-                            <h3>More Info</h3>
-                            <div className="pd-row">
-                                <details className="company-products">
-                                    <summary>Company Products</summary>
-
-                                    {company.products?.map((product) => {
-                                            return (
-                                                <li key={product.id} onClick={() => handleProductClick(product.id)}>{product.name}</li>
-                                            )
-                                        })}
-                                </details>
-
-                                <details className="colleagues">
-                                    <summary>Contacts at Company</summary>
-
-                                    {company.contacts?.map((contact) => {
-                                            return (
-                                                <li key={contact.id} onClick={() => handleContactClick(contact.id)}>{contact.name}</li>
-                                            )
-                                        })}
-                                </details>
-                            </div>
-                        </div>
-                        {isEditClicked ? <EditCompany id={id} fetchCompany={fetchCompany}/> : null}
+                            )
+                        })}
+                    </div>
                 </div>
+                <div className="pd-right">
+                    <h3>More</h3>
+                    <div className="pd-row">
+                    <CompProductsDrawer company={company} handleProductClick={handleProductClick}/>
+                    <CompContactsDrawer company={company} handleContactClick={handleContactClick}/>
+                    </div>
+                </div>
+                {isEditClicked ? <EditCompany id={id} fetchCompany={fetchCompany} /> : null}
+            </div>
 
 
 

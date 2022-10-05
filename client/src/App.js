@@ -43,7 +43,7 @@ function App() {
   const dispatch = useDispatch()
 
   const conBlackList = ['real_company_name', 'owner_name', 'twitter_url', 'image_url', 'user_id', 'company_id', 'company_products']
-  const compBlackList = ['owner_name', 'description', 'hq_email', 'hq_address_line_2', 'hq_address_line_1', 'primary_contact_pbid', 'verticals', 'linkedin_regularCompanyUrl', 'year_founded', 'employees', 'linkedin_company_id', 'logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
+  const compBlackList = ['owner_name', 'hq_email', 'hq_address_line_2', 'hq_address_line_1', 'primary_contact_pbid', 'verticals', 'year_founded', 'employees', 'linkedin_company_id', 'logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
   const prodBlackList = ['price_sign', 'image_link', 'api_featured_image', 'input_company_name']
 
   const [toggleMode, setToggleMode] = useState(localStorage.getItem("toggle-mode") === 'true')
@@ -146,11 +146,16 @@ function App() {
                   icon={toggleMode ? <Visible /> : <Unvisible />}>{toggleMode ? "Light Mode" : "Dark Mode"}</IconButton>
                 </ButtonToolbar>
               </Nav.Item>
-              <Nav.Item icon={<Others/>}>
-                Support
+              <Nav.Item icon={<Peoples/>}>
+                Users
               </Nav.Item>
-              <Nav.Item icon={<Others/>}>
-                Billing
+              <Nav.Item 
+                as={NavLink} 
+                children={<Profile />}
+                href="/profile"
+                icon={<UserBadge/>}
+                >
+                My Account
               </Nav.Item>
               <Nav.Item
                   as={NavLink} 
@@ -181,7 +186,6 @@ function App() {
                   </IconButton>
                 </ButtonToolbar>
               </Nav.Item>
-              
               </Nav.Menu>
               {/* <Badge content="69">
                 <Avatar size="md" src="https://media-exp1.licdn.com/dms/image/C5103AQFOvyuxg-C8lA/profile-displayphoto-shrink_200_200/0/1517234384465?e=1669852800&v=beta&t=qGk8v75g1irvfxW8at7Tm3BgrwcOzFYtNXorqr1aWVY" alt="@will" />

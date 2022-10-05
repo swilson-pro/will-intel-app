@@ -10,8 +10,6 @@ const Login = () => {
 
     const user = useSelector((state) => state.user);
 
-    console.log('user',user)
-
     let navigate = useNavigate()
 
     const dispatch = useDispatch()

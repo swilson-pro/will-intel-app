@@ -69,8 +69,6 @@ const ContactCard = () => {
         backToContacts()
     }
 
-
-
     const backToContacts = () => {
         navigate(`/contacts`)
     }
@@ -148,10 +146,8 @@ const ContactCard = () => {
         textarea: ''
     };
 
-
-
     return (
-        <div className="contact-card">
+        <div className="card">
             <ButtonToolbar>
                 <IconButton
                     className="card-button"
@@ -178,41 +174,25 @@ const ContactCard = () => {
                 <div className="pd-left">
                     <div className="pd-row">
                         <div className="image-div">
-                            <img className='pd-image' src={contact.image_url} alt={contact.name}></img>
+                            {!contact.image_url ? 
+                            <img className='pd-image' src={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`} alt={contact.name}></img> 
+                            : <img className='pd-image' src={contact.image_url} alt={contact.name}></img>}
+                            
                             <div className="a-tag-div">
                                 <a className="materials-icons" href={contact.email}><FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon></a>
                                 <a className="materials-icons" href={contact.phone}><FontAwesomeIcon icon={faPhone}></FontAwesomeIcon></a>
                                 <a className="materials-icons" href={contact.linkedin_profile_url} target="_blank"><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></a>
                             </div>
-                            <div className="bio-modal-div">
-                            <BioModal contact={contact} />
+                            <div className="modal-div">
+                                {!contact.bio ? null : <BioModal contact={contact} /> }
+                            
                             </div>
                         </div>
                         <div className="general-info">
                             <h3 className="contact-name">{contact.name}</h3>
                             <h4 className="contact-position">{contact.position}</h4>
                             <h4 className="contact-company" onClick={() => handleCompanyClick(contact.company_id)}>{contact.real_company_name}</h4>
-                            
-                            {/* <h4 className="company-id">Company ID: {contact.company_id}</h4> */}
-
-                        </div>
-                        {/* <hr></hr> */}
-                        <div className="left-body">
-
-                            {/* <h4>Email: {contact.email}</h4> */}
-
-                            {/* <h4>Phone: {contact.phone}</h4> */}
-
                             <h4>Contact Owner: {contact.owner_name}</h4>
-                            <h4>Contact Owner ID: {contact.user_id}</h4>
-                            {/* <h4>Company: {contact.company_name}</h4> */}
-                            {/* <h4>Position:{contact.position}</h4> */}
-                            {/* <details>
-                                <summary>Bio</summary>
-                                <p>{contact.bio}</p>
-                            </details> */}
-                            {/* <p>{contact.bio}</p> */}
-                            
                         </div>
 
                     </div>
@@ -277,9 +257,8 @@ const ContactCard = () => {
                 <div className="pd-right">
                     <h3>Organization</h3>
                     <div className="pd-row">
-
-
-                        <img onClick={() => handleCompanyClick(contact.company_id)} className="contact-company-logo" src={contact.company_logo} alt={contact.real_company_name}></img>
+                    {!contact.company_logo ? <img onClick={() => handleCompanyClick(contact.company_id)} className="contact-company-logo" src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={contact.real_company_name}></img>
+                     : <img onClick={() => handleCompanyClick(contact.company_id)} className="contact-company-logo" src={contact.company_logo} alt={contact.real_company_name}></img>}
                         <div className="company-name">
                             <span>
                                 <FontAwesomeIcon className="span-icon" icon={faBuilding}></FontAwesomeIcon>

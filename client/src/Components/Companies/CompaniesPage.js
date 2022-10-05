@@ -7,9 +7,6 @@ import 'rsuite/dist/rsuite.min.css'
 import '../../Style/CompaniesTable.css'
 
 
-
-
-
 // import 'rsuite/styles/index.less';
 // import 'custom-theme.less';
 
@@ -32,20 +29,12 @@ const CompaniesPage = ({compBlackList}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
-    const [sortField, setSortField] = useState('name')
+    const [sortField, setSortField] = useState('description')
     const [order, setOrder] = useState('')
-
-
-
-
-
 
     const [page, setPage] = useState(1)
 
     const [pageCount, setPageCount] = useState();
-
-
-
 
     useEffect(() => {
         getCompaniesForPage(page, sortField, order)
@@ -53,25 +42,17 @@ const CompaniesPage = ({compBlackList}) => {
 
 
     const getCompaniesForPage = async (page) => {
-        // console.log('page', page)
-        // console.log('order', order)
-        // console.log('sortField', sortField)
+
         const res = await fetch(`http://localhost:3000/companies_paginated/${page}?${sortField}=${order}`)
         const companiesPageData = await res.json()
-        // console.log('companiesPageData', companiesPageData)
-
 
         const companiesDataArray = companiesPageData.companies
-        // console.log('companiesDataArray', companiesDataArray)
         const pagina = companiesPageData.page
-        // console.log('pagina', pagina)
         const paginaCuenta = companiesPageData.page_count
         setPageCount(paginaCuenta)
-        // console.log('paginaCuenta', paginaCuenta)
 
 
         let pObjKeys = Object.keys(companiesDataArray[0])
-        // console.log('pObjKeys', pObjKeys)
 
         let pDisplayKeys = pObjKeys.filter((item) => !compBlackList.includes(item))
 
@@ -84,54 +65,8 @@ const CompaniesPage = ({compBlackList}) => {
         setKeyArray(pDisplayKeys)
         setCompanies(pDisplayCompanies)
 
-        // console.log('pDisplayKeys', pDisplayKeys)
-        // console.log('pDisplayCompanies', pDisplayCompanies)
 
     }
-
-
-    
-
-
-
-    // const fetchCompanies = async () => {
-    //     const response = await fetch(`http://localhost:3000/companies`)
-    //     const companiesArray = await response.json()
-
-    //     let objKeys = Object.keys(companiesArray[0])
-
-    //     let displayKeys = objKeys.filter((item) => !compBlackList.includes(item))
-
-    //     companiesArray.map(objectElement => {
-    //         compBlackList.map((element) => delete objectElement[element])
-    //     })
-
-    //     let displayCompanies = companiesArray.filter((item) => !compBlackList.includes(item))
-
-    //     if (owner == "All") {
-    //         setCompanies(displayCompanies)
-    //     } else setCompanies(displayCompanies.filter(company => company.owner_name == owner))
-
-
-    //     setKeyArray(displayKeys)
-    // }
-
-    // const newDisplayedCompanies = companies.filter(company => {
-    //     return company.name.toLowerCase().includes(searchTerm.toLowerCase())
-    // })
-
-    // const fetchOwnerNames = async () => {
-    //     const response = await fetch(`http://localhost:3000/users_names`)
-    //     const ownersNamesArray = await response.json()
-    //     setOwnersNames(ownersNamesArray)
-    // }
-
-    // useEffect(() => {
-    //     fetchCompanies()
-    //     fetchOwnerNames()
-    // }, [owner])
-
-
 
     let formatter = (str) => {
         let arr = str.split('')
@@ -155,17 +90,6 @@ const CompaniesPage = ({compBlackList}) => {
     const handleSorting = (sortField, sortOrder) => {
         console.log('sortField, sortOrder', sortField, sortOrder)
 
-
-        // if (sortField) {
-        //     const sorted = [...companies].sort((a,b) => {
-        //         return (
-        //             a[sortField]?.toString().localeCompare(b[sortField]?.toString(), 'en', {
-        //                 numeric: true,
-        //             }) * (sortOrder === 'asc' ? 1 : -1)
-        //         )
-        //     })
-        //     setCompanies(sorted)
-        // }
     }
 
     console.log('companies', companies)
@@ -196,10 +120,7 @@ const CompaniesPage = ({compBlackList}) => {
         setOwner(e.target.value)
     }
 
-
     const handleClick = (rowData) => {
-        console.log('rowData', rowData)
-        console.log('rowData.id', rowData.id)
         navigate(`/companies/${rowData.id}`)
     }
 

@@ -17,7 +17,6 @@ const NavBar = () => {
                     <input type='text' />
                     {/* <FontAwesomeIcon icon={faYoutube}></FontAwesomeIcon> */}
                     {/* <FontAwesomeIcon icon={faGithub}></FontAwesomeIcon> */}
-
                 </div>
             </div>
             <div className='header_right'>
