@@ -110,7 +110,6 @@ const Profile = () => {
                             <p className='user-stats' onClick={() => navigate('/companies')}>Companies: {userCompanyCount}</p>
                             <p className='user-stats' onClick={() => navigate('/products')}>Products: {userProductCount}</p>
                             <p className='user-stats not-available' >Notes: {userNoteCount}</p>
-                            <p className='user-stats not-available' >Users: {userCount}</p>
                         </div>
                     </div>
                 </div>

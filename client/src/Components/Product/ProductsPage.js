@@ -22,7 +22,7 @@ const ProductsPage = ({prodBlackList}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
-    const [sortField, setSortField] = useState('name')
+    const [sortField, setSortField] = useState('description')
     const [order, setOrder] = useState('asc')
 
 
@@ -176,7 +176,7 @@ const ProductsPage = ({prodBlackList}) => {
 
     return (
         <main className="main">
-            <h1>Products</h1>
+            {/* <h1 className='page-header'>Products</h1> */}
             {/* <NavLink className='new-product-navlink' to='/products/new' >
                 <button className='new-product'>Add Product</button></NavLink> */}
             {/* <div className="filter">

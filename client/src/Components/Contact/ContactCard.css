@@ -283,6 +283,14 @@ margin: 1rem;
 }
 
 .company-aggregates {
+    /* border: solid;
+    max-width: 30vw;
+    margin-left: 5vw; */
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
 }
 
 .user-stats {

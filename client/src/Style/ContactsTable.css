@@ -38,6 +38,11 @@
 .table {
     cursor:pointer;
 }
+
+.page-header{
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
 /* 
 .contacts-table thead tr {
     background-color: #009879;

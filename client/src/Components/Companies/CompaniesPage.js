@@ -31,7 +31,7 @@ const CompaniesPage = ({compBlackList}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
-    const [sortField, setSortField] = useState('description')
+    const [sortField, setSortField] = useState('hq_city')
     const [order, setOrder] = useState('')
 
     const [page, setPage] = useState(1)
@@ -129,7 +129,7 @@ const CompaniesPage = ({compBlackList}) => {
 
     return(
         <main className="main">
-            <h1>Companies</h1>
+            {/* <h1 className='page-header'>Companies</h1> */}
             {/* <NavLink className='new-company-navlink' to='/companies/new' >
                 <IconButton icon={<PlusIcon />}>Add New Company</IconButton>
             </NavLink> */}

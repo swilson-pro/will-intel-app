@@ -151,7 +151,7 @@ const ContactsPage = ({conBlackList}) => {
                     </button>
                 
             </NavLink> */}
-            <h1>Contacts</h1>
+            {/* <h1 className='page-header'>Contacts</h1> */}
 
             
             </div>

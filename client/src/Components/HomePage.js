@@ -63,7 +63,7 @@ const HomePage = () => {
         <main>
 
             <div className="company-aggregates">
-                <h3 className="user-stats">User Details</h3>
+                <h3 className="user-stats">HomePage</h3>
                     <p className="user-stats">{user.profile.first_name} {user.profile.last_name}</p>
                     <p className="user-stats">Email: {user.profile.email} </p>
                 <h3 className="user-stats">Company Stats</h3>
