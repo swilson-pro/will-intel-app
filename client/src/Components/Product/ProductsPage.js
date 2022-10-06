@@ -70,7 +70,7 @@ const ProductsPage = ({prodBlackList}) => {
 
         setKeyArray(pDisplayKeys)
         setProducts(pDisplayProducts)
-        setLoading(!loading)
+        setLoading(false)
 
         console.log('pDisplayKeys', pDisplayKeys)
         console.log('pDisplayProducts', pDisplayProducts)

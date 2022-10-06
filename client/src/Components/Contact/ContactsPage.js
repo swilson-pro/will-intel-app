@@ -44,37 +44,39 @@ const ContactsPage = ({conBlackList}) => {
 
     const getContactsForPage = async (page) => {
         // console.log('page', page)
-        const res = await fetch(`http://localhost:3000/contacts_paginated/${page}?${sortField}=${order}`)
-        const contactsPageData = await res.json()
+        setLoading(true)
+        fetch(`http://localhost:3000/contacts_paginated/${page}?${sortField}=${order}`)
+        .then(resp=> resp.json())
+        .then(data=>{
+            const contactsDataArray = data.contacts
+            // console.log('contactsDataArray', contactsDataArray)
+            const pagina = data.page
+            // console.log('pagina', pagina)
+            const paginaCuenta = data.page_count
+            setPageCount(paginaCuenta)
+            console.log('paginaCuenta', paginaCuenta)
+            
+            let objKeys = Object.keys(contactsDataArray[0])
+            // console.log('objKeys', objKeys)
+            
+            let displayKeys = objKeys.filter((item) => !conBlackList.includes(item))
+            
+            contactsDataArray.map(objectElement => {
+                conBlackList.map((element) => delete objectElement[element])
+            })
+            
+            let displayContacts = contactsDataArray.filter((item) => !conBlackList.includes(item))
+            setKeyArray(displayKeys)
+            setContacts(displayContacts)
+            setLoading(false)
+        })
         // console.log('contactsPageData', contactsPageData)
 
 
-        const contactsDataArray = contactsPageData.contacts
-        // console.log('contactsDataArray', contactsDataArray)
-        const pagina = contactsPageData.page
-        // console.log('pagina', pagina)
-        const paginaCuenta = contactsPageData.page_count
-        setPageCount(paginaCuenta)
-        console.log('paginaCuenta', paginaCuenta)
-
-        let objKeys = Object.keys(contactsDataArray[0])
-        // console.log('objKeys', objKeys)
-
-        let displayKeys = objKeys.filter((item) => !conBlackList.includes(item))
-
-        contactsDataArray.map(objectElement => {
-            conBlackList.map((element) => delete objectElement[element])
-        })
-
-        let displayContacts = contactsDataArray.filter((item) => !conBlackList.includes(item))
 
 
         // console.log('displayKeys', displayKeys)
         // console.log('displayContacts', displayContacts)
-
-        setKeyArray(displayKeys)
-        setContacts(displayContacts)
-        setLoading(!loading)
 
 
     }

@@ -66,7 +66,7 @@ const CompaniesPage = ({compBlackList}) => {
 
         setKeyArray(pDisplayKeys)
         setCompanies(pDisplayCompanies)
-        setLoading(!loading)
+        setLoading(false)
 
 
     }
