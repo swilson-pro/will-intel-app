@@ -17,6 +17,10 @@ import { SchemaModel, StringType } from "schema-typed"
 
 import ProductDescriptionModal from "./ProductDescriptionModal";
 
+import ProdContactsDrawer from "./ProdContactsDrawer";
+import OtherProductsDrawer from "./OtherProductsDrawer";
+
+
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
 const ProductCard = () => {
@@ -38,6 +42,8 @@ const ProductCard = () => {
     const [notes, setNotes] = useState([])
     const [newNote, setNewNote] = useState("")
 
+    const [company, setCompany] = useState({})
+
     const fetchProduct = async () => {
         const response = await fetch(`http://localhost:3000/products/${id}`)
         const productObj = await response.json()
@@ -46,9 +52,22 @@ const ProductCard = () => {
         setNotes(reverseOrderNotes)
     }
 
+    const fetchCompany = async () => {
+        const response = await fetch(`http://localhost:3000/companies/${product.company_id}`)
+        const companyObj = await response.json()
+        setCompany(companyObj)
+    }
+
+    console.log('product.company_id', product.company_id)
+    console.log('company', company)
+
     useEffect(() => {
         fetchProduct()
     }, [])
+
+    useEffect(() => {
+        fetchCompany()
+    }, [product])
 
     const updateProduct = async () => {
         setIsEditClicked(!isEditClicked)
@@ -158,6 +177,7 @@ const ProductCard = () => {
                     Edit Product
                 </IconButton>
             </ButtonToolbar>
+            <h5 className="card-header">Product</h5>
             <div className="profile-details">
                 <div className="pd-left">
                     <div className="pd-row">
@@ -178,13 +198,14 @@ const ProductCard = () => {
                             <h3>{product.name}</h3>
                             <h3>Brand: {product.brand}</h3>
                             <h4><a href={product.website} target="_blank">{product.website}</a></h4>
-                            <h3 onClick={() => handleCompanyClick(product.company_id)}>{product.company_name}</h3>
+                            <h3 className="company-name" onClick={() => handleCompanyClick(product.company_id)}>{product.company_name}</h3>
                         </div>
                     </div>
                     <hr></hr>
                     {isEditClicked ? <EditProduct id={id} fetchProduct={fetchProduct} /> : null}
                 </div>
                 <div className="pd-mid">
+                    
                     <Form
                         ref={formRef}
                         model={model}
@@ -232,22 +253,23 @@ const ProductCard = () => {
                 <div className="pd-right">
                     <h3>More Info</h3>
                     <div className="pd-row">
-                        <img onClick={() => handleCompanyClick(product.company_id)} className="product-company-logo" src={product.company_logo} alt={product.company_name}></img>
-                        <details className="colleagues">
-                            <summary>Associated Contacts</summary>
-                            {product.company_contacts?.map((contact) => {
-                                return <li key={contact.id} onClick={() => handleContactClick(contact.id)}>{contact.name}</li>
-                            })}
-                        </details>
-                        <details className="company-products">
-                            <summary>Other Products from this company</summary>
+                    {!product.company_logo ? <img onClick={() => handleCompanyClick(product.company_id)} className="company-logo" src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={product.company_name}></img>
+                     : <img onClick={() => handleCompanyClick(product.company_id)} className="company-logo" src={product.company_logo} alt={product.company_name}></img>}
+                        <div className="company-name">
+                            <span>
+                                <FontAwesomeIcon className="span-icon" icon={faBuilding}></FontAwesomeIcon>
+                            </span>
+                            <span>
+                                <p className="span-content" onClick={() => handleCompanyClick(product.company_id)}>{product.company_name}</p>
+                            </span>
 
-                            {product.company_products?.filter(item => item.id !== product.id).map(filteredProduct => {
-                                return (
-                                    <li key={filteredProduct.id} onClick={() => handleProductClick(filteredProduct.id)}>{filteredProduct.name}</li>
-                                )
-                            })}
-                        </details>
+                        </div>
+
+                        
+                        <ProdContactsDrawer company={company} handleContactClick={handleContactClick}/>
+
+                        <OtherProductsDrawer product={product} handleProductClick={handleProductClick} />
+
                     </div>
                 </div>
 

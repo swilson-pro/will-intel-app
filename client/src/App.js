@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import HomePage from './Components/HomePage';
 import NavBar from './NavBar';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 
@@ -31,13 +31,13 @@ import { useEffect, useState, forwardRef } from 'react';
 
 import 'rsuite/dist/rsuite.min.css'
 
-import {Button, ButtonToolbar, IconButton, CustomProvider, Navbar, Nav, Container, Header, Content, Footer, List, FlexboxGrid, Col, Avatar, Badge} from 'rsuite'
+import { Button, ButtonToolbar, IconButton, CustomProvider, Navbar, Nav, Container, Header, Content, Footer, List, FlexboxGrid, Col, Avatar, Badge } from 'rsuite'
 
-import {Visible, Unvisible, Others, UserBadge, Plus, userTimes, Minus, Site, Peoples, PeoplesCostomize, Storage, Gear} from '@rsuite/icons'
+import { Visible, Unvisible, Others, UserBadge, Plus, userTimes, Minus, Site, Peoples, PeoplesCostomize, Storage, Gear } from '@rsuite/icons'
 
 
-import {setUser, logout} from './features/user/user'
-import {useSelector, useDispatch} from 'react-redux'
+import { setUser, logout } from './features/user/user'
+import { useSelector, useDispatch } from 'react-redux'
 
 function App() {
 
@@ -71,45 +71,45 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <CustomProvider theme={toggleMode ? "dark" : "light"}>
-        <Container style={{minHeight: "100vh"}}>
-          
-          <Header className="header" style={{
-    display: 'flex', width: 3000, paddingLeft: 30, height: 70, fontSize: 20
-    }}>
-          <Navbar appearance='default'>
-            <Navbar.Brand className="brand">Carlson</Navbar.Brand>
-            <Nav>
-                <Nav.Item 
-                as={NavLink} 
-                children={<HomePage />} 
-                href="/"
-                icon={<Site/>}>
-                  Home
-                </Nav.Item>
-              <Nav.Item 
-                as={NavLink} 
-                children={<ContactsPage />} 
-                href="/contacts" 
-                icon={<UserBadge/>}>
-                Contacts
-              </Nav.Item>
-              <Nav.Item 
-                as={NavLink} 
-                children={<HomePage />} 
-                href="/companies"
-                icon={<PeoplesCostomize/>}>
-                Companies
-              </Nav.Item>
-              <Nav.Item 
-                as={NavLink} 
-                children={<HomePage />} 
-                href="/products"
-                icon={<Storage/>}>
-                Products
-              </Nav.Item>
-            </Nav>
-            {/* <Nav pullRight>
+        <CustomProvider theme={toggleMode ? "dark" : "light"}>
+          <Container style={{ minHeight: "100vh" }}>
+
+            <Header className="header" style={{
+              display: 'flex', width: 3000, paddingLeft: 30, height: 70, fontSize: 20
+            }}>
+              <Navbar appearance='default'>
+                <Navbar.Brand className="brand">Carlson</Navbar.Brand>
+                <Nav>
+                  <Nav.Item
+                    as={NavLink}
+                    children={<HomePage />}
+                    href="/"
+                    icon={<Site />}>
+                    Home
+                  </Nav.Item>
+                  <Nav.Item
+                    as={NavLink}
+                    children={<ContactsPage />}
+                    href="/contacts"
+                    icon={<UserBadge />}>
+                    Contacts
+                  </Nav.Item>
+                  <Nav.Item
+                    as={NavLink}
+                    children={<HomePage />}
+                    href="/companies"
+                    icon={<PeoplesCostomize />}>
+                    Companies
+                  </Nav.Item>
+                  <Nav.Item
+                    as={NavLink}
+                    children={<HomePage />}
+                    href="/products"
+                    icon={<Storage />}>
+                    Products
+                  </Nav.Item>
+                </Nav>
+                {/* <Nav pullRight>
               <Nav.Item>
                 <ButtonToolbar>
                   <IconButton onClick={toggleModeFunc} 
@@ -120,167 +120,204 @@ function App() {
                 </ButtonToolbar>
               </Nav.Item>
             </Nav> */}
-            <Nav pullRight>
-              <Nav.Menu title="Add New" icon={<Plus/>} >
-                <Nav.Item 
-                  as={NavLink}
-                  children={<NewContact />} 
-                  href="/contacts/new"
-                  icon={<UserBadge/>}>
-                  Contact
-                </Nav.Item>
-                <Nav.Item
-                  as={NavLink} 
-                  children={<NewCompany />} 
-                  href="/companies/new"
-                  icon={<PeoplesCostomize/>}>
-                  Company
-                </Nav.Item>
-                <Nav.Item 
-                  as={NavLink} 
-                  children={<NewProduct />}
-                  href="/products/new"
-                  icon={<Storage/>}>
-                  Product
-                </Nav.Item>
-              </Nav.Menu>
-            </Nav>
-            <Nav pullRight>
-              <Nav.Menu title="Settings" icon={<Gear/>}>
-              <Nav.Item>
-                <ButtonToolbar>
-                  <IconButton onClick={toggleModeFunc} 
-                  color="red" 
-                  appearance='ghost' 
-                  size='lg' 
-                  icon={toggleMode ? <Visible /> : <Unvisible />}>{toggleMode ? "Light Mode" : "Dark Mode"}</IconButton>
-                </ButtonToolbar>
-              </Nav.Item>
-              <Nav.Item icon={<Peoples/>}>
-                Users
-              </Nav.Item>
-              <Nav.Item 
-                as={NavLink} 
-                children={<Profile />}
-                href="/profile"
-                icon={<UserBadge/>}
-                >
-                My Account
-              </Nav.Item>
-              <Nav.Item
-                  as={NavLink} 
-                  children={<Login />} 
-                  href="/login"
-                  icon={<UserBadge/>}>
-                  Login
-              </Nav.Item>
-              <Nav.Item
-                  as={NavLink} 
-                  children={<NewUser />} 
-                  href="/newuser"
-                  icon={<UserBadge/>}>
-                  Create Account
-              </Nav.Item>
-              <Nav.Item>
-                <ButtonToolbar>
-                  <IconButton
-                    onClick={() => {
-                      localStorage.clear();
-                      dispatch(logout())
-                  }}
-                    appearance='ghost'
-                    size='xs'
-                    icon={<Minus />}
+                <Nav pullRight>
+                  <Nav.Menu title="Add New" icon={<Plus />} >
+                    <Nav.Item
+                      as={NavLink}
+                      children={<NewContact />}
+                      href="/contacts/new"
+                      icon={<UserBadge />}>
+                      Contact
+                    </Nav.Item>
+                    <Nav.Item
+                      as={NavLink}
+                      children={<NewCompany />}
+                      href="/companies/new"
+                      icon={<PeoplesCostomize />}>
+                      Company
+                    </Nav.Item>
+                    <Nav.Item
+                      as={NavLink}
+                      children={<NewProduct />}
+                      href="/products/new"
+                      icon={<Storage />}>
+                      Product
+                    </Nav.Item>
+                  </Nav.Menu>
+                </Nav>
+                <Nav pullRight>
+                  <Nav.Menu title="Settings" icon={<Gear />}>
+                    <Nav.Item>
+                      <ButtonToolbar>
+                        <IconButton onClick={toggleModeFunc}
+                          color="red"
+                          appearance='ghost'
+                          size='lg'
+                          icon={toggleMode ? <Visible /> : <Unvisible />}>{toggleMode ? "Light Mode" : "Dark Mode"}</IconButton>
+                      </ButtonToolbar>
+                    </Nav.Item>
+                    <Nav.Item icon={<Peoples />}>
+                      Users
+                    </Nav.Item>
+                    <Nav.Item
+                      as={NavLink}
+                      children={<Profile />}
+                      href="/profile"
+                      icon={<UserBadge />}
                     >
-                      Log out
-                  </IconButton>
-                </ButtonToolbar>
-              </Nav.Item>
-              </Nav.Menu>
-              {/* <Badge content="69">
+                      My Account
+                    </Nav.Item>
+                    <Nav.Item
+                      as={NavLink}
+                      children={<Login />}
+                      href="/login"
+                      icon={<UserBadge />}>
+                      Login
+                    </Nav.Item>
+                    <Nav.Item
+                      as={NavLink}
+                      children={<NewUser />}
+                      href="/newuser"
+                      icon={<UserBadge />}>
+                      Create Account
+                    </Nav.Item>
+                    <Nav.Item>
+                      <ButtonToolbar>
+                        <IconButton
+                          onClick={() => {
+                            localStorage.clear();
+                            dispatch(logout())
+                          }}
+                          appearance='ghost'
+                          size='xs'
+                          icon={<Minus />}
+                        >
+                          Log out
+                        </IconButton>
+                      </ButtonToolbar>
+                    </Nav.Item>
+                  </Nav.Menu>
+                  {/* <Badge content="69">
                 <Avatar size="md" src="https://media-exp1.licdn.com/dms/image/C5103AQFOvyuxg-C8lA/profile-displayphoto-shrink_200_200/0/1517234384465?e=1669852800&v=beta&t=qGk8v75g1irvfxW8at7Tm3BgrwcOzFYtNXorqr1aWVY" alt="@will" />
               </Badge> */}
 
-            </Nav>
-            {/* <Avatar circle style={{backgroundColor: "orange", fontSize: 14}}>
+                </Nav>
+                {/* <Avatar circle style={{backgroundColor: "orange", fontSize: 14}}>
                   Sam
             </Avatar> */}
 
 
-            <Nav pullRight>
+                <Nav pullRight>
 
-              { user ? <Navbar.Brand className="user">{user.profile.email}</Navbar.Brand> : <Navbar.Brand className="user">Logged Out</Navbar.Brand>}
-              {/* <Navbar.Brand className="user">{user.profile.email}</Navbar.Brand> */}
-              
-            </Nav>
-          </Navbar>
-          </Header>
-          {/* <NavBar /> */}
-          <Content>
-            <Routes>
-              <Route path='/contacts/new' element={
-                <PrivateRoute>
-                  <NewContact conBlackList={conBlackList} />
-                </PrivateRoute>
-            }
-               />
-              <Route path='/contacts/:id' element={
-                <PrivateRoute>
-                  <ContactCard conBlackList={conBlackList} />
-                </PrivateRoute>
-              } />
-              <Route path='/contacts' element={<ContactsPage conBlackList={conBlackList} />} />
-              <Route path='/companies/new' element={<NewCompany compBlackList={compBlackList} />} />
-              <Route path='/companies/:id' element={<CompanyCard />} />
-              <Route path='/companies' element={ <CompaniesPage compBlackList={compBlackList} /> } />
-              <Route path='/products/new' element={<NewProduct />} />
-              <Route path='/products/:id' element={<ProductCard />} />
-              <Route path='/products' element={ <ProductsPage prodBlackList={prodBlackList} />} />
+                  {user ? <Navbar.Brand className="user">{user.profile.email}</Navbar.Brand> : <Navbar.Brand className="user">Logged Out</Navbar.Brand>}
+                  {/* <Navbar.Brand className="user">{user.profile.email}</Navbar.Brand> */}
 
-              <Route path='/newuser' element={<NewUser />} />
-              <Route path='/login' element={<Login />} />
-              
+                </Nav>
+              </Navbar>
+            </Header>
+            {/* <NavBar /> */}
+            <Content>
+              <Routes>
+                <Route path='/contacts/new' element={
+                  <PrivateRoute>
+                    <NewContact conBlackList={conBlackList} />
+                  </PrivateRoute>
+                }
+                />
+                <Route path='/contacts/:id' element={
+                  <PrivateRoute>
+                    <ContactCard conBlackList={conBlackList} />
+                  </PrivateRoute>
+                } />
+                <Route path='/contacts' element={
+                  <PrivateRoute>
+                    <ContactsPage conBlackList={conBlackList} />
+                  </PrivateRoute>
+                } />
+                <Route path='/companies/new' element={
+                  <PrivateRoute>
+                    <NewCompany compBlackList={compBlackList} />
+                  </PrivateRoute>
+                } />
+                <Route path='/companies/:id' element={
+                  <PrivateRoute>
+                    <CompanyCard />
+                  </PrivateRoute>
+                } />
+                <Route path='/companies' element={
+                  <PrivateRoute>
+                    <CompaniesPage compBlackList={compBlackList} />
+                  </PrivateRoute>
+                } />
+                <Route path='/products/new' element={
+                  <PrivateRoute>
+                    <NewProduct />
+                  </PrivateRoute>
+                } />
+                <Route path='/products/:id' element={
+                  <PrivateRoute>
+                    <ProductCard />
+                  </PrivateRoute>
+                } />
+                <Route path='/products' element={
+                  <PrivateRoute>
+                    <ProductsPage prodBlackList={prodBlackList} />
+                  </PrivateRoute>
+                } />
+                <Route path='/profile' element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                } />
 
-              <Route path='/profile' element={<Profile />} />
-              
+                <Route path='/newuser' element={<NewUser />} />
+                <Route path='/login' element={<Login />} />
 
-              {/* <Route path='/initiatives' element={ <InitiativesPage />} /> */}
-              <Route exact path='/' element={ <HomePage />} />
-            </Routes>
-          </Content>
-          <Footer>
 
-            <List>
-              <FlexboxGrid justify='space-between'>
-                <FlexboxGrid.Item style={{ marginButton: 5, display: "flex", justifyContent: "center"}} as={Col} colspan={6}>
-                  <List>
-                    <h6>Lead Nectar</h6>
-                    <List.Item>New York</List.Item>
-                  </List>
-                </FlexboxGrid.Item>
-                <FlexboxGrid.Item style={{ marginButton: 5, display: "flex", justifyContent: "center"}} as={Col} colspan={6}>
-                <List>
-                    <h6>Legal Disclaimer</h6>
-                    <List.Item>Lisbon</List.Item>
-                  </List>
-                </FlexboxGrid.Item>
-                <FlexboxGrid.Item style={{ marginButton: 5, display: "flex", justifyContent: "center"}} as={Col} colspan={6}>
-                <List>
-                    <h6>Intel</h6>
-                    <List.Item>Tulum</List.Item>
-                  </List>
-                </FlexboxGrid.Item>
-              </FlexboxGrid>
-              <FlexboxGrid justify='center'>
-                <FlexboxGrid.Item>
-                  <p>
-                    All Rights Reserved
-                  </p>
-                </FlexboxGrid.Item>
-              </FlexboxGrid>
-            </List>
-          </Footer>
-        
+
+
+
+                {/* <Route path='/initiatives' element={ <InitiativesPage />} /> */}
+                <Route exact path='/' element={
+                  <PrivateRoute>
+                    <HomePage />
+                  </PrivateRoute>
+                } />
+              </Routes>
+            </Content>
+            <Footer>
+
+              <List>
+                <FlexboxGrid justify='space-between'>
+                  <FlexboxGrid.Item style={{ marginButton: 5, display: "flex", justifyContent: "center" }} as={Col} colspan={6}>
+                    <List>
+                      <h6>Lead Nectar</h6>
+                      <List.Item>New York</List.Item>
+                    </List>
+                  </FlexboxGrid.Item>
+                  <FlexboxGrid.Item style={{ marginButton: 5, display: "flex", justifyContent: "center" }} as={Col} colspan={6}>
+                    <List>
+                      <h6>Legal Disclaimer</h6>
+                      <List.Item>Lisbon</List.Item>
+                    </List>
+                  </FlexboxGrid.Item>
+                  <FlexboxGrid.Item style={{ marginButton: 5, display: "flex", justifyContent: "center" }} as={Col} colspan={6}>
+                    <List>
+                      <h6>Intel</h6>
+                      <List.Item>Tulum</List.Item>
+                    </List>
+                  </FlexboxGrid.Item>
+                </FlexboxGrid>
+                <FlexboxGrid justify='center'>
+                  <FlexboxGrid.Item>
+                    <p>
+                      All Rights Reserved
+                    </p>
+                  </FlexboxGrid.Item>
+                </FlexboxGrid>
+              </List>
+            </Footer>
+
           </Container>
         </CustomProvider>
       </BrowserRouter>

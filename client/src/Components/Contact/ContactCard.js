@@ -16,7 +16,7 @@ import Moment from 'moment';
 
 import { useSelector } from 'react-redux'
 
-import { Form, Input, Button, IconButton, ButtonToolbar, SelectPicker, Popover, Whisper } from 'rsuite'
+import { Form, Input, Button, IconButton, ButtonToolbar, Popover, Whisper } from 'rsuite'
 import { useRef, forwardRef } from "react"
 import { SchemaModel, StringType } from "schema-typed"
 
@@ -43,6 +43,8 @@ const ContactCard = () => {
 
     const [notes, setNotes] = useState([])
     const [newNote, setNewNote] = useState("")
+
+
 
     const fetchContact = async () => {
         const response = await fetch(`http://localhost:3000/contacts/${id}`)
@@ -171,13 +173,14 @@ const ContactCard = () => {
                         Edit Contact
                 </IconButton>
             </ButtonToolbar>
+            <h5 className="card-header">Contact</h5>
             <div className="profile-details">
                 <div className="pd-left">
                     <div className="pd-row">
                         <div className="image-div">
                             {!contact.image_url ? 
                             <img className='pd-image' src={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`} alt={contact.name}></img> 
-                            : <img className='pd-image' src={contact.image_url} alt={contact.name}></img>}
+                            : <img className='pd-image' src={contact.image_url} onError={(e) => (e.currentTarget.src = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png')} alt={contact.name}></img>}
                             
                             <div className="a-tag-div">
                                 <a className="materials-icons" href={contact.email}><FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon></a>
@@ -250,6 +253,7 @@ const ContactCard = () => {
                                     {/* <p className="note-timestamp">{`${note.created_at.substring(0, 10)} | ${note.user_name}`}</p> */}
                                     <p className="note-timestamp">{`${Moment(note.created_at).format('MMMM DD, LT')} | ${note.user_name}`}</p>
                                     <p className="note">{note.content}</p>
+                                    <button>delete</button>
                                 </div>
                             )
                         })}
@@ -258,8 +262,8 @@ const ContactCard = () => {
                 <div className="pd-right">
                     <h3>Organization</h3>
                     <div className="pd-row">
-                    {!contact.company_logo ? <img onClick={() => handleCompanyClick(contact.company_id)} className="contact-company-logo" src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={contact.real_company_name}></img>
-                     : <img onClick={() => handleCompanyClick(contact.company_id)} className="contact-company-logo" src={contact.company_logo} alt={contact.real_company_name}></img>}
+                    {!contact.company_logo ? <img onClick={() => handleCompanyClick(contact.company_id)} className="company-logo" src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={contact.real_company_name}></img>
+                     : <img onClick={() => handleCompanyClick(contact.company_id)} className="company-logo" src={contact.company_logo} onError={(e) => (e.currentTarget.src = `https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`)} alt={contact.real_company_name}></img>}
                         <div className="company-name">
                             <span>
                                 <FontAwesomeIcon className="span-icon" icon={faBuilding}></FontAwesomeIcon>

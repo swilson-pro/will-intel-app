@@ -16,6 +16,8 @@ import {useSelector} from 'react-redux'
 const {Column, HeaderCell, Cell} = Table
 
 
+
+
 const ContactsPage = ({conBlackList}) => {
 
     const user = useSelector((state) => state.user);
@@ -23,6 +25,8 @@ const ContactsPage = ({conBlackList}) => {
     console.log('user', user)
 
     let navigate = useNavigate()
+
+    const [loading, setLoading] = useState(true)
     
     const [contacts, setContacts] = useState([])
     const [keyArray, setKeyArray] = useState([])
@@ -70,6 +74,8 @@ const ContactsPage = ({conBlackList}) => {
 
         setKeyArray(displayKeys)
         setContacts(displayContacts)
+        setLoading(!loading)
+
 
     }
 
@@ -146,6 +152,7 @@ const ContactsPage = ({conBlackList}) => {
             </div>
 
             <Table 
+            loading={loading}
             className="table"
             showHeader={true}
             height={1000}

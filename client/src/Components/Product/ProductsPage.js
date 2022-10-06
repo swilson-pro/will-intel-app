@@ -12,6 +12,8 @@ const ProductsPage = ({prodBlackList}) => {
 
     let navigate = useNavigate()
 
+    const [loading, setLoading] = useState(true)
+
     const [ownersNames, setOwnersNames] = useState([])
     const [owner, setOwner] = useState([])
 
@@ -68,6 +70,7 @@ const ProductsPage = ({prodBlackList}) => {
 
         setKeyArray(pDisplayKeys)
         setProducts(pDisplayProducts)
+        setLoading(!loading)
 
         console.log('pDisplayKeys', pDisplayKeys)
         console.log('pDisplayProducts', pDisplayProducts)
@@ -195,6 +198,7 @@ const ProductsPage = ({prodBlackList}) => {
                 </div>
             </div> */}
             <Table
+            loading={loading}
             className="table"
             showHeader={true}
             height={1000}

@@ -25,6 +25,11 @@ Rails.application.routes.draw do
   delete '/contacts/:id', to: 'contacts#destroy'
 
   get '/users', to: 'users#index'
+  get '/usercontacts/:id', to: 'users#show_contacts'
+  get '/usercontactscount/:id', to: 'users#count_contacts'
+  get '/usercompaniescount/:id', to: 'users#count_companies'
+  get '/userproductscount/:id', to: 'users#count_products'
+  get '/usernotescount/:id', to: 'users#count_contacts'
   get '/users/:id', to: 'users#show'
   get '/users_names', to: 'users#shownames'
   post '/users', to: 'users#create'
@@ -51,6 +56,7 @@ Rails.application.routes.draw do
 
 
   get '/notes', to: 'notes#index'
+  get '/count_notes', to: 'notes#count'
   get '/notes/:id', to: 'notes#show'
   post '/notes', to: 'notes#create'
 end

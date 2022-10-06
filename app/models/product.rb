@@ -6,6 +6,10 @@ class Product < ApplicationRecord
         company.name
     end
 
+    def company_logo
+        company.logoUrl
+    end
+
     def owner_name
         company.user.name
     end

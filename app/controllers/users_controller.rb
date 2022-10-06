@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     # POST /users
 
     def create
-        user = User.create!(name:params[:name], email:params[:email], password:params[:password])
+        user = User.create!(first_name: params[:first_name], last_name: params[:last_name], name:params[:name], email:params[:email], password:params[:password], image:params[:image])
         render json: user
     end
 
@@ -39,10 +39,69 @@ class UsersController < ApplicationController
         end
     end
 
-    def shownames
-        users = User.all.pluck(:name)
+    def count
+        users = User.all.length
         render json: users
     end
 
 
+    # def show
+    #     user = User.find(params[:id])
+    #     render json: user
+    # end
+    def show_contacts
+        user = User.find(params[:id])
+        # contacts = user.contacts
+        contacts = Contact.find_by(user_id: params[:id])
+        if user
+            render json: contacts
+        else
+            render json: {errors: contacts.errors.full_messages}, status: 422
+        end
+    end
+
+    def count_contacts
+        user = User.find(params[:id])
+        contacts = user.contacts.length
+        if user
+            render json: contacts
+        else
+            render json: {errors: contacts.errors.full_messages}, status: 422
+        end
+    end
+
+    def count_companies
+        user = User.find(params[:id])
+        companies = user.companies.length
+        if user
+            render json: companies
+        else
+            render json: {errors: companies.errors.full_messages}, status: 422
+        end
+    end
+
+    def count_products
+        user = User.find(params[:id])
+        products = user.products.length
+        if user
+            render json: products
+        else
+            render json: {errors: products.errors.full_messages}, status: 422
+        end
+    end
+
+    def notes
+        user = User.find(params[:id])
+        notes = user.notes.length
+        if user
+            render json: notes
+        else
+            render json: {errors: notes.errors.full_messages}, status: 422
+        end
+    end
+
+    def shownames
+        users = User.all.pluck(:name)
+        render json: users
+    end
 end

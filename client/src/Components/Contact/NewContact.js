@@ -210,9 +210,10 @@ const NewContact = () => {
 
     return (
         <>
-        <h2 className='new-contact'>New Contact</h2>
+        <h1 style={{ margin: 40 }}>New Contact</h1>
 
         <Form 
+        style={{ margin: 40 }}
         ref={formRef} 
         model={model}
         formValue={formValue}

@@ -2,17 +2,23 @@ import { useState, useEffect } from "react"
 
 import NewCompany from "../Companies/NewCompany"
 
-import {Form, Input, Button, ButtonToolbar, SelectPicker } from 'rsuite'
+import { Form, Input, Button, ButtonToolbar, SelectPicker } from 'rsuite'
 
 import { forwardRef, useRef } from "react"
 
-import {SchemaModel, StringType} from "schema-typed"
+import { SchemaModel, StringType } from "schema-typed"
 
 import { Popover, Whisper } from 'rsuite';
 
-import {Message, useToaster} from 'rsuite'
+import { Message, useToaster } from 'rsuite'
+
+import { useSelector } from "react-redux"
 
 const NewProduct = () => {
+
+    const user = useSelector((state) => state.user).profile;
+
+
 
     const [name, setName] = useState('')
     const [brand, setBrand] = useState('')
@@ -23,24 +29,42 @@ const NewProduct = () => {
 
     const [companies, setCompanies] = useState([])
 
+    const [companiesNames, setCompaniesNames] = useState([])
+
     const fetchCompanies = async () => {
+        let companiesArray = []
         let req = await fetch(`http://localhost:3000/companies_names`)
         let res = await req.json()
+
         setCompanies(res)
 
+        // console.log('res', res)
+
+        res.map((company) => {
+            companiesArray.push(company[1])
+        })
+
+        setCompaniesNames(companiesArray)
     }
+    console.log('companiesNames', companiesNames)
+
+
+
+    const data = companiesNames.map(
+        item => ({ label: item, value: item })
+    );
 
     const handleProductSubmit = async (e) => {
         e.preventDefault()
-        
 
-        console.log('companies', companies)
-        console.log('e.target', e.target)
-        console.log('e.target[0].value', e.target[0].value)
-        console.log('e.target[1].value', e.target[1].value)
-        console.log('e.target[2].value', e.target[2].value)
-        console.log('e.target[3].value', e.target[3].value)
-        console.log('e.target[4].value', e.target[4].value)
+
+        // console.log('companies', companies)
+        // console.log('e.target', e.target)
+        // console.log('e.target[0].value', e.target[0].value)
+        // console.log('e.target[1].value', e.target[1].value)
+        // console.log('e.target[2].value', e.target[2].value)
+        // console.log('e.target[3].value', e.target[3].value)
+        // console.log('e.target[4].value', e.target[4].value)
 
         let newCompany = e.target[2].value
 
@@ -54,8 +78,8 @@ const NewProduct = () => {
         let newCompanyName = result[1]
         console.log('newCompanyID', newCompanyID)
         console.log('newCompanyName', newCompanyName)
-        
-        console.log('product: ', {name, brand, newCompanyName, price, image, website})
+
+        console.log('product: ', { name, brand, newCompanyName, price, image, website })
 
         console.log('result', result)
 
@@ -67,7 +91,7 @@ const NewProduct = () => {
             body: JSON.stringify({
                 name: name,
                 brand: brand,
-                input_company_name: newCompanyID, 
+                input_company_name: newCompanyID,
                 price: price,
                 image_link: image,
                 website: website,
@@ -82,12 +106,24 @@ const NewProduct = () => {
     }
 
     const formClick = async () => {
-        if(!formRef.current.check()) {
-            console.error('form error')
+        // if (!formRef.current.check()) {
+        //     console.error('form error')
+        //     return;
+        // }
+        let fName = formValue.name
+        let fCompany = formValue.companySelect
+
+        if (!fName || !fCompany) {
+            toaster.push(    
+                <Message showIcon type="error" header="Error">
+                    Something isn't right
+              </Message>)
             return;
         }
-        let fName = formValue.name
-        console.log('fName', fName)
+
+        let companyObject = companies.find(company => {
+            return company[1] == formValue.companySelect
+        })
 
         let req = await fetch(`http://localhost:3000/products`, {
             method: "POST",
@@ -96,9 +132,26 @@ const NewProduct = () => {
             },
             body: JSON.stringify({
                 name: fName,
-                user_id: 1
+                company_id: companyObject[0],
+                user_id: user.id
             })
         })
+        .then(res => {
+            if (res.ok) {
+                return res.json()
+            } else {
+                toaster.push(
+                    <Message showIcon type="error" header="Error">
+                        Try Again
+                    </Message>)
+            }
+        })
+        .then((data) => {
+            console.log('data', data)
+            setFormValue(defaultFormValue)
+            toaster.push(message)
+        })
+        .catch(error => alert(error.res.data))
     }
 
     useEffect(() => {
@@ -117,7 +170,8 @@ const NewProduct = () => {
 
     const [formValue, setFormValue] = useState({
         name: "",
-        description: ""
+        description: "",
+        companySelect: ""
     })
 
     const formRef = useRef()
@@ -130,40 +184,44 @@ const NewProduct = () => {
 
 
     const defaultFormValue = {
-        name: '',
-        description: ''
+
     }
 
     return (
         <>
-        <h2 className='new-product'>New Product</h2>
-        <Form
-        ref={formRef}
-        model={model}
-        formValue={formValue}
-        onChange={formValue => setFormValue(formValue)}
-        onSubmit={formClick}
-        fluid
-        >
-            <Form.Group controlId='name'>
-                <Form.ControlLabel>Product Name</Form.ControlLabel>
-                <Form.Control name='name' />
-                <Form.HelpText tooltip>Product Name is required</Form.HelpText>
-            </Form.Group>
-            <ButtonToolbar>
-                <Whisper
-                    placement='right'
-                    trigger='active'
-                    speaker={<Popover arrow={false}>Clicked</Popover>}>
-                <Button appearance='ghost' type='submit'>
-                    Submit
-                </Button>
+            <h1 style={{margin: 40}}>New Product</h1>
+            <Form
+                style={{ margin: 40 }}
+                ref={formRef}
+                model={model}
+                formValue={formValue}
+                onChange={formValue => setFormValue(formValue)}
+                onSubmit={formClick}
+                fluid
+            >
+                <Form.Group controlId='name'>
+                    <Form.ControlLabel>Product Name</Form.ControlLabel>
+                    <Form.Control name='name' />
+                    <Form.HelpText tooltip>Product Name is required</Form.HelpText>
+                </Form.Group>
+                <Form.Group controlId="companySelect">
+                    <Form.ControlLabel>SelectPicker:</Form.ControlLabel>
+                    <Form.Control name="companySelect" accepter={SelectPicker} data={data} />
+                </Form.Group>
+                <ButtonToolbar>
+                    <Whisper
+                        placement='right'
+                        trigger='active'
+                        speaker={<Popover arrow={false}>Clicked</Popover>}>
+                        <Button appearance='ghost' type='submit'>
+                            Submit
+                        </Button>
 
-                </Whisper>
+                    </Whisper>
 
-            </ButtonToolbar>
+                </ButtonToolbar>
 
-        </Form>
+            </Form>
 
         </>
         // <div className="new-product-div">

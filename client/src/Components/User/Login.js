@@ -10,6 +10,8 @@ import { setUser, logout } from '../../features/user/user'
 
 import { Form, Button, ButtonToolbar } from 'rsuite'
 
+import {Message, useToaster} from 'rsuite'
+
 
 
 const Login = () => {
@@ -43,7 +45,7 @@ const Login = () => {
                 if (res.ok) {
                     return res.json()
                 } else {
-                    alert("someething went wrong")
+                    alert("something went wrong")
                 }
             })
             .then((data) => {
@@ -77,6 +79,7 @@ const Login = () => {
                 .then((res) => res.json())
                 .then((data) => {
                     console.log('useEffect data', data)
+                    navigate(-1)
                     dispatch(setUser(data))
                 });
         }
@@ -94,6 +97,15 @@ const Login = () => {
     const handleClick = () => {
         navigate(`/newuser`)
     }
+
+    const toaster = useToaster()
+
+    const message = (
+        <Message showIcon type="success">
+            Your Dashboard
+        </Message>
+    )
+
 
     let defaultFormValue = {
         email: "",
@@ -125,13 +137,21 @@ const Login = () => {
                 if (res.ok) {
                     return res.json()
                 } else {
-                    alert("someething went wrong")
+                    toaster.push(    
+                    <Message showIcon type="error" header="Error">
+                        Try Again
+                  </Message>)
                 }
             })
             .then((data) => {
                 console.log('data', data)
                 localStorage.setItem("jwt", data.token);
                 dispatch(setUser(data.user))
+                setFormValue(defaultFormValue)
+                toaster.push(message)
+                navigate(`/`)
+
+                
             })
             .catch(error => alert(error.res.data))
     }
@@ -140,8 +160,9 @@ const Login = () => {
 
     return (
         <>
-        <h1>Login</h1>
+        <h1 style={{margin: 40}} >Login</h1>
             <Form
+            style={{margin: 40}}
                 ref={formRef}
                 formValue={formValue}
                 onChange={formValue => setFormValue(formValue)}
@@ -164,11 +185,18 @@ const Login = () => {
                         <Button onClick={() => setFormValue(defaultFormValue)} appearance="ghost">Cancel</Button>
                     </ButtonToolbar>
                 </Form.Group>
+                <Form.Group>
+                    <ButtonToolbar>
+                        <span>
+                            Or,  <Button onClick={() => navigate('/newuser')} appearance="subtle" color="yellow">Create Account</Button>
+                        </span>
+                    </ButtonToolbar>
+                </Form.Group>
 
             </Form>
-            <div>
+            {/* <div>
                 <h1>Name: {user.profile.name}</h1>
-                <h1>Email: {user.profile.email}</h1>
+                <h1>Email: {user.profile.email}</h1> */}
                 {/* <button
                 onClick={(e) => {
                     e.preventDefault()
@@ -176,7 +204,7 @@ const Login = () => {
                 }}
                 >Log In
             </button> */}
-                <button
+                {/* <button
                     onClick={() => {
                         localStorage.clear();
                         dispatch(logout())
@@ -211,11 +239,11 @@ const Login = () => {
                         <Button appearance="ghost">Cancel</Button>
                     </ButtonToolbar>
 
-                </form>
+                </form> */}
 
-                <button onClick={handleClick}>Create New Account</button>
+                {/* <button onClick={handleClick}>Create New Account</button>
 
-            </div>
+            </div> */}
         </>
     )
 }

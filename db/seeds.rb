@@ -7,7 +7,14 @@ Company.destroy_all
 
 puts 'seeding users...'
 
-user1 = User.create!(name: "Bill", email: "bill@gmail.com", username: "bill", password_digest: "bill")
+user1 = User.create!(
+    first_name: "Will", 
+    last_name: "Carlson", 
+    image: "https://media-exp1.licdn.com/dms/image/C5103AQFOvyuxg-C8lA/profile-displayphoto-shrink_400_400/0/1517234384465?e=1670457600&v=beta&t=UXnbQB7fQ5INu6IxIhJwmZyrursa725lIY_2S_ARSvg", 
+    name: "Will", 
+    email: "will@gmail.com", 
+    username: "bill", 
+    password_digest: "bill")
 user2 = User.create!(name: "Alex", email: "alex@gmail.com", username: "alex", password_digest: "alex")
 user3 = User.create!(name: "Ben", email: "ben@gmail.com", username: "ben", password_digest: "ben")
 
@@ -162,70 +169,70 @@ products_csv.each do |row|
     )
 end
 
-# puts "making notes"
+puts "making notes"
 
-# 300.times{
-#     Note.create(
-#         notable: Contact.all.sample, 
-#         user: User.all.sample, 
-#         content: "Very good opportunity here!")
+300.times{
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "Very good opportunity here!")
 
-#     Note.create(
-#         notable: Company.all.sample,
-#         user: User.all.sample,
-#         content: "This company has a lot of potential, I think they'd be interested in working with us."
-#     )
-#     Note.create(
-#         notable: Contact.all.sample, 
-#         user: User.all.sample, 
-#         content: "Seems like they're interested!")
+    Note.create(
+        notable: Company.all.sample,
+        user: User.all.sample,
+        content: "This company has a lot of potential, I think they'd be interested in working with us."
+    )
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "Seems like they're interested!")
 
-#     Note.create(
-#         notable: Contact.all.sample, 
-#         user: User.all.sample, 
-#         content: "This could be a great opportunity.")
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "This could be a great opportunity.")
 
-#     Note.create(
-#         notable: Contact.all.sample, 
-#         user: User.all.sample, 
-#         content: "Think they're a good fit")
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "Think they're a good fit")
 
-#     Note.create(
-#         notable: Contact.all.sample, 
-#         user: User.all.sample, 
-#         content: "Impressive experience")
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "Impressive experience")
 
-#     Note.create(
-#         notable: Contact.all.sample, 
-#         user: User.all.sample, 
-#         content: "Outstanding background.")
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "Outstanding background.")
 
-#     Note.create(
-#         notable: Contact.all.sample, 
-#         user: User.all.sample, 
-#         content: "I think this could work")
+    Note.create(
+        notable: Contact.all.sample, 
+        user: User.all.sample, 
+        content: "I think this could work")
         
-#     Note.create(
-#         notable: Company.all.sample, 
-#         user: User.all.sample, 
-#         content: "This organization seems to be in need of our services.")
+    Note.create(
+        notable: Company.all.sample, 
+        user: User.all.sample, 
+        content: "This organization seems to be in need of our services.")
 
-#     Note.create(
-#         notable: Company.all.sample, 
-#         user: User.all.sample, 
-#         content: "Great organization with great people. I think we're going to be able to help them a lot.")        
+    Note.create(
+        notable: Company.all.sample, 
+        user: User.all.sample, 
+        content: "Great organization with great people. I think we're going to be able to help them a lot.")        
 
-#     Note.create(
-#         notable: Product.all.sample, 
-#         user: User.all.sample, 
-#         content: "This is an amazing product.")
+    Note.create(
+        notable: Product.all.sample, 
+        user: User.all.sample, 
+        content: "This is an amazing product.")
 
-#     Note.create(
-#         notable: Product.all.sample, 
-#         user: User.all.sample, 
-#         content: "This product is selling like hot pockets!")
+    Note.create(
+        notable: Product.all.sample, 
+        user: User.all.sample, 
+        content: "This product is selling like hot pockets!")
 
         
 
-# }
+}
 

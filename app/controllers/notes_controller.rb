@@ -5,6 +5,11 @@ class NotesController < ApplicationController
         render json: notes
     end
 
+    def count
+        notes = Note.all.length
+        render json: notes
+    end
+
     def create
         note = Note.new(
             notable_type: params[:notable_type],

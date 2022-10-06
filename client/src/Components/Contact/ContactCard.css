@@ -2,6 +2,18 @@
     border: solid;
 } */
 
+.card {
+    padding: 10px 1%;
+    position: relative;
+
+}
+
+.card-header {
+    position: absolute;
+    top: -5vh;
+    right: 17vw;
+}
+
 .card-button {
     margin: 2rem;
 }
@@ -44,11 +56,7 @@
     vertical-align:middle;
 }
 
-.card {
-    padding: 10px 1%;
 
-
-}
 
 .profile-details {
     margin: 10px;
@@ -83,6 +91,10 @@
 }
 
 .pd-left .pd-row .contact-company {
+    cursor: pointer;
+}
+
+.company-name {
     cursor: pointer;
 }
 
@@ -208,18 +220,20 @@ margin: 1rem;
 }
 
 
-.pd-right .contact-company-logo {
+.company-logo {
     cursor: pointer;
     width: 20rem;
     height: auto;
     
 }
 
-.pd-right .company-products {
+.company-products {
     cursor: pointer;
     width: max-content;
     list-style: none;
 }
+
+
 .pd-right .colleagues {
     cursor: pointer;
     list-style: none;
@@ -251,4 +265,41 @@ margin: 1rem;
 
 .products-list {
     cursor: pointer;
+}
+
+.company-aggregates {
+}
+
+.user-stats {
+    cursor: pointer;
+    margin: 1rem;
+    font-size: 2rem;
+    
+  }
+  
+  .not-available {
+    cursor:not-allowed;
+  }
+
+
+
+
+.profile-right .pd-row {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px 10px;
+}
+
+.profile-right .pd-row .company-name {
+    cursor: pointer;
+    display: flex;
+    margin:5px;
+    vertical-align: middle;
+}
+
+.profile-mid{
+    margin: 0 10px;
+
+
 }

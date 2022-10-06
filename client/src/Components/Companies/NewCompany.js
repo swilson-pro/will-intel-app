@@ -1,12 +1,12 @@
-import {Form, Input, Button, ButtonToolbar, SelectPicker } from 'rsuite'
+import { Form, Input, Button, ButtonToolbar } from 'rsuite'
 
 import { useState, useEffect, forwardRef, useRef } from "react"
 
-import {SchemaModel, StringType} from "schema-typed"
+import { SchemaModel, StringType } from "schema-typed"
 
 import { Popover, Whisper } from 'rsuite';
 
-import {Message, useToaster} from 'rsuite'
+import { Message, useToaster } from 'rsuite'
 
 
 const NewCompany = () => {
@@ -19,7 +19,7 @@ const NewCompany = () => {
     const handleCompanySubmit = async (e) => {
         e.preventDefault();
 
-        console.log('Company: ', {name, website, logoUrl, description})
+        console.log('Company: ', { name, website, logoUrl, description })
 
         let req = await fetch(`http://localhost:3000/companies`, {
             method: "POST",
@@ -65,13 +65,13 @@ const NewCompany = () => {
     })
 
     const formClick = async () => {
-        if(!formRef.current.check()) {
+        if (!formRef.current.check()) {
             console.error('form error');
             return;
         }
         let fName = formValue.name
         let fDescription = formValue.description
-        console.log(`New Company submitted: `,`name: ${fName}`, `description: ${fDescription}`)
+        console.log(`New Company submitted: `, `name: ${fName}`, `description: ${fDescription}`)
 
         let req = await fetch(`http://localhost:3000/companies`, {
             method: "POST",
@@ -95,39 +95,40 @@ const NewCompany = () => {
 
     return (
         <>
-        <h2 className='new-contact'>New Company</h2>
-        <Form
-        ref={formRef}
-        model={model}
-        formValue={formValue}
-        onChange={formValue => setFormValue(formValue)}
-        onSubmit={formClick}
-        fluid
-        >
-            <Form.Group controlId='name'>
-                <Form.ControlLabel>Company Name</Form.ControlLabel>
-                <Form.Control name='name' />
-                <Form.HelpText tooltip>Company Name is required</Form.HelpText>
-            </Form.Group>
-            <Form.Group controlId='description'>
-                <Form.ControlLabel>Description</Form.ControlLabel>
-                <Form.Control name='description' />
-                <Form.HelpText tooltip>Optional</Form.HelpText>
-            </Form.Group>
-            <ButtonToolbar>
-                <Whisper
-                    placement='right'
-                    trigger='active'
-                    speaker={<Popover arrow={false}>Clicked</Popover>}>
-                <Button appearance='ghost' type='submit'>
-                    Submit
-                </Button>
+            <h1 style={{ margin: 40 }}>New Company</h1>
+            <Form
+                style={{ margin: 40 }}
+                ref={formRef}
+                model={model}
+                formValue={formValue}
+                onChange={formValue => setFormValue(formValue)}
+                onSubmit={formClick}
+                fluid
+            >
+                <Form.Group controlId='name'>
+                    <Form.ControlLabel>Company Name</Form.ControlLabel>
+                    <Form.Control name='name' />
+                    <Form.HelpText tooltip>Company Name is required</Form.HelpText>
+                </Form.Group>
+                <Form.Group controlId='description'>
+                    <Form.ControlLabel>Description</Form.ControlLabel>
+                    <Form.Control name='description' />
+                    <Form.HelpText tooltip>Optional</Form.HelpText>
+                </Form.Group>
+                <ButtonToolbar>
+                    <Whisper
+                        placement='right'
+                        trigger='active'
+                        speaker={<Popover arrow={false}>Clicked</Popover>}>
+                        <Button appearance='ghost' type='submit'>
+                            Submit
+                        </Button>
 
-                </Whisper>
+                    </Whisper>
 
-            </ButtonToolbar>
-            
-        </Form>
+                </ButtonToolbar>
+
+            </Form>
         </>
 
         // <div className="new-company-div">

@@ -27,6 +27,8 @@ const CompaniesPage = ({compBlackList}) => {
     const [companies, setCompanies] = useState([])
     const [keyArray, setKeyArray] = useState([])
 
+    const [loading, setLoading] = useState(true)
+
     const [searchTerm, setSearchTerm] = useState("")
 
     const [sortField, setSortField] = useState('description')
@@ -64,6 +66,7 @@ const CompaniesPage = ({compBlackList}) => {
 
         setKeyArray(pDisplayKeys)
         setCompanies(pDisplayCompanies)
+        setLoading(!loading)
 
 
     }
@@ -149,6 +152,7 @@ const CompaniesPage = ({compBlackList}) => {
                 </div> */}
             </div>
             <Table
+                loading={loading}
                 className="table"
                 showHeader={true}
                 height={1000}

@@ -168,7 +168,7 @@ const CompanyCard = () => {
                     Edit Company Details
                 </IconButton>
             </ButtonToolbar>
-
+            <h5 className="card-header">Company</h5>
             <div className="profile-details">
                 <div className="pd-left">
                     <div className="pd-row">
