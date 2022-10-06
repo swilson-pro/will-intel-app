@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   delete '/contacts/:id', to: 'contacts#destroy'
 
   get '/users', to: 'users#index'
+  get '/count_users', to: 'users#count'
   get '/usercontacts/:id', to: 'users#show_contacts'
   get '/usercontactscount/:id', to: 'users#count_contacts'
   get '/usercompaniescount/:id', to: 'users#count_companies'
