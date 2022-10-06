@@ -13,8 +13,8 @@ user1 = User.create!(
     image: "https://media-exp1.licdn.com/dms/image/C5103AQFOvyuxg-C8lA/profile-displayphoto-shrink_400_400/0/1517234384465?e=1670457600&v=beta&t=UXnbQB7fQ5INu6IxIhJwmZyrursa725lIY_2S_ARSvg", 
     name: "Will", 
     email: "will@gmail.com", 
-    username: "bill", 
-    password_digest: "bill")
+    username: "will", 
+    password_digest: "will")
 user2 = User.create!(name: "Alex", email: "alex@gmail.com", username: "alex", password_digest: "alex")
 user3 = User.create!(name: "Ben", email: "ben@gmail.com", username: "ben", password_digest: "ben")
 

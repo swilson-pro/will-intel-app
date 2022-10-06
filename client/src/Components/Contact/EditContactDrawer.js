@@ -511,7 +511,7 @@ const EditContactDrawer = ({ contact, id, fetchContact }) => {
                             </Whisper>
                         </ButtonToolbar>
                     </Form>
-                    <p>Image:</p>
+                    <p>Image: <a src={contact.image_url}>Link</a></p>
                     <Form
                         style={{ margin: 40 }}
                         ref={formRef}

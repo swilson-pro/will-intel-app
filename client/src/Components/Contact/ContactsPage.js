@@ -55,7 +55,7 @@ const ContactsPage = ({conBlackList}) => {
         // console.log('pagina', pagina)
         const paginaCuenta = contactsPageData.page_count
         setPageCount(paginaCuenta)
-        // console.log('paginaCuenta', paginaCuenta)
+        console.log('paginaCuenta', paginaCuenta)
 
         let objKeys = Object.keys(contactsDataArray[0])
         // console.log('objKeys', objKeys)
@@ -79,6 +79,9 @@ const ContactsPage = ({conBlackList}) => {
 
     }
 
+    console.log('page', page)
+
+    console.log('pageCount', pageCount)
 
     const handleSorting = (sortField, sortOrder) => {
         // console.log('sortField, sortOrder', sortField, sortOrder)

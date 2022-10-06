@@ -61,4 +61,5 @@ Rails.application.routes.draw do
   get '/count_notes', to: 'notes#count'
   get '/notes/:id', to: 'notes#show'
   post '/notes', to: 'notes#create'
+  delete '/notes/:id', to: 'notes#destroy'
 end

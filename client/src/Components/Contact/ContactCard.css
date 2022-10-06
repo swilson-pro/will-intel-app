@@ -15,7 +15,8 @@
 }
 
 .card-button {
-    margin: 2rem;
+    margin: 40;
+    margin-top: 1rem;
 }
 
 .new-contact {
@@ -195,7 +196,21 @@ margin: 1rem;
     margin: 10px;
     padding: 5px;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
 }
+
+.note-delete {
+    opacity: 0;
+}
+
+.note-delete:hover {
+    opacity: 1;
+
+}
+
+
+
 
 .note-timestamp {
     margin: 10px;

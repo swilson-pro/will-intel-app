@@ -41,4 +41,14 @@ class NotesController < ApplicationController
     #     end
     # end
 
+    def destroy
+        note = Note.find_by(id: params[:id])
+        if note
+            note.destroy
+            render json: {}, status: 200
+        else
+            render json: { errors: "Note not found" }, status: 404
+        end
+    end
+
 end

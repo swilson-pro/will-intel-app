@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
-import {Visible, Unvisible, Others, UserBadge, Plus, Calendar, Trash, Edit } from '@rsuite/icons'
+import { Visible, Unvisible, Others, UserBadge, Plus, Calendar, Trash, Edit } from '@rsuite/icons'
 
 import BioModal from "./BioModal"
 
@@ -24,11 +24,15 @@ import { SchemaModel, StringType } from "schema-typed"
 import ProductsDrawer from "../Product/ProductsDrawer"
 import ContactsDrawer from "./ContactsDrawer"
 
+import MenuIcon from '@rsuite/icons/Menu';
+
+import ContactOptionsModal from "./ContactOptionsModal"
+
 
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
 const ContactCard = () => {
-;
+    ;
     const user = useSelector((state) => state.user).profile;
 
     const formRef = useRef()
@@ -72,6 +76,14 @@ const ContactCard = () => {
         })
             .then(alert("Contact Deleted"))
         backToContacts()
+    }
+
+    const deleteNote = async (id) => {
+        let req = await fetch(`http://localhost:3000/notes/${id}`, {
+            method: "DELETE",
+        })
+            .then(alert("Note Deleted"))
+            fetchContact()
     }
 
     const backToContacts = () => {
@@ -153,47 +165,42 @@ const ContactCard = () => {
 
     return (
         <div className="card">
-            <ButtonToolbar>
+            <ContactOptionsModal contact={contact} fetchContact={fetchContact} deleteContact={deleteContact} />
+
+            {/* <ButtonToolbar>
                 <IconButton
                     className="card-button"
-                    color="blue"
+                    color="red"
                     appearance="ghost"
-                    size="md"
-                    icon={<Trash/>}
+                    size="xs"
+                    icon={<MenuIcon/>}
                     onClick={() => deleteContact(contact.id)}
                     >
-                        Delete Contact
+                        Options
                 </IconButton>
-                {/* <IconButton
-                    className="card-button"
-                    color="blue"
-                    appearance="ghost"
-                    size="md"
-                    icon={<Edit/>}
-                    onClick={() => updateContact(contact.id)}
-                    >
-                        Edit Contact
-                </IconButton> */}
-            </ButtonToolbar>
+
+            </ButtonToolbar> */}
+
             {/* <ContactsDrawer contact={contact} handleContactClick={handleContactClick}/> */}
-            <EditContactDrawer contact={contact} fetchContact={fetchContact}/>
+            {/* <EditContactDrawer className="card-button" contact={contact} fetchContact={fetchContact}/> */}
+
             <h5 className="card-header">Contact</h5>
             <div className="profile-details">
                 <div className="pd-left">
                     <div className="pd-row">
                         <div className="image-div">
-                            {!contact.image_url ? 
-                            <img className='pd-image' src={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`} alt={contact.name}></img> 
-                            : <img className='pd-image' src={contact.image_url} onError={(e) => (e.currentTarget.src = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png')} alt={contact.name}></img>}
-                            
+                            {!contact.image_url ?
+                                <img className='pd-image' src={`https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`} alt={contact.name}></img>
+                                : <img className='pd-image' src={contact.image_url} onError={(e) => (e.currentTarget.src = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png')} alt={contact.name}></img>}
+
                             <div className="a-tag-div">
                                 <a className="materials-icons" href={contact.email}><FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon></a>
                                 <a className="materials-icons" href={contact.phone}><FontAwesomeIcon icon={faPhone}></FontAwesomeIcon></a>
                                 <a className="materials-icons" href={contact.linkedin_profile_url} target="_blank"><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></a>
                             </div>
                             <div className="modal-div">
-                                {!contact.bio ? null : <BioModal contact={contact} /> }
-                            
+                                {!contact.bio ? null : <BioModal contact={contact} />}
+
                             </div>
                         </div>
                         <div className="general-info">
@@ -212,7 +219,7 @@ const ContactCard = () => {
                         formValue={formValue}
                         onChange={formValue => setFormValue(formValue)}
                         onSubmit={formClick}
-                        style={{margin: 10}}
+                        style={{ margin: 10 }}
                         fluid
                     >
                         <Form.Group controlId="textarea">
@@ -255,9 +262,15 @@ const ContactCard = () => {
                             return (
                                 <div key={note.id} className="note-div">
                                     {/* <p className="note-timestamp">{`${note.created_at.substring(0, 10)} | ${note.user_name}`}</p> */}
-                                    <p className="note-timestamp">{`${Moment(note.created_at).format('MMMM DD, LT')} | ${note.user_name}`}</p>
-                                    <p className="note">{note.content}</p>
-                                    <button>delete</button>
+                                    <div>
+                                        <p className="note-timestamp">{`${Moment(note.created_at).format('MMMM DD, LT')} | ${note.user_name}`}</p>
+                                        <p className="note">{note.content}</p>
+                                    </div>
+                                    <div>
+                                            <Trash className='note-delete' color='red' onClick={() => deleteNote(note.id)}/>
+                                        
+                                    </div>
+
                                 </div>
                             )
                         })}
@@ -266,8 +279,8 @@ const ContactCard = () => {
                 <div className="pd-right">
                     <h3>Organization</h3>
                     <div className="pd-row">
-                    {!contact.company_logo ? <img onClick={() => handleCompanyClick(contact.company_id)} className="company-logo" src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={contact.real_company_name}></img>
-                     : <img onClick={() => handleCompanyClick(contact.company_id)} className="company-logo" src={contact.company_logo} onError={(e) => (e.currentTarget.src = `https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`)} alt={contact.real_company_name}></img>}
+                        {!contact.company_logo ? <img onClick={() => handleCompanyClick(contact.company_id)} className="company-logo" src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={contact.real_company_name}></img>
+                            : <img onClick={() => handleCompanyClick(contact.company_id)} className="company-logo" src={contact.company_logo} onError={(e) => (e.currentTarget.src = `https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`)} alt={contact.real_company_name}></img>}
                         <div className="company-name">
                             <span>
                                 <FontAwesomeIcon className="span-icon" icon={faBuilding}></FontAwesomeIcon>
@@ -277,7 +290,7 @@ const ContactCard = () => {
                             </span>
 
                         </div>
-                        <ProductsDrawer contact={contact} handleProductClick={handleProductClick}/>
+                        <ProductsDrawer contact={contact} handleProductClick={handleProductClick} />
                         {/* <details className="company-products">
                             <summary>Company Products</summary>
 
@@ -287,7 +300,7 @@ const ContactCard = () => {
                                 )
                             })}
                         </details> */}
-                        <ContactsDrawer contact={contact} handleContactClick={handleContactClick}/>
+                        <ContactsDrawer contact={contact} handleContactClick={handleContactClick} />
                         {/* <details className="colleagues">
                             <summary>Colleagues</summary>
                             {contact.company_contacts?.filter(colleague => colleague.name !== contact.name).map(filteredColleague => {

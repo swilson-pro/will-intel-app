@@ -111,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_202733) do
     t.string "image"
     t.string "first_name"
     t.string "last_name"
+    t.string "role"
   end
 
 end
