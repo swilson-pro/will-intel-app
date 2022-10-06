@@ -104,4 +104,10 @@ class UsersController < ApplicationController
         users = User.all.pluck(:name)
         render json: users
     end
+
+    def user_name_objects
+        users = User.all
+        names = users.pluck(:id, :name)
+        render json: names
+    end
 end

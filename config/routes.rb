@@ -33,6 +33,8 @@ Rails.application.routes.draw do
   get '/users/:id', to: 'users#show'
   get '/users_names', to: 'users#shownames'
   post '/users', to: 'users#create'
+  get '/user_name_objects', to: 'users#user_name_objects'
+
   
   post '/login', to: 'users#login'
 

@@ -2,6 +2,7 @@ import { Navigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import EditContact from "./EditContact"
+import EditContactDrawer from "./EditContactDrawer"
 import './ContactCard.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -23,16 +24,17 @@ import { SchemaModel, StringType } from "schema-typed"
 import ProductsDrawer from "../Product/ProductsDrawer"
 import ContactsDrawer from "./ContactsDrawer"
 
+
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
 const ContactCard = () => {
-
+;
     const user = useSelector((state) => state.user).profile;
 
     const formRef = useRef()
 
     console.log('user', user)
-    console.log('user.isLoggedIn', user.isLoggedIn)
+    // console.log('user.isLoggedIn', user.isLoggedIn)
 
     let navigate = useNavigate()
 
@@ -162,7 +164,7 @@ const ContactCard = () => {
                     >
                         Delete Contact
                 </IconButton>
-                <IconButton
+                {/* <IconButton
                     className="card-button"
                     color="blue"
                     appearance="ghost"
@@ -171,8 +173,10 @@ const ContactCard = () => {
                     onClick={() => updateContact(contact.id)}
                     >
                         Edit Contact
-                </IconButton>
+                </IconButton> */}
             </ButtonToolbar>
+            {/* <ContactsDrawer contact={contact} handleContactClick={handleContactClick}/> */}
+            <EditContactDrawer contact={contact} fetchContact={fetchContact}/>
             <h5 className="card-header">Contact</h5>
             <div className="profile-details">
                 <div className="pd-left">
@@ -269,7 +273,7 @@ const ContactCard = () => {
                                 <FontAwesomeIcon className="span-icon" icon={faBuilding}></FontAwesomeIcon>
                             </span>
                             <span>
-                                <p className="span-content" onClick={() => handleCompanyClick(contact.company_id)}>{contact.company_name}</p>
+                                <p className="span-content" onClick={() => handleCompanyClick(contact.company_id)}>{contact.real_company_name}</p>
                             </span>
 
                         </div>
