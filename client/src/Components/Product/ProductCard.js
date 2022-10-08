@@ -20,6 +20,8 @@ import ProductDescriptionModal from "./ProductDescriptionModal";
 import ProdContactsDrawer from "./ProdContactsDrawer";
 import OtherProductsDrawer from "./OtherProductsDrawer";
 
+import ProductOptionsModal from "./ProductOptionsModal";
+
 
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
@@ -155,28 +157,7 @@ const ProductCard = () => {
     console.log('id', id)
     return (
         <div className="card">
-            <ButtonToolbar>
-                <IconButton
-                    className="card-button"
-                    color="blue"
-                    appearance="ghost"
-                    size="md"
-                    icon={<Trash />}
-                    onClick={() => deleteProduct(product.id)}
-                >
-                    Delete Product
-                </IconButton>
-                <IconButton
-                    className="card-button"
-                    color="blue"
-                    appearance="ghost"
-                    size="md"
-                    icon={<Edit />}
-                    onClick={() => updateProduct(product.id)}
-                >
-                    Edit Product
-                </IconButton>
-            </ButtonToolbar>
+            <ProductOptionsModal product={product} fetchProduct={fetchProduct} deleteProduct={deleteProduct} />
             <h5 className="card-header">Product</h5>
             <div className="profile-details">
                 <div className="pd-left">
@@ -184,7 +165,7 @@ const ProductCard = () => {
                         <div className="image-div">
                             {!product.image_link ?
                                 <img className='pd-image' src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={product.name} onClick={() => handleCompanyClick(product.company_id)}></img>
-                                : <img className='pd-image' src={product.image_link} alt={product.name} onClick={() => handleCompanyClick(product.company_id)}></img>}
+                                : <img className='pd-image' src={product.image_link} onError={(e) => (e.currentTarget.src = 'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg')} alt={product.name} onClick={() => handleCompanyClick(product.company_id)}></img>}
                             <div className="a-tag-div">
 
                                 <a href={product.product_link} target="_blank"><FontAwesomeIcon icon={faProductHunt}></FontAwesomeIcon></a>
@@ -195,6 +176,7 @@ const ProductCard = () => {
                             </div>
                         </div>
                         <div className="general-info">
+                            <h3>{product.image_link}</h3>
                             <h3>{product.name}</h3>
                             <h3>Brand: {product.brand}</h3>
                             <h4><a href={product.website} target="_blank">{product.website}</a></h4>
@@ -254,7 +236,7 @@ const ProductCard = () => {
                     <h3>More Info</h3>
                     <div className="pd-row">
                     {!product.company_logo ? <img onClick={() => handleCompanyClick(product.company_id)} className="company-logo" src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={product.company_name}></img>
-                     : <img onClick={() => handleCompanyClick(product.company_id)} className="company-logo" src={product.company_logo} alt={product.company_name}></img>}
+                     : <img onClick={() => handleCompanyClick(product.company_id)} className="company-logo" src={product.company_logo} onError={(e) => (e.currentTarget.src = 'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg')} alt={product.company_name}></img>}
                         <div className="company-name">
                             <span>
                                 <FontAwesomeIcon className="span-icon" icon={faBuilding}></FontAwesomeIcon>

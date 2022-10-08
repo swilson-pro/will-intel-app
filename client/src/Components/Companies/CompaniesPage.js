@@ -20,6 +20,7 @@ const CompaniesPage = ({compBlackList}) => {
     // const compBlackList = ['description', 'logoUrl', 'pb_companyID', 'company_also_known_as', 'parent_company', 'company_legal_name', 'primary_industry_sector', 'primary_industry_group', 'primary_industry_code']
 
     let navigate = useNavigate()
+    const [companyCount, setCompanyCount] = useState()
 
     const [ownersNames, setOwnersNames] = useState([])
     const [owner, setOwner] = useState("All")
@@ -40,8 +41,15 @@ const CompaniesPage = ({compBlackList}) => {
 
     useEffect(() => {
         getCompaniesForPage(page, sortField, order)
+        getCompaniesCount()
     }, [owner, page, sortField, order])
 
+
+    const getCompaniesCount = async () => {
+        const res = await fetch(`http://localhost:3000/count_companies`)
+        const count = await res.json()
+        setCompanyCount(count)
+    }
 
     const getCompaniesForPage = async (page) => {
 
@@ -129,6 +137,7 @@ const CompaniesPage = ({compBlackList}) => {
 
     return(
         <main className="main">
+            <p className='user-stats'>Companies: {companyCount}</p>
             {/* <h1 className='page-header'>Companies</h1> */}
             {/* <NavLink className='new-company-navlink' to='/companies/new' >
                 <IconButton icon={<PlusIcon />}>Add New Company</IconButton>

@@ -26,6 +26,8 @@ const ContactsPage = ({conBlackList}) => {
 
     let navigate = useNavigate()
 
+    const [contactCount, setContactCount] = useState()
+
     const [loading, setLoading] = useState(true)
     
     const [contacts, setContacts] = useState([])
@@ -40,7 +42,14 @@ const ContactsPage = ({conBlackList}) => {
 
     useEffect(() => {
         getContactsForPage(page, sortField, order)
+        getContactsCount()
     }, [page, sortField, order])
+
+    const getContactsCount = async () => {
+        const res = await fetch(`http://localhost:3000/count_contacts`)
+        const count = await res.json()
+        setContactCount(count)
+    }
 
     const getContactsForPage = async (page) => {
         // console.log('page', page)
@@ -139,7 +148,7 @@ const ContactsPage = ({conBlackList}) => {
 
     return(
         <main>
-
+            <p className='user-stats'>Contacts:  {contactCount}</p>
             <div className="button-container">
             {/* <NavLink className='new-contact-navlink' to='/contacts/new' >
                 

@@ -29,6 +29,8 @@ import DescriptionModal from "./DescriptionModal";
 import CompProductsDrawer from "./CompProductsDrawer";
 import CompContactsDrawer from "./CompContactsDrawer";
 
+import CompanyOptionsModal from "./CompanyOptionsModal";
+
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
 const CompanyCard = () => {
@@ -145,29 +147,7 @@ const CompanyCard = () => {
     console.log('company', company)
     return (
         <div className="card">
-            <ButtonToolbar>
-                <IconButton
-                    className="card-button"
-                    color="blue"
-                    appearance='ghost'
-                    size='md'
-                    icon={<Trash />}
-                    onClick={() => deleteCompany(company.id)}
-                >
-                    Delete Company
-
-                </IconButton>
-                <IconButton
-                    className="card-button"
-                    color="blue"
-                    appearance='ghost'
-                    size='md'
-                    icon={<Edit />}
-                    onClick={updateCompany}
-                >
-                    Edit Company Details
-                </IconButton>
-            </ButtonToolbar>
+            <CompanyOptionsModal company={company} fetchCompany={fetchCompany} deleteCompany={deleteCompany} />
             <h5 className="card-header">Company</h5>
             <div className="profile-details">
                 <div className="pd-left">
@@ -175,7 +155,7 @@ const CompanyCard = () => {
                         <div className="image-div">
                             {!company.logoUrl ?
                                 <img className='pd-image' src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={company.name}></img>
-                                : <img className='pd-image' src={company.logoUrl} alt={company.name}></img>}
+                                : <img className='pd-image' src={company.logoUrl} onError={(e) => (e.currentTarget.src ='https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg')} alt={company.name}></img>}
                             <div className="a-tag-div">
                                 <a className="materials-icons" href={company.linkedin_regularCompanyUrl} target="_blank"><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></a>
                                 <a className="materials-icons" href={company.hq_email}><FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon></a>

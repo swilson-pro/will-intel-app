@@ -92,6 +92,9 @@ class ProductsController < ApplicationController
         if params[:description]
             product.update(description: params[:description])
         end     
+        if params[:image_link]
+            product.update(image_link: params[:image_link])
+        end     
 
     end
 

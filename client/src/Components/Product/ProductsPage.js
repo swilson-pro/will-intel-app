@@ -12,6 +12,8 @@ const ProductsPage = ({prodBlackList}) => {
 
     let navigate = useNavigate()
 
+    const [productCount, setProductCount] = useState()
+
     const [loading, setLoading] = useState(true)
 
     const [ownersNames, setOwnersNames] = useState([])
@@ -37,9 +39,15 @@ const ProductsPage = ({prodBlackList}) => {
 
     useEffect(() => {
         getProductsForPage(page, sortField, order)
+        getProductsCount()
     }, [page, sortField, order])
 
 
+    const getProductsCount = async () => {
+        const res = await fetch(`http://localhost:3000/count_products`)
+        const count = await res.json()
+        setProductCount(count)
+    }
 
     const getProductsForPage = async (page) => {
         // console.log('page', page)
@@ -176,6 +184,7 @@ const ProductsPage = ({prodBlackList}) => {
 
     return (
         <main className="main">
+            <p className='user-stats'>Products: {productCount}</p>
             {/* <h1 className='page-header'>Products</h1> */}
             {/* <NavLink className='new-product-navlink' to='/products/new' >
                 <button className='new-product'>Add Product</button></NavLink> */}
