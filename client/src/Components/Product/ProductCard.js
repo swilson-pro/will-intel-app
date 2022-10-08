@@ -22,6 +22,8 @@ import OtherProductsDrawer from "./OtherProductsDrawer";
 
 import ProductOptionsModal from "./ProductOptionsModal";
 
+import {Loader} from 'rsuite'
+
 
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
@@ -46,10 +48,15 @@ const ProductCard = () => {
 
     const [company, setCompany] = useState({})
 
+    const [compLoading, setCompLoading] = useState(true)
+    const [prodLoading, setProdLoading] = useState(true)
+
+
     const fetchProduct = async () => {
         const response = await fetch(`http://localhost:3000/products/${id}`)
         const productObj = await response.json()
         setProduct(productObj)
+        setProdLoading(false)
         let reverseOrderNotes = productObj.notes.reverse()
         setNotes(reverseOrderNotes)
     }
@@ -58,6 +65,7 @@ const ProductCard = () => {
         const response = await fetch(`http://localhost:3000/companies/${product.company_id}`)
         const companyObj = await response.json()
         setCompany(companyObj)
+        setCompLoading(false)
     }
 
     console.log('product.company_id', product.company_id)
@@ -155,6 +163,7 @@ const ProductCard = () => {
     })
 
     console.log('id', id)
+    console.log('compLoading', compLoading)
     return (
         <div className="card">
             <ProductOptionsModal product={product} fetchProduct={fetchProduct} deleteProduct={deleteProduct} />
@@ -163,9 +172,10 @@ const ProductCard = () => {
                 <div className="pd-left">
                     <div className="pd-row">
                         <div className="image-div">
-                            {!product.image_link ?
+                            {prodLoading ? <Loader center={true} className='image-loader' size='lg' content='Loading...'/> : !product.image_link ?
                                 <img className='pd-image' src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={product.name} onClick={() => handleCompanyClick(product.company_id)}></img>
                                 : <img className='pd-image' src={product.image_link} onError={(e) => (e.currentTarget.src = 'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg')} alt={product.name} onClick={() => handleCompanyClick(product.company_id)}></img>}
+
                             <div className="a-tag-div">
 
                                 <a href={product.product_link} target="_blank"><FontAwesomeIcon icon={faProductHunt}></FontAwesomeIcon></a>
@@ -235,8 +245,11 @@ const ProductCard = () => {
                 <div className="pd-right">
                     <h3>More Info</h3>
                     <div className="pd-row">
-                    {!product.company_logo ? <img onClick={() => handleCompanyClick(product.company_id)} className="company-logo" src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={product.company_name}></img>
+                        {compLoading ? <Loader center={false} className='image-loader' size='lg' content='Loading...'/>
+                         : !product.company_logo ? <img onClick={() => handleCompanyClick(product.company_id)} className="company-logo" src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={product.company_name}></img>
                      : <img onClick={() => handleCompanyClick(product.company_id)} className="company-logo" src={product.company_logo} onError={(e) => (e.currentTarget.src = 'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg')} alt={product.company_name}></img>}
+                    {/* {!product.company_logo ? <img onClick={() => handleCompanyClick(product.company_id)} className="company-logo" src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={product.company_name}></img>
+                     : <img onClick={() => handleCompanyClick(product.company_id)} className="company-logo" src={product.company_logo} onError={(e) => (e.currentTarget.src = 'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg')} alt={product.company_name}></img>} */}
                         <div className="company-name">
                             <span>
                                 <FontAwesomeIcon className="span-icon" icon={faBuilding}></FontAwesomeIcon>

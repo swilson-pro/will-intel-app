@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPhone, faEnvelope, faEraser, faUserPen, faBuilding, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
-import { Container, Sidebar, Content, Sidenav, Nav, Form, Input, Button, ButtonToolbar, IconButton, Popover, Whisper } from 'rsuite';
+import { Container, Sidebar, Content, Sidenav, Nav, Form, Input, Button, ButtonToolbar, IconButton, Popover, Whisper, Loader } from 'rsuite';
 
 import DashboardIcon from '@rsuite/icons/Dashboard';
 import GroupIcon from '@rsuite/icons/legacy/Group';
@@ -31,6 +31,8 @@ import CompContactsDrawer from "./CompContactsDrawer";
 
 import CompanyOptionsModal from "./CompanyOptionsModal";
 
+
+
 const Textarea = forwardRef((props, ref) => <Input {...props} as="textarea" ref={ref} />);
 
 const CompanyCard = () => {
@@ -51,10 +53,13 @@ const CompanyCard = () => {
     const [notes, setNotes] = useState([])
     const [newNote, setNewNote] = useState("")
 
+    const [compLoading, setCompLoading] = useState(true)
+
     const fetchCompany = async () => {
         const response = await fetch(`http://localhost:3000/companies/${id}`)
         const companyObj = await response.json()
         setCompany(companyObj)
+        setCompLoading(false)
         let reverseOrderNotes = companyObj.notes.reverse()
         setNotes(reverseOrderNotes)
     }
@@ -153,9 +158,12 @@ const CompanyCard = () => {
                 <div className="pd-left">
                     <div className="pd-row">
                         <div className="image-div">
-                            {!company.logoUrl ?
+                            {compLoading ? <Loader center={true} className='image-loader' size='lg' content='Loading...'/> : !company.logoUrl ?
                                 <img className='pd-image' src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={company.name}></img>
                                 : <img className='pd-image' src={company.logoUrl} onError={(e) => (e.currentTarget.src ='https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg')} alt={company.name}></img>}
+                            {/* {!company.logoUrl ?
+                                <img className='pd-image' src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={company.name}></img>
+                                : <img className='pd-image' src={company.logoUrl} onError={(e) => (e.currentTarget.src ='https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg')} alt={company.name}></img>} */}
                             <div className="a-tag-div">
                                 <a className="materials-icons" href={company.linkedin_regularCompanyUrl} target="_blank"><FontAwesomeIcon icon={faLinkedin}></FontAwesomeIcon></a>
                                 <a className="materials-icons" href={company.hq_email}><FontAwesomeIcon icon={faEnvelope}></FontAwesomeIcon></a>

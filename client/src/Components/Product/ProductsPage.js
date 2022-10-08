@@ -185,27 +185,6 @@ const ProductsPage = ({prodBlackList}) => {
     return (
         <main className="main">
             <p className='user-stats'>Products: {productCount}</p>
-            {/* <h1 className='page-header'>Products</h1> */}
-            {/* <NavLink className='new-product-navlink' to='/products/new' >
-                <button className='new-product'>Add Product</button></NavLink> */}
-            {/* <div className="filter">
-                <label className='filterLabel'>Choose owner:</label>
-                <select name='ownersNames' id='ownersNames' onChange={updateOwner}>
-                    <option value="All">All</option>
-                    {ownersNames.map((ownerName) => {
-                        return <option value={ownerName}>{ownerName}</option>
-                    })}
-                </select>
-                <div className='searchbox'>
-                <input
-                type='text'
-                id='search'
-                placeholder='search by name'
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                </div>
-            </div> */}
             <Table
             loading={loading}
             className="table"

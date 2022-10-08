@@ -79,6 +79,12 @@
     width: 30rem;
     height: auto;
 }
+
+.image-loader {
+    width: 30rem;
+    height: 30rem;
+    border-radius: 20px;
+}
 .pd-left {
     margin: 1rem;
 }
