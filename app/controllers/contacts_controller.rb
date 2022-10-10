@@ -141,6 +141,20 @@ class ContactsController < ApplicationController
         
     end
 
+    def dupes
+        contacts = Contact.all
+        names = contacts.pluck(:name)
+        names_id = contacts.pluck(:id, :name, :created_at)
+        repeat_names = names.find_all {|name| names.count(name) > 1}
+        # repeat_names_id = names_id.find_all {|name_id| names_id.count(name_id.name) >1}
+        repeat_names_ids = names_id.find_all{|name| names.count(name[1]) > 1}
+        # render json: repeat_names
+        render json: {data: repeat_names_ids,
+        names: repeat_names}
+    end
+
+
+
     # def update
     #     contact = Contact.find_by(id: params[:id])
     #     if contact
@@ -167,11 +181,6 @@ class ContactsController < ApplicationController
     def update
         contact = Contact.find_by(id: params[:id])
         if contact
-            # company = Company.find_or_create_by(name: params[:company_name], user_id: contact.user_id)
-            # company = Company.find_by(name: params[:company_name], user_id: contact.user_id)
-            # user = User.find_by(name: params[:input_owner_name])
-
-            # params[:name] ? contact.update(name: params[:name]) | contact.update(name: contact.name)
             if params[:name]
                 contact.update(name: params[:name])
             end

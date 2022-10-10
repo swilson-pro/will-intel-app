@@ -144,6 +144,7 @@ margin: 1rem;
 
 .pd-row .general-info {
     margin: 1rem;
+    max-width: 30rem;
 }
 
 .pd-mid{

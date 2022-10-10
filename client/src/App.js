@@ -31,13 +31,16 @@ import { useEffect, useState, forwardRef } from 'react';
 
 import 'rsuite/dist/rsuite.min.css'
 
-import { Button, ButtonToolbar, IconButton, CustomProvider, Navbar, Nav, Container, Header, Content, Footer, List, FlexboxGrid, Col, Avatar, Badge } from 'rsuite'
+import { Button, ButtonToolbar, IconButton, CustomProvider, Navbar, Nav, Container, Header, Content, Footer, List, FlexboxGrid, Col, Avatar, Badge, Input } from 'rsuite'
 
-import { Visible, Unvisible, Others, UserBadge, Plus, userTimes, Minus, Site, Peoples, PeoplesCostomize, Storage, Gear } from '@rsuite/icons'
+import { Visible, Unvisible, Others, UserBadge, Plus, userTimes, Minus, Site, Peoples, PeoplesCostomize, Storage, Gear, Search } from '@rsuite/icons'
 
 
 import { setUser, logout } from './features/user/user'
 import { useSelector, useDispatch } from 'react-redux'
+
+import GlobalSearch from './GlobalSearch';
+import Dupes from './Dupe Handling/Dupes';
 
 function App() {
 
@@ -144,6 +147,13 @@ function App() {
                       Product
                     </Nav.Item>
                   </Nav.Menu>
+                  {/* Global Search */}
+                  {/* <Nav.Menu icon={<Search />} title="Search">
+                    <Nav.Item icon={<Search />}>dropbox</Nav.Item>
+                    <Nav.Item icon={<Search />}>firefox</Nav.Item>
+                    <Nav.Item icon={<Search />}>gitlab</Nav.Item>
+                    <Nav.Item icon={<Search />}>linux</Nav.Item>
+                  </Nav.Menu> */}
                 </Nav>
                 <Nav pullRight>
                   <Nav.Menu title="Settings" icon={<Gear />}>
@@ -158,6 +168,13 @@ function App() {
                     </Nav.Item>
                     <Nav.Item icon={<Peoples />}>
                       Users
+                    </Nav.Item>
+                    <Nav.Item 
+                      as={NavLink}
+                      children={<Dupes/>}
+                      href="/dupes"
+                      icon={<Peoples />}>
+                      Dupe Handling
                     </Nav.Item>
                     <Nav.Item
                       as={NavLink}
@@ -269,6 +286,7 @@ function App() {
                     <Profile />
                   </PrivateRoute>
                 } />
+                <Route path='/dupes' element={<Dupes/>}/>
 
                 <Route path='/newuser' element={<NewUser />} />
                 <Route path='/login' element={<Login />} />

@@ -1,22 +1,15 @@
 import { useState, useEffect } from "react"
-import { Navigate, NavLink } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import PaginateContacts from "./PaginateContacts"
 import './paginate.css'
 import '../../Style/ContactsTable.css'
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faPlus} from '@fortawesome/free-solid-svg-icons'
-
-import { Button, IconButton, Table } from 'rsuite';
+import { Table } from 'rsuite';
 import 'rsuite/dist/rsuite.min.css'
 
 import {useSelector} from 'react-redux'
 
 const {Column, HeaderCell, Cell} = Table
-
-
-
 
 const ContactsPage = ({conBlackList}) => {
 
@@ -116,8 +109,6 @@ const ContactsPage = ({conBlackList}) => {
 
         handleSorting(sortColumn, sortOrder)
         
-
-
     }
 
     let formatter = (str) => {
@@ -145,24 +136,10 @@ const ContactsPage = ({conBlackList}) => {
         navigate(`/contacts/${rowData.id}`)
     }
 
-
     return(
         <main>
             <p className='user-stats'>Contacts:  {contactCount}</p>
             <div className="button-container">
-            {/* <NavLink className='new-contact-navlink' to='/contacts/new' >
-                
-                    <button type='button' className='new-contact'>
-                        <span className="button_icon">
-                        <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
-                        </span>
-                        <span className="button_text">Person</span>
-                    </button>
-                
-            </NavLink> */}
-            {/* <h1 className='page-header'>Contacts</h1> */}
-
-            
             </div>
 
             <Table 

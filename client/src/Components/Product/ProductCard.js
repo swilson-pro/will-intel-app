@@ -173,8 +173,8 @@ const ProductCard = () => {
                     <div className="pd-row">
                         <div className="image-div">
                             {prodLoading ? <Loader center={true} className='image-loader' size='lg' content='Loading...'/> : !product.image_link ?
-                                <img className='pd-image' src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={product.name} onClick={() => handleCompanyClick(product.company_id)}></img>
-                                : <img className='pd-image' src={product.image_link} onError={(e) => (e.currentTarget.src = 'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg')} alt={product.name} onClick={() => handleCompanyClick(product.company_id)}></img>}
+                                <img className='pd-image' src={`https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg`} alt={product.name}></img>
+                                : <img className='pd-image' src={product.image_link} onError={(e) => (e.currentTarget.src = 'https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg')} alt={product.name}></img>}
 
                             <div className="a-tag-div">
 
@@ -186,7 +186,6 @@ const ProductCard = () => {
                             </div>
                         </div>
                         <div className="general-info">
-                            <h3>{product.image_link}</h3>
                             <h3>{product.name}</h3>
                             <h3>Brand: {product.brand}</h3>
                             <h4><a href={product.website} target="_blank">{product.website}</a></h4>
