@@ -40,7 +40,12 @@ const ContactDupes = ({ data, names }) => {
                     return <li key={index}>{name}
                     <ul>
                         {data.data.map((d) => {
-                            return d[1] === name ? <li>{`${d[1]} | id: ${d[0]} | Created: ${Moment(d[2]).format('MMM DD, LT')}`}</li> : null
+                            return d[1] === name ? <li>{`${d[1]}`}
+                            <ul>
+                                <li>{`ID: ${d[0]}`}</li>
+                                <li>{`Created: ${Moment(d[2]).format('MMM DD, LT')}`}</li>
+                            </ul>
+                            </li> : null
                         })}
                     </ul>
                     </li>
