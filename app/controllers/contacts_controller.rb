@@ -144,7 +144,7 @@ class ContactsController < ApplicationController
     def dupes
         contacts = Contact.all
         names = contacts.pluck(:name)
-        names_id = contacts.pluck(:id, :name, :created_at)
+        names_id = contacts.pluck(:id, :name, :created_at, :image_url, :user_id)
         repeat_names = names.find_all {|name| names.count(name) > 1}
         # repeat_names_id = names_id.find_all {|name_id| names_id.count(name_id.name) >1}
         repeat_names_ids = names_id.find_all{|name| names.count(name[1]) > 1}

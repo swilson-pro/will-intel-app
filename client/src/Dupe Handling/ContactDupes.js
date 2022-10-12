@@ -7,7 +7,7 @@ import { useState } from 'react'
 import Moment from 'moment';
 
 
-const ContactDupes = ({ data, names }) => {
+const ContactDupes = ({ data, names, owners }) => {
     console.log('names', names)
     // console.log('data.data', data.data)
 
@@ -40,10 +40,16 @@ const ContactDupes = ({ data, names }) => {
                     return <li key={index}>{name}
                     <ul>
                         {data.data.map((d) => {
-                            return d[1] === name ? <li>{`${d[1]}`}
+                            return d[1] === name ? <li className='dupe_name'>{`${d[1]}`}
                             <ul>
                                 <li>{`ID: ${d[0]}`}</li>
                                 <li>{`Created: ${Moment(d[2]).format('MMM DD, LT')}`}</li>
+                                <li>{`Image: ${d[3]}`}</li>
+                                {/* <li>{`Owner: ${owners.map((owner) => {
+                                    return owner[0] === d[4] ? owner[1] : null
+                                })}`}</li> */}
+                                <li>{`Owner: ${owners.find((owner) => owner[0] === d[4])[1]}`}</li>
+                                {/* <li>{`Owner: ${owners.filter((owner) => owner[0] === d[4])}`}</li> */}
                             </ul>
                             </li> : null
                         })}

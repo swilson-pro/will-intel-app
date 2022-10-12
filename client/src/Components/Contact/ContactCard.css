@@ -330,6 +330,8 @@ margin: 1rem;
 
 .profile-mid{
     margin: 0 10px;
+}
 
-
+.dupe_name {
+    border: solid;
 }
