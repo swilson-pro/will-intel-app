@@ -17,6 +17,16 @@ const Dupes = () => {
     const [data, setData] = useState([])
     const [type, setType] = useState(null)
 
+    let names = data.names
+    console.log('names', names)
+
+    let result
+
+    names ? result = names.filter((x, i, a) => a.indexOf(x) == i) : console.log('names dont exist')
+
+    // const result = names.filter((x, i, a) => a.indexOf(x) == i);
+    console.log('result', result)
+
     const featCategory = category => {
         setType(category)
         fetch(`http://localhost:3000/dupes/${category.toLowerCase()}`)
@@ -49,7 +59,7 @@ const Dupes = () => {
                 placeholder="Contacts"
                 onSelect={featCategory}
             />
-            <ContactDupes data={data}/>
+            <ContactDupes data={data} names={result}/>
             
         </>
     );
