@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_202733) do
     t.datetime "updated_at", null: false
     t.string "image_url"
     t.string "input_owner_name"
+    t.boolean "is_dupe_primary"
   end
 
   create_table "notes", force: :cascade do |t|

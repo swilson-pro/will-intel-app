@@ -334,8 +334,10 @@ margin: 1rem;
 
 .dupe_name {
     border: solid;
+    background-color: lightblue;
 }
 .dupe_button {
     position: absolute;
     right: 0;
 }
+

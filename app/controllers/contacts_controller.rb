@@ -228,6 +228,9 @@ class ContactsController < ApplicationController
             if params[:bio]
                 contact.update(bio: params[:bio])
             end
+            if params[:is_dupe_primary]
+                contact.update(is_dupe_primary: params[:is_dupe_primary])
+            end
 
             render json: contact, status: 204
         else

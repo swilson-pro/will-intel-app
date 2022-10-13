@@ -106,7 +106,7 @@ const Dupes = () => {
                 placeholder="Contacts"
                 onSelect={fetchCategory}
             />
-            <ContactDupes data={data} names={result} owners={owners}/>
+            <ContactDupes data={data} names={result} owners={owners} fetchContactDupes={fetchContactDupes}/>
             
         </>
     );
