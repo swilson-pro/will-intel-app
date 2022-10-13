@@ -25,5 +25,9 @@ class Contact < ApplicationRecord
     def company_contacts
         company&.contacts
     end
+    def notes_count
+        notes.length
+    end
+    
 end
     

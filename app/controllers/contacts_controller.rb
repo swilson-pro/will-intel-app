@@ -121,6 +121,15 @@ class ContactsController < ApplicationController
         render json: contacts, each_serializer: ContactTableSerializer
     end
 
+    def dupes
+        contacts = Contact.all
+        names = contacts.pluck(:name)
+        # names_id = contacts.pluck(:id, :name, :created_at, :image_url, :user_id, :phone, :company_id)
+        # repeat_names_id = names_id.find_all {|name_id| names_id.count(name_id.name) >1}
+        dupes = contacts.find_all{|name| names.count(name.name) > 1}
+        render json: dupes, each_serializer: ContactTableSerializer
+    end
+
     def count
         contacts = Contact.all.length
         render json: contacts
@@ -141,16 +150,20 @@ class ContactsController < ApplicationController
         
     end
 
-    def dupes
+    # def dupes
+    #     contacts = Contact.all
+    #     names = contacts.pluck(:name)
+    #     names_id = contacts.pluck(:id, :name, :created_at, :image_url, :user_id, :phone, :company_id)
+    #     # repeat_names_id = names_id.find_all {|name_id| names_id.count(name_id.name) >1}
+    #     repeat_names_ids = names_id.find_all{|name| names.count(name[1]) > 1}
+    #     render json: repeat_names_ids
+    # end
+
+    def dupe_names
         contacts = Contact.all
         names = contacts.pluck(:name)
-        names_id = contacts.pluck(:id, :name, :created_at, :image_url, :user_id, :company_id)
         repeat_names = names.find_all {|name| names.count(name) > 1}
-        # repeat_names_id = names_id.find_all {|name_id| names_id.count(name_id.name) >1}
-        repeat_names_ids = names_id.find_all{|name| names.count(name[1]) > 1}
-        # render json: repeat_names
-        render json: {data: repeat_names_ids,
-        names: repeat_names}
+        render json: repeat_names
     end
 
 

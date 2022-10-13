@@ -11,14 +11,14 @@ import { Panel, Placeholder, Stack, ButtonGroup, Button } from 'rsuite';
 
 const ContactDupes = ({ data, names, owners }) => {
     console.log('names', names)
-    // console.log('data.data', data.data)
+    console.log('data', data)
+    console.log('owners', owners)
 
-    const contacts = data.data
+    const contacts = data
+    const [preview, setPreview] = useState('')
+    const [primary, setPrimary] = useState('')
+    const [secondary, setSecondary] = useState('')
 
-    // let names = data.names
-
-
-    // console.log('data.names', data.names)
 
 
     // console.log('names', names)
@@ -32,43 +32,72 @@ const ContactDupes = ({ data, names, owners }) => {
 
     // console.log('contacts[0]', contacts[0])
 
+    const handlePreviewSubmit = async (e) => {
+        e.preventDefault()
+        console.log('e', e)
+        console.log('e.target', e.target)
+        console.log('e.target.value', e.target.value)
+        console.log('e.target[0]', e.target[0])
+        console.log('e.target[1]', e.target[1])
+        console.log('e.target[0].name', e.target[0].name)
+        console.log('e.target[1].name', e.target[1].name)
+    }
+
+    // console.log('primary', primary)
+
+
+
     return (
         <>
-            <h1>hello world</h1>
+
+            
             {/* {data.data ? console.log('data.data', data.data) : console.log('no data.data')} */}
-            {names && data.data ?
+            {names && data ?
                 <div>
+                    <h1>{`Total Dupes: ${names.length}`}</h1>
                     {names.map((name, index) => {
-                        return <ul key={index}>{`${name} (${data.data.filter(d => d[1] === name).length})`}
+                        return <ul key={index}>{`${name} (${data.filter(d => d.name === name).length})`}
+                        <form onSubmit={handlePreviewSubmit}>
                             <div>
-                                {data.data.map((d) => {
-                                    return d[1] === name ? <div className='dupe_name'>
-                                        {`${d[1]}`}
-                                        <button className='dupe_button'>primary</button>
+                            
+                                {data.map((d) => {
+                                    return d.name === name ? <div className='dupe_name'>
+                                        {`${d.name}`}
+                                        <div className='dupe_button'>
+                                        {/* <input type="radio" id={d.id} name='primary_button' value={`id: ${d.id}, name: ${d.name}`} onChange={(e) => setPrimary(e.target.value)}></input> */}
+                                        <input type="radio" id={d.id} name={d.name} value={`id: ${d.id}, name: ${d.name}`}></input>
+                                        <label htmlFor={d.id}>Primary</label>
+                                        </div>
                                         <div>
-                                            <p>{`ID: ${d[0]}`}</p>
+                                            <p>{`ID: ${d.id}`}</p>
                                             <p>{`Created: ${Moment(d[2]).format('MMM DD, LT')}`}</p>
-                                            <p>{`Image: ${d[3]}`}</p>
+                                            <p>{`Image: ${d.image_url}`}</p>
                                             {/* <li>{`Owner: ${owners.map((owner) => {
                                     return owner[0] === d[4] ? owner[1] : null
                                 })}`}</li> */}
-                                            <p>{`Owner: ${owners.find((owner) => owner[0] === d[4])[1]}`}</p>
+                                            <p>{`Owner: ${owners.find((owner) => owner[0] === d.user_id)[1]}`}</p>
                                             {/* <li>{`Owner: ${owners.filter((owner) => owner[0] === d[4])}`}</li> */}
+                                            <p>{`Phone: ${d.phone}`}</p>
+                                            <p>{`Notes: ${d.notes_count}`}</p>
                                         </div>
                                     </div> : null
                                 })}
+
                             </div>
+                            <button type="submit">Preview</button>
+                                </form>                            
+                        
                         </ul>
                     })}
 
                 </div>
                 : "names don't exist"}
-            {names && data.data ?
+            {names && data ?
                 <ul>
                     {names.map((name, index) => {
                         return <li key={index}>{name}
                             <ul>
-                                {data.data.map((d) => {
+                                {data.map((d) => {
                                     return d[1] === name ? <li className='dupe_name'>
                                         {`${d[1]}`}
                                         <button className='dupe_button'>primary</button>

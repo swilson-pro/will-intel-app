@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/count_contacts', to: 'contacts#count'
   get '/contacts/:id', to: 'contacts#show'
   get '/dupes/contacts', to: 'contacts#dupes'
+  get '/dupenames/contacts', to: 'contacts#dupe_names'
   post '/contacts', to: 'contacts#create'
   patch '/contacts/:id', to: 'contacts#update'
   delete '/contacts/:id', to: 'contacts#destroy'
