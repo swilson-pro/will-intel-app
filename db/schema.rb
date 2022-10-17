@@ -69,6 +69,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_05_202733) do
     t.string "image_url"
     t.string "input_owner_name"
     t.boolean "is_dupe_primary"
+    t.string "secondary_email"
+    t.string "secondary_phone"
   end
 
   create_table "notes", force: :cascade do |t|

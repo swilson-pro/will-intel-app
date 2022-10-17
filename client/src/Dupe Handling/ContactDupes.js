@@ -8,27 +8,27 @@ import Moment from 'moment';
 
 import { Panel, Placeholder, Stack, ButtonGroup, Button } from 'rsuite';
 
+import ContactMergeDrawer from './ContactMergeDrawer';
+
 
 const ContactDupes = ({ data, names, owners, fetchContactDupes }) => {
-    console.log('names', names)
-    console.log('data', data)
-    console.log('owners', owners)
+    // console.log('names', names)
+    // console.log('data', data)
+    // console.log('owners', owners)
 
     const contacts = data
     const [preview, setPreview] = useState('')
     const [primary, setPrimary] = useState('')
     const [secondary, setSecondary] = useState('')
 
-
-
-    // console.log('names', names)
-
-    // const result = names.filter((x, i, a) => a.indexOf(x) == i);
-
-    // console.log('result', result);
-    // expected output: Array ["exuberant", "destruction", "present"]
-
-    // console.log('contacts[0]', contacts[0])
+    const [open, setOpen] = useState(false);
+    const [overflow, setOverflow] = useState(true);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [nomen, setNomen] = useState('')
+    const [image, setImage] = useState('')
+    const [phone, setPhone] = useState('')
+    const [notesCount, setNotesCount] = useState(0)
 
     const handlePreviewSubmit = async (e) => {
         e.preventDefault()
@@ -41,32 +41,51 @@ const ContactDupes = ({ data, names, owners, fetchContactDupes }) => {
         console.log('e.target[1].name', e.target[1].name)
     }
 
+    console.log('open', open)
+    console.log('nomen', nomen)
+    console.log('image', image)
+    console.log('phone', phone)
+    console.log('notesCount', notesCount)
+
     const handleClick = async (e) => {
         e.preventDefault()
         fetchContactDupes()
-        console.log('e.target', e.target)
-        console.log('e.target.name', e.target.name)
-        console.log('e.target.value', e.target.value)
-        console.log('e.target[0]', e.target[0])
-        console.log('e.target[1]', e.target[1])
-        console.log('hi')
+            .then(previewMergeContacts(e.target.name))
     }
 
-    console.log('data', data)
-    console.log('names', names)
-
-    const unPrimaryOthers = async (sameName) => {
+    const previewMergeContacts = async (contactName) => {
+        console.log('OOOOO YEAH', contactName)
+        const sameName = data.filter(item => item.name === contactName)
         console.log('sameName', sameName)
+        const primary = data.filter(item => item.name === contactName && item.is_dupe_primary === true)
+        console.log('primary', primary)
+        const secondary = data.filter(item => item.name === contactName && item.is_dupe_primary === false)
+        console.log('secondary', secondary)
+        console.log('secondary[0].image_url', secondary[0].image_url)
+        console.log('secondary[1]', secondary[1])
+        // secondary[1].image_url !== undefined || secondary[1].image_url ? console.log('secondary[1].image_url') : console.log('DOES NOT EXIST')
+        secondary[1] == undefined ? console.log('undefined') : console.log('not undefined')
+        setNomen(primary[0].name)
+        primary[0].image_url ? setImage(primary[0].image_url) : secondary[0].image_url ? setImage(secondary[0].image_url) : secondary[1] ? setImage(secondary[1].image_url) : console.log('no image')
+        primary[0].phone ? setPhone(primary[0].phone) : secondary[0].phone ? setPhone(secondary[0].phone) : secondary[1] ? setPhone(secondary[1].phone) : console.log('no phone')
+        setNotesCount(primary[0].notes_count)
+        // setNotesCount(primary[0].notes_count + secondary[0].notes_count + secondary[1] ? secondary.notes_count : 0)
+        handleOpen()
+
+    }
+
+    const unPrimaryOthers = async (toUnPrimary) => {
+        console.log('toUnPrimary', toUnPrimary)
         console.log('begin')
-        for(let item of sameName) {
+        for (let item of toUnPrimary) {
             await unPrimary(item)
         }
-        console.log('finished');
+
         return;
     }
 
     const unPrimary = async (item) => {
-        console.log('item to unprmary',item)
+        console.log('item to unprmary', item)
         let req = await fetch(`http://localhost:3000/contacts/${item.id}`, {
             method: "PATCH",
             body: JSON.stringify({
@@ -75,7 +94,7 @@ const ContactDupes = ({ data, names, owners, fetchContactDupes }) => {
             headers: {
                 "Content-type": "application/json"
             }
-        })
+        }).then(console.log('unprimaried done'))
     }
 
     const handleRadioClick = async (e) => {
@@ -87,24 +106,20 @@ const ContactDupes = ({ data, names, owners, fetchContactDupes }) => {
         console.log('data after click', data)
         const chickens = data.map(item => item.id)
         console.log('chickens', chickens)
-        const result = data.filter(item => item.id === parseInt(e.target.value))
-        console.log('result', result)
-        const nombre = result[0].name
+        const toPrimary = data.filter(item => item.id === parseInt(e.target.value))
+        console.log('toPrimary', toPrimary)
+        const nombre = toPrimary[0].name
         console.log('nombre', nombre)
-        const sameName = data.filter(item => item.name === nombre && item.id !== parseInt(e.target.value))
+        const toUnPrimary = data.filter(item => item.name === nombre && item.id !== parseInt(e.target.value))
         // console.log('sameName', sameName)
 
-        unPrimaryOthers(sameName)
+        primaryPrimary(e.target.value)
+        unPrimaryOthers(toUnPrimary)
+    }
 
-
-
-
-        // set others' primary value to false
-
-
-
-
-        let req = await fetch(`http://localhost:3000/contacts/${e.target.value}`, {
+    const primaryPrimary = async (id) => {
+        console.log('id', id)
+        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 is_dupe_primary: true
@@ -119,6 +134,15 @@ const ContactDupes = ({ data, names, owners, fetchContactDupes }) => {
             {/* {data.data ? console.log('data.data', data.data) : console.log('no data.data')} */}
             {names && data ?
                 <div>
+                    {nomen ?
+                        <form>
+                            <h3>merge preview</h3>
+                            <h4>{nomen}</h4>
+                            <p>{image}</p>
+                            <p>Notes: {notesCount}</p>
+                        </form>
+                        : null}
+
                     <h1>{`Total Dupes: ${names.length}`}</h1>
                     {names.map((name, index) => {
                         return <form>
@@ -143,6 +167,7 @@ const ContactDupes = ({ data, names, owners, fetchContactDupes }) => {
                                                 {/* <li>{`Owner: ${owners.filter((owner) => owner[0] === d[4])}`}</li> */}
                                                 <p>{`Phone: ${d.phone}`}</p>
                                                 <p>{`Notes: ${d.notes_count}`}</p>
+                                                
                                             </div>
                                         </div> : null
                                     })}

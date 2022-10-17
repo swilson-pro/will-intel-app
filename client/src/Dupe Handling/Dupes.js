@@ -4,6 +4,7 @@ import Nav from "@rsuite/responsive-nav";
 import { useEffect, useState } from 'react';
 import { InputPicker } from 'rsuite'
 import ContactDupes from './ContactDupes';
+import NewContactDupes from './NewContactDupes';
 
 
 const categories = ['Contacts', 'Companies', 'Products'].map(
@@ -78,6 +79,7 @@ const Dupes = () => {
             .then(data => {
                 setData(data)
             })
+            .then(console.log('fetchdupes from dupes page'))
     }
 
     const fetchDupeNames = async () => {
@@ -86,6 +88,7 @@ const Dupes = () => {
             .then(data => {
                 setNames(data)
             })
+            
     }
 
     useEffect(() => {
@@ -106,7 +109,8 @@ const Dupes = () => {
                 placeholder="Contacts"
                 onSelect={fetchCategory}
             />
-            <ContactDupes data={data} names={result} owners={owners} fetchContactDupes={fetchContactDupes}/>
+            {/* <ContactDupes data={data} names={result} owners={owners} fetchContactDupes={fetchContactDupes}/> */}
+            <NewContactDupes data={data} names={result} owners={owners} fetchContactDupes={fetchContactDupes}/>
             
         </>
     );
