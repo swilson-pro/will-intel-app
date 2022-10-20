@@ -7,7 +7,7 @@ gem 'will_paginate', '~> 3.3'
 
 gem 'active_model_serializers'
 
-ruby "2.7.4"
+ruby "2.7.6"
 
 gem 'pg'
 
