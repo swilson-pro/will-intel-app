@@ -28,7 +28,7 @@ const EditContact = ({id, contact, fetchContact}) => {
     }
 
     const fetchOwners = async () => {
-        const response = await fetch(`http://localhost:3000/users`)
+        const response = await fetch(`http://localhost:3000/api/users`)
         const ownersArray = await response.json()
         setOwners(ownersArray)
     }

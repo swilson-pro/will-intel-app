@@ -26,7 +26,7 @@ const Profile = () => {
     }
 
     const getUserContactsCount = async () => {
-        const res = await fetch(`http://localhost:3000/usercontactscount/${user.id}`)
+        const res = await fetch(`http://localhost:3000/api/usercontactscount/${user.id}`)
         const count = await res.json()
         setUserContactCount(count)
     }
@@ -38,7 +38,7 @@ const Profile = () => {
     }
 
     const getUserCompaniesCount = async () => {
-        const res = await fetch(`http://localhost:3000/usercompaniescount/${user.id}`)
+        const res = await fetch(`http://localhost:3000/api/usercompaniescount/${user.id}`)
         const count = await res.json()
         setUserCompanyCount(count)
     }
@@ -50,7 +50,7 @@ const Profile = () => {
     }
 
     const getUserProductsCount = async () => {
-        const res = await fetch(`http://localhost:3000/userproductscount/${user.id}`)
+        const res = await fetch(`http://localhost:3000/api/userproductscount/${user.id}`)
         const count = await res.json()
         setUserProductCount(count)
     }
@@ -62,7 +62,7 @@ const Profile = () => {
     }
 
     const getUserNotesCount = async () => {
-        const res = await fetch(`http://localhost:3000/usernotescount/${user.id}`)
+        const res = await fetch(`http://localhost:3000/api/usernotescount/${user.id}`)
         const count = await res.json()
         setUserNoteCount(count)
     }

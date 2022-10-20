@@ -101,7 +101,7 @@ const NewUser = () => {
 
     console.log('input data', `name: ${fName}, email: ${fEmail}, password: ${fPassword}`)
 
-    fetch("http://localhost:3000/users", {
+    fetch("http://localhost:3000/api/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

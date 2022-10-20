@@ -6,21 +6,7 @@ Rails.application.routes.draw do
 
 
   # pagination
-  get '/users', to: 'users#index'
-  get '/count_users', to: 'users#count'
-  get '/usercontacts/:id', to: 'users#show_contacts'
-  get '/usercontactscount/:id', to: 'users#count_contacts'
-  get '/usercompaniescount/:id', to: 'users#count_companies'
-  get '/userproductscount/:id', to: 'users#count_products'
-  get '/usernotescount/:id', to: 'users#count_contacts'
-  get '/users/:id', to: 'users#show'
-  get '/users_names', to: 'users#shownames'
-  post '/users', to: 'users#create'
-  get '/user_name_objects', to: 'users#user_name_objects'
 
-  post '/login', to: 'users#login'
-
-  get '/profile', to: 'users#profile'
 
 
 
@@ -31,6 +17,22 @@ Rails.application.routes.draw do
     # post "/signup", to: "users#create"
     # post "/login", to: "sessions#create"
     # delete "/logout", to: "sessions#destroy"
+
+    get '/users', to: 'users#index'
+    get '/count_users', to: 'users#count'
+    get '/usercontacts/:id', to: 'users#show_contacts'
+    get '/usercontactscount/:id', to: 'users#count_contacts'
+    get '/usercompaniescount/:id', to: 'users#count_companies'
+    get '/userproductscount/:id', to: 'users#count_products'
+    get '/usernotescount/:id', to: 'users#count_contacts'
+    get '/users/:id', to: 'users#show'
+    get '/users_names', to: 'users#shownames'
+    post '/users', to: 'users#create'
+    get '/user_name_objects', to: 'users#user_name_objects'
+  
+    post '/login', to: 'users#login'
+  
+    get '/profile', to: 'users#profile'
 
     get '/companies_paginated/:page', to: 'companies#paginated_companies'
 

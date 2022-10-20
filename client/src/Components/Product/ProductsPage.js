@@ -114,7 +114,7 @@ const ProductsPage = ({prodBlackList}) => {
 
 
     const fetchOwnersNames = async () => {
-        const response = await fetch(`http://localhost:3000/users_names`)
+        const response = await fetch(`http://localhost:3000/api/users_names`)
         const ownersNamesArray = await response.json()
         setOwnersNames(ownersNamesArray)
     }

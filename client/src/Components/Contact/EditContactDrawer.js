@@ -254,7 +254,7 @@ const EditContactDrawer = ({ contact, id, fetchContact }) => {
 
         const fetchOwners = async () => {
             let ownersArray = []
-            let req = await fetch(`http://localhost:3000/user_name_objects`)
+            let req = await fetch(`http://localhost:3000/api/user_name_objects`)
             let res = await req.json()
     
             setOwners(res)
