@@ -46,7 +46,7 @@ const CompaniesPage = ({compBlackList}) => {
 
 
     const getCompaniesCount = async () => {
-        const res = await fetch(`http://localhost:3000/count_companies`)
+        const res = await fetch(`http://localhost:3000/api/count_companies`)
         const count = await res.json()
         setCompanyCount(count)
     }

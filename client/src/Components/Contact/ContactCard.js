@@ -83,7 +83,7 @@ const ContactCard = () => {
     }
 
     const deleteNote = async (id) => {
-        let req = await fetch(`http://localhost:3000/notes/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/notes/${id}`, {
             method: "DELETE",
         })
             .then(alert("Note Deleted"))
@@ -113,7 +113,7 @@ const ContactCard = () => {
 
     const handleAddNote = async (e) => {
         e.preventDefault()
-        let req = await fetch(`http://localhost:3000/notes`, {
+        let req = await fetch(`http://localhost:3000/api/notes`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -146,7 +146,7 @@ const ContactCard = () => {
             return;
         }
         console.log('formValue', formValue)
-        let req = await fetch(`http://localhost:3000/notes`, {
+        let req = await fetch(`http://localhost:3000/api/notes`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

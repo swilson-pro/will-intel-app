@@ -6,15 +6,6 @@ Rails.application.routes.draw do
 
 
   # pagination
-
-
-  
-
-  
-
-
-
-
   get '/users', to: 'users#index'
   get '/count_users', to: 'users#count'
   get '/usercontacts/:id', to: 'users#show_contacts'
@@ -27,22 +18,11 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create'
   get '/user_name_objects', to: 'users#user_name_objects'
 
-  
   post '/login', to: 'users#login'
 
   get '/profile', to: 'users#profile'
 
 
-
-
-
-
-
-  get '/notes', to: 'notes#index'
-  get '/count_notes', to: 'notes#count'
-  get '/notes/:id', to: 'notes#show'
-  post '/notes', to: 'notes#create'
-  delete '/notes/:id', to: 'notes#destroy'
 
   namespace :api do
     # resources :notes, only: [:index]
@@ -53,6 +33,12 @@ Rails.application.routes.draw do
     # delete "/logout", to: "sessions#destroy"
 
     get '/companies_paginated/:page', to: 'companies#paginated_companies'
+
+    get '/notes', to: 'notes#index'
+    get '/count_notes', to: 'notes#count'
+    get '/notes/:id', to: 'notes#show'
+    post '/notes', to: 'notes#create'
+    delete '/notes/:id', to: 'notes#destroy'
 
     get '/companies', to: 'companies#index'
     get '/count_companies', to: 'companies#count'

@@ -32,7 +32,7 @@ const Profile = () => {
     }
 
     const getCompaniesCount = async () => {
-        const res = await fetch(`http://localhost:3000/count_companies`)
+        const res = await fetch(`http://localhost:3000/api/count_companies`)
         const count = await res.json()
         setCompanyCount(count)
     }
@@ -56,7 +56,7 @@ const Profile = () => {
     }
 
     const getNotesCount = async () => {
-        const res = await fetch(`http://localhost:3000/count_notes`)
+        const res = await fetch(`http://localhost:3000/api/count_notes`)
         const count = await res.json()
         setNoteCount(count)
     }
