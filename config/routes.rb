@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # pagination
 
 
-  get '/companies_paginated/:page', to: 'companies#paginated_companies'
+  
 
   
 
@@ -33,13 +33,7 @@ Rails.application.routes.draw do
   get '/profile', to: 'users#profile'
 
 
-  get '/companies', to: 'companies#index'
-  get '/count_companies', to: 'companies#count'
-  get '/companies/:id', to: 'companies#show'
-  get '/companies_names', to: 'companies#names'
-  post '/companies', to: 'companies#create'
-  patch '/companies/:id', to: 'companies#update'
-  delete '/companies/:id', to: 'companies#destroy'
+
 
 
 
@@ -57,6 +51,16 @@ Rails.application.routes.draw do
     # post "/signup", to: "users#create"
     # post "/login", to: "sessions#create"
     # delete "/logout", to: "sessions#destroy"
+
+    get '/companies_paginated/:page', to: 'companies#paginated_companies'
+
+    get '/companies', to: 'companies#index'
+    get '/count_companies', to: 'companies#count'
+    get '/companies/:id', to: 'companies#show'
+    get '/companies_names', to: 'companies#names'
+    post '/companies', to: 'companies#create'
+    patch '/companies/:id', to: 'companies#update'
+    delete '/companies/:id', to: 'companies#destroy'
 
     get '/owners_contacts/:user_id', to: 'contacts#owners_contacts'
 

@@ -53,7 +53,7 @@ const CompaniesPage = ({compBlackList}) => {
 
     const getCompaniesForPage = async (page) => {
 
-        const res = await fetch(`http://localhost:3000/companies_paginated/${page}?${sortField}=${order}`)
+        const res = await fetch(`http://localhost:3000/api/companies_paginated/${page}?${sortField}=${order}`)
         const companiesPageData = await res.json()
 
         const companiesDataArray = companiesPageData.companies

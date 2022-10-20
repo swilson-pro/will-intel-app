@@ -62,7 +62,7 @@ const ProductCard = () => {
     }
 
     const fetchCompany = async () => {
-        const response = await fetch(`http://localhost:3000/companies/${product.company_id}`)
+        const response = await fetch(`http://localhost:3000/api/companies/${product.company_id}`)
         const companyObj = await response.json()
         setCompany(companyObj)
         setCompLoading(false)

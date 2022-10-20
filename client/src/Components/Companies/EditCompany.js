@@ -9,7 +9,7 @@ const EditCompany = ({id, fetchCompany}) => {
         let newName = e.target[0].value
         console.log('e.target[0]', e.target[0])
         console.log('e.target[0].value', e.target[0].value)
-        let req = await fetch(`http://localhost:3000/companies/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/companies/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 name: newName
@@ -24,7 +24,7 @@ const EditCompany = ({id, fetchCompany}) => {
     const updateWebsite = async (e) => {
         e.preventDefault()
         let newWebsite = e.target[0].value
-        let req = await fetch(`http://localhost:3000/companies/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/companies/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 website: newWebsite
@@ -39,7 +39,7 @@ const EditCompany = ({id, fetchCompany}) => {
     const updateLinkedin = async (e) => {
         e.preventDefault()
         let newLinkedin = e.target[0].value
-        let req = await fetch(`http://localhost:3000/companies/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/companies/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 linkedin_regularCompanyUrl: newLinkedin
@@ -54,7 +54,7 @@ const EditCompany = ({id, fetchCompany}) => {
     const updateDescription = async (e) => {
         e.preventDefault()
         let newDescription = e.target[0].value
-        let req = await fetch(`http://localhost:3000/companies/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/companies/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 description: newDescription

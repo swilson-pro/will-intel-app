@@ -50,7 +50,7 @@ const EditCompanyDrawer = ({ company, fetchCompany }) => {
 
 
         console.log('fNameVal', fNameVal)
-        let req = await fetch(`http://localhost:3000/companies/${company.id}`, {
+        let req = await fetch(`http://localhost:3000/api/companies/${company.id}`, {
             method: "PATCH",
             body: JSON.stringify(fNameVal),
             headers: {
@@ -78,7 +78,7 @@ const EditCompanyDrawer = ({ company, fetchCompany }) => {
 
 
         console.log('fWebsiteVal', fWebsiteVal)
-        let req = await fetch(`http://localhost:3000/companies/${company.id}`, {
+        let req = await fetch(`http://localhost:3000/api/companies/${company.id}`, {
             method: "PATCH",
             body: JSON.stringify(fWebsiteVal),
             headers: {
@@ -106,7 +106,7 @@ const EditCompanyDrawer = ({ company, fetchCompany }) => {
 
 
         console.log('fLinkedinVal', fLinkedinVal)
-        let req = await fetch(`http://localhost:3000/companies/${company.id}`, {
+        let req = await fetch(`http://localhost:3000/api/companies/${company.id}`, {
             method: "PATCH",
             body: JSON.stringify(fLinkedinVal),
             headers: {

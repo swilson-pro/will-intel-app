@@ -21,7 +21,7 @@ const NewCompany = () => {
 
         console.log('Company: ', { name, website, logoUrl, description })
 
-        let req = await fetch(`http://localhost:3000/companies`, {
+        let req = await fetch(`http://localhost:3000/api/companies`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -73,7 +73,7 @@ const NewCompany = () => {
         let fDescription = formValue.description
         console.log(`New Company submitted: `, `name: ${fName}`, `description: ${fDescription}`)
 
-        let req = await fetch(`http://localhost:3000/companies`, {
+        let req = await fetch(`http://localhost:3000/api/companies`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

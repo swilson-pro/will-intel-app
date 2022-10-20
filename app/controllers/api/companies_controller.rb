@@ -1,4 +1,4 @@
-class CompaniesController < ApplicationController
+class Api::CompaniesController < ApplicationController
     require 'will_paginate/array'
 
     def paginated_companies

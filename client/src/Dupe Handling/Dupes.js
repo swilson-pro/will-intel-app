@@ -52,7 +52,7 @@ const Dupes = () => {
 
     const fetchCompanies = async () => {
         let companiesArray = []
-        let req = await fetch(`http://localhost:3000/companies_names`)
+        let req = await fetch(`http://localhost:3000/api/companies_names`)
         let res = await req.json()
 
         setCompanies(res)

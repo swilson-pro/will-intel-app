@@ -56,7 +56,7 @@ const CompanyCard = () => {
     const [compLoading, setCompLoading] = useState(true)
 
     const fetchCompany = async () => {
-        const response = await fetch(`http://localhost:3000/companies/${id}`)
+        const response = await fetch(`http://localhost:3000/api/companies/${id}`)
         const companyObj = await response.json()
         setCompany(companyObj)
         setCompLoading(false)
@@ -74,7 +74,7 @@ const CompanyCard = () => {
 
     const deleteCompany = async (id) => {
         console.log('clicked', id)
-        let req = await fetch(`http://localhost:3000/companies/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/companies/${id}`, {
             method: "DELETE",
         })
             .then(alert("Company Deleted"))
