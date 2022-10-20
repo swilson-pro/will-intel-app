@@ -65,4 +65,14 @@ Rails.application.routes.draw do
   get '/notes/:id', to: 'notes#show'
   post '/notes', to: 'notes#create'
   delete '/notes/:id', to: 'notes#destroy'
+
+  namespace :api do
+    # resources :notes, only: [:index]
+
+    # get "/me", to: "chickens#show"
+    # post "/signup", to: "users#create"
+    # post "/login", to: "sessions#create"
+    # delete "/logout", to: "sessions#destroy"
+    get '/chickens', to: 'chickens#index'
+  end
 end

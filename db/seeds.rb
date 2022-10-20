@@ -169,70 +169,76 @@ products_csv.each do |row|
     )
 end
 
-puts "making notes"
+# puts "making notes"
 
-300.times{
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "Very good opportunity here!")
+# 300.times{
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "Very good opportunity here!")
 
-    Note.create(
-        notable: Company.all.sample,
-        user: User.all.sample,
-        content: "This company has a lot of potential, I think they'd be interested in working with us."
-    )
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "Seems like they're interested!")
+#     Note.create(
+#         notable: Company.all.sample,
+#         user: User.all.sample,
+#         content: "This company has a lot of potential, I think they'd be interested in working with us."
+#     )
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "Seems like they're interested!")
 
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "This could be a great opportunity.")
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "This could be a great opportunity.")
 
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "Think they're a good fit")
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "Think they're a good fit")
 
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "Impressive experience")
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "Impressive experience")
 
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "Outstanding background.")
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "Outstanding background.")
 
-    Note.create(
-        notable: Contact.all.sample, 
-        user: User.all.sample, 
-        content: "I think this could work")
+#     Note.create(
+#         notable: Contact.all.sample, 
+#         user: User.all.sample, 
+#         content: "I think this could work")
         
-    Note.create(
-        notable: Company.all.sample, 
-        user: User.all.sample, 
-        content: "This organization seems to be in need of our services.")
+#     Note.create(
+#         notable: Company.all.sample, 
+#         user: User.all.sample, 
+#         content: "This organization seems to be in need of our services.")
 
-    Note.create(
-        notable: Company.all.sample, 
-        user: User.all.sample, 
-        content: "Great organization with great people. I think we're going to be able to help them a lot.")        
+#     Note.create(
+#         notable: Company.all.sample, 
+#         user: User.all.sample, 
+#         content: "Great organization with great people. I think we're going to be able to help them a lot.")        
 
-    Note.create(
-        notable: Product.all.sample, 
-        user: User.all.sample, 
-        content: "This is an amazing product.")
+#     Note.create(
+#         notable: Product.all.sample, 
+#         user: User.all.sample, 
+#         content: "This is an amazing product.")
 
-    Note.create(
-        notable: Product.all.sample, 
-        user: User.all.sample, 
-        content: "This product is selling like hot pockets!")
+#     Note.create(
+#         notable: Product.all.sample, 
+#         user: User.all.sample, 
+#         content: "This product is selling like hot pockets!")
 
         
 
-}
+# }
 
+puts "making chickens"
+
+3.times{Chicken.create(
+    user: User.all.sample
+    name: Contact.all.sample
+)}
