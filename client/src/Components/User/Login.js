@@ -34,7 +34,7 @@ const Login = () => {
     let handleSubmit = (e) => {
         e.preventDefault()
         console.log('form', form)
-        fetch("http://localhost:3000/login", {
+        fetch("http://localhost:3000/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const Login = () => {
         let token = localStorage.getItem("jwt");
         console.log('token', token)
         if (token && !user.isLoggedin) {
-            fetch("http://localhost:3000/profile", {
+            fetch("http://localhost:3000/api/profile", {
                 headers: {
                     token: token,
                     "Content-Type": "application/json",
@@ -126,7 +126,7 @@ const Login = () => {
             return;
         }
         console.log('formValue on click', formValue)
-        fetch("http://localhost:3000/login", {
+        fetch("http://localhost:3000/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
