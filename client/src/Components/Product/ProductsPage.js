@@ -34,7 +34,7 @@ const ProductsPage = ({prodBlackList}) => {
 
     const [pageCount, setPageCount] = useState();
 
-    console.log('pageCount', pageCount)
+    // console.log('pageCount', pageCount)
 
 
     useEffect(() => {
@@ -80,8 +80,8 @@ const ProductsPage = ({prodBlackList}) => {
         setProducts(pDisplayProducts)
         setLoading(false)
 
-        console.log('pDisplayKeys', pDisplayKeys)
-        console.log('pDisplayProducts', pDisplayProducts)
+        // console.log('pDisplayKeys', pDisplayKeys)
+        // console.log('pDisplayProducts', pDisplayProducts)
     }
 
 
@@ -163,7 +163,7 @@ const ProductsPage = ({prodBlackList}) => {
         sortColumn === sortField && order === 'asc' ? 'desc' : 'asc'
 
 
-        console.log('sortOrder', sortOrder)
+        // console.log('sortOrder', sortOrder)
 
         setSortField(sortColumn)
         setOrder(sortOrder)
@@ -179,8 +179,8 @@ const ProductsPage = ({prodBlackList}) => {
         navigate(`/products/${rowData.id}`)
         
     }
-    console.log('products', products)
-    console.log('keyArray', keyArray)
+    // console.log('products', products)
+    // console.log('keyArray', keyArray)
 
     return (
         <main className="main">
