@@ -44,8 +44,10 @@ import Dupes from './Dupe Handling/Dupes';
 
 function App() {
 
-  const fetchChickens = () => {
-    console.log('chickens gone wild')
+  const fetchChickens = async () => {
+    const req = await fetch(`http://localhost:3000/api/chickens`)
+    const res = await req.json()
+    console.log('chickens', res)
   }
 
   const user = useSelector((state) => state.user);

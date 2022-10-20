@@ -15,7 +15,7 @@ const ContactsPage = ({conBlackList}) => {
 
     const user = useSelector((state) => state.user);
 
-    console.log('user', user)
+    // console.log('user', user)
 
     let navigate = useNavigate()
 
@@ -56,7 +56,7 @@ const ContactsPage = ({conBlackList}) => {
             // console.log('pagina', pagina)
             const paginaCuenta = data.page_count
             setPageCount(paginaCuenta)
-            console.log('paginaCuenta', paginaCuenta)
+            // console.log('paginaCuenta', paginaCuenta)
             
             let objKeys = Object.keys(contactsDataArray[0])
             // console.log('objKeys', objKeys)
@@ -83,9 +83,9 @@ const ContactsPage = ({conBlackList}) => {
 
     }
 
-    console.log('page', page)
+    // console.log('page', page)
 
-    console.log('pageCount', pageCount)
+    // console.log('pageCount', pageCount)
 
     const handleSorting = (sortField, sortOrder) => {
         // console.log('sortField, sortOrder', sortField, sortOrder)
