@@ -44,7 +44,7 @@ const ProductsPage = ({prodBlackList}) => {
 
 
     const getProductsCount = async () => {
-        const res = await fetch(`http://localhost:3000/count_products`)
+        const res = await fetch(`http://localhost:3000/api/count_products`)
         const count = await res.json()
         setProductCount(count)
     }
@@ -53,7 +53,7 @@ const ProductsPage = ({prodBlackList}) => {
         // console.log('page', page)
         // console.log('order', order)
         // console.log('sortField', sortField)
-        const res = await fetch(`http://localhost:3000/products_paginated/${page}?${sortField}=${order}`)
+        const res = await fetch(`http://localhost:3000/api/products_paginated/${page}?${sortField}=${order}`)
         const productsPageData = await res.json()
         // console.log('productsPageData', productsPageData)
 

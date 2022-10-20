@@ -18,7 +18,7 @@ const EditProduct = ({id, fetchProduct}) => {
     const updateName = async (e) => {
         e.preventDefault()
         let newName = e.target[0].value
-        let req = await fetch(`http://localhost:3000/products/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/products/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 name: newName
@@ -33,7 +33,7 @@ const EditProduct = ({id, fetchProduct}) => {
     const updateBrand = async (e) => {
         e.preventDefault()
         let newBrand = e.target[0].value
-        let req = await fetch(`http://localhost:3000/products/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/products/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 brand: newBrand
@@ -55,7 +55,7 @@ const EditProduct = ({id, fetchProduct}) => {
         console.log('result[0]', result[0])
         console.log('result[1]', result[1])
 
-        let req = await fetch(`http://localhost:3000/products/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/products/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 company_id: result[0]
@@ -70,7 +70,7 @@ const EditProduct = ({id, fetchProduct}) => {
         e.preventDefault()
         let newProductLink = e.target[0].value
         console.log('e')
-        let req = await fetch(`http://localhost:3000/products/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/products/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 product_link: newProductLink
@@ -86,7 +86,7 @@ const EditProduct = ({id, fetchProduct}) => {
         e.preventDefault()
         let newWebsite = e.target[0].value
         console.log('e')
-        let req = await fetch(`http://localhost:3000/products/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/products/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 website: newWebsite
@@ -102,7 +102,7 @@ const EditProduct = ({id, fetchProduct}) => {
         e.preventDefault()
         let newDescription = e.target[0].value
         console.log('e')
-        let req = await fetch(`http://localhost:3000/products/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/products/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 description: newDescription

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get '/companies_paginated/:page', to: 'companies#paginated_companies'
 
-  get '/products_paginated/:page', to: 'products#paginated_products'
+  
 
 
   get '/owners_contacts/:user_id', to: 'contacts#owners_contacts'
@@ -52,12 +52,7 @@ Rails.application.routes.draw do
   patch '/companies/:id', to: 'companies#update'
   delete '/companies/:id', to: 'companies#destroy'
 
-  get '/products', to: 'products#index'
-  get '/count_products', to: 'products#count'
-  get '/products/:id', to: 'products#show'
-  post '/products', to: 'products#create'
-  patch '/products/:id', to: 'products#update'
-  delete '/products/:id', to: 'products#destroy'
+
 
 
   get '/notes', to: 'notes#index'
@@ -73,6 +68,15 @@ Rails.application.routes.draw do
     # post "/signup", to: "users#create"
     # post "/login", to: "sessions#create"
     # delete "/logout", to: "sessions#destroy"
+
+    get '/products_paginated/:page', to: 'products#paginated_products'
+
+    get '/products', to: 'products#index'
+    get '/count_products', to: 'products#count'
+    get '/products/:id', to: 'products#show'
+    post '/products', to: 'products#create'
+    patch '/products/:id', to: 'products#update'
+    delete '/products/:id', to: 'products#destroy'
     get '/chickens', to: 'chickens#index'
     get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
   end

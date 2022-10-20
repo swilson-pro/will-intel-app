@@ -83,7 +83,7 @@ const NewProduct = () => {
 
         console.log('result', result)
 
-        let req = await fetch(`http://localhost:3000/products`, {
+        let req = await fetch(`http://localhost:3000/api/products`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -125,7 +125,7 @@ const NewProduct = () => {
             return company[1] == formValue.companySelect
         })
 
-        let req = await fetch(`http://localhost:3000/products`, {
+        let req = await fetch(`http://localhost:3000/api/products`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

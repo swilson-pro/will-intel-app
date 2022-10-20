@@ -50,7 +50,7 @@ const EditProductDrawer = ({ product, fetchProduct }) => {
 
 
         console.log('fNameVal', fNameVal)
-        let req = await fetch(`http://localhost:3000/products/${product.id}`, {
+        let req = await fetch(`http://localhost:3000/api/products/${product.id}`, {
             method: "PATCH",
             body: JSON.stringify(fNameVal),
             headers: {
@@ -78,7 +78,7 @@ const EditProductDrawer = ({ product, fetchProduct }) => {
 
 
         console.log('fWebsiteVal', fWebsiteVal)
-        let req = await fetch(`http://localhost:3000/products/${product.id}`, {
+        let req = await fetch(`http://localhost:3000/api/products/${product.id}`, {
             method: "PATCH",
             body: JSON.stringify(fWebsiteVal),
             headers: {
@@ -107,7 +107,7 @@ const EditProductDrawer = ({ product, fetchProduct }) => {
     
     
             console.log('fImageVal', fImageVal)
-            let req = await fetch(`http://localhost:3000/products/${product.id}`, {
+            let req = await fetch(`http://localhost:3000/api/products/${product.id}`, {
                 method: "PATCH",
                 body: JSON.stringify(fImageVal),
                 headers: {

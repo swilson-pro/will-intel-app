@@ -1,4 +1,4 @@
-class ProductsController < ApplicationController
+class Api::ProductsController < ApplicationController
     require 'will_paginate/array'
 
     def paginated_products

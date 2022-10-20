@@ -53,7 +53,7 @@ const ProductCard = () => {
 
 
     const fetchProduct = async () => {
-        const response = await fetch(`http://localhost:3000/products/${id}`)
+        const response = await fetch(`http://localhost:3000/api/products/${id}`)
         const productObj = await response.json()
         setProduct(productObj)
         setProdLoading(false)
@@ -92,7 +92,7 @@ const ProductCard = () => {
     }
 
     const deleteProduct = async (id) => {
-        let req = await fetch(`http://localhost:3000/products/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/products/${id}`, {
             method: "DELETE",
         })
             .then(alert("Product Deleted"))
