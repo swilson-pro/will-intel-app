@@ -238,7 +238,9 @@ end
 
 puts "making chickens"
 
-3.times{Chicken.create(
-    user: User.all.sample
-    name: Contact.all.sample
-)}
+
+3.times{
+    Chicken.create(
+        user: User.all.sample, 
+        name: Contact.all.sample.name)
+}

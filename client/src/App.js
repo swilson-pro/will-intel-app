@@ -44,6 +44,10 @@ import Dupes from './Dupe Handling/Dupes';
 
 function App() {
 
+  // const fetchChickens = () => {
+  //   console.log('chickens gone wild')
+  // }
+
   const user = useSelector((state) => state.user);
 
   console.log(user ? "user exists" : "user doesn't exist")
@@ -61,6 +65,7 @@ function App() {
 
   const [toggleMode, setToggleMode] = useState(localStorage.getItem("toggle-mode") === 'true')
   useEffect(() => {
+    // fetchChickens()
     localStorage.setItem("toggle-mode", toggleMode)
   }, [toggleMode])
   const toggleModeFunc = () => {
