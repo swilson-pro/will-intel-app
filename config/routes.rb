@@ -6,25 +6,14 @@ Rails.application.routes.draw do
 
 
   # pagination
-  get '/contacts_paginated/:page', to: 'contacts#paginated_contacts'
-  get '/owners_contacts_paginated/:user_id/:page', to: 'contacts#owners_contacts_paginated'
+
 
   get '/companies_paginated/:page', to: 'companies#paginated_companies'
 
   
 
 
-  get '/owners_contacts/:user_id', to: 'contacts#owners_contacts'
 
-
-  get '/contacts', to: 'contacts#index'
-  get '/count_contacts', to: 'contacts#count'
-  get '/contacts/:id', to: 'contacts#show'
-  get '/dupes/contacts', to: 'contacts#dupes'
-  get '/dupenames/contacts', to: 'contacts#dupe_names'
-  post '/contacts', to: 'contacts#create'
-  patch '/contacts/:id', to: 'contacts#update'
-  delete '/contacts/:id', to: 'contacts#destroy'
 
   get '/users', to: 'users#index'
   get '/count_users', to: 'users#count'
@@ -68,6 +57,20 @@ Rails.application.routes.draw do
     # post "/signup", to: "users#create"
     # post "/login", to: "sessions#create"
     # delete "/logout", to: "sessions#destroy"
+
+    get '/owners_contacts/:user_id', to: 'contacts#owners_contacts'
+
+    get '/contacts_paginated/:page', to: 'contacts#paginated_contacts'
+    get '/owners_contacts_paginated/:user_id/:page', to: 'contacts#owners_contacts_paginated'
+
+    get '/contacts', to: 'contacts#index'
+    get '/count_contacts', to: 'contacts#count'
+    get '/contacts/:id', to: 'contacts#show'
+    get '/dupes/contacts', to: 'contacts#dupes'
+    get '/dupenames/contacts', to: 'contacts#dupe_names'
+    post '/contacts', to: 'contacts#create'
+    patch '/contacts/:id', to: 'contacts#update'
+    delete '/contacts/:id', to: 'contacts#destroy'
 
     get '/products_paginated/:page', to: 'products#paginated_products'
 

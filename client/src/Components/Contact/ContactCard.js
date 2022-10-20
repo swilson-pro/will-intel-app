@@ -37,7 +37,7 @@ const ContactCard = () => {
 
     const formRef = useRef()
 
-    console.log('user', user)
+    // console.log('user', user)
     // console.log('user.isLoggedIn', user.isLoggedIn)
 
     let navigate = useNavigate()
@@ -130,7 +130,7 @@ const ContactCard = () => {
         setNewNote("")
     }
 
-    console.log('contact.notes', contact.notes)
+    // console.log('contact.notes', contact.notes)
 
     const [formValue, setFormValue] = useState({
         textarea: ""
