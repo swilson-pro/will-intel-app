@@ -39,7 +39,7 @@ const ContactsPage = ({conBlackList}) => {
     }, [page, sortField, order])
 
     const getContactsCount = async () => {
-        const res = await fetch(`http://localhost:3000/count_contacts`)
+        const res = await fetch(`http://localhost:3000/api/count_contacts`)
         const count = await res.json()
         setContactCount(count)
     }
@@ -47,7 +47,7 @@ const ContactsPage = ({conBlackList}) => {
     const getContactsForPage = async (page) => {
         // console.log('page', page)
         setLoading(true)
-        fetch(`http://localhost:3000/contacts_paginated/${page}?${sortField}=${order}`)
+        fetch(`http://localhost:3000/api/contacts_paginated/${page}?${sortField}=${order}`)
         .then(resp=> resp.json())
         .then(data=>{
             const contactsDataArray = data.contacts

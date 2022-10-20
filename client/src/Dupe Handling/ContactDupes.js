@@ -86,7 +86,7 @@ const ContactDupes = ({ data, names, owners, fetchContactDupes }) => {
 
     const unPrimary = async (item) => {
         console.log('item to unprmary', item)
-        let req = await fetch(`http://localhost:3000/contacts/${item.id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${item.id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 is_dupe_primary: "false"
@@ -119,7 +119,7 @@ const ContactDupes = ({ data, names, owners, fetchContactDupes }) => {
 
     const primaryPrimary = async (id) => {
         console.log('id', id)
-        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 is_dupe_primary: true

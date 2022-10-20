@@ -56,7 +56,7 @@ const ContactCard = () => {
 
 
     const fetchContact = async () => {
-        const response = await fetch(`http://localhost:3000/contacts/${id}`)
+        const response = await fetch(`http://localhost:3000/api/contacts/${id}`)
         const contactObj = await response.json()
         console.log('contactObj', contactObj)
         setContact(contactObj)
@@ -75,7 +75,7 @@ const ContactCard = () => {
     }
 
     const deleteContact = async (id) => {
-        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${id}`, {
             method: "DELETE",
         })
             .then(alert("Contact Deleted"))

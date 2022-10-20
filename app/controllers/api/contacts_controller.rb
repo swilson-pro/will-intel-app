@@ -1,4 +1,4 @@
-class ContactsController < ApplicationController
+class Api::ContactsController < ApplicationController
     require 'will_paginate/array'
 
 

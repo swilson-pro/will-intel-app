@@ -88,7 +88,7 @@ const NewContact = () => {
 
         // console.log('Contact: ', {name, newCompanyName, position, phone, email, location, linkedin, image})
 
-        let req = await fetch(`http://localhost:3000/contacts`, {
+        let req = await fetch(`http://localhost:3000/api/contacts`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -181,7 +181,7 @@ const NewContact = () => {
         console.log('fPosition', fPosition)
 
         console.log("New Contact: ", `name: ${fName}`,`Email: ${fEmail}`, `company_id: ${valueID}`, `company_name: ${value}` )
-        let req = await fetch(`http://localhost:3000/contacts`, {
+        let req = await fetch(`http://localhost:3000/api/contacts`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

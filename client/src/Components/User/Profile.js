@@ -20,7 +20,7 @@ const Profile = () => {
     const [userCount, setUserCount] = useState()
 
     const getContactsCount = async () => {
-        const res = await fetch(`http://localhost:3000/count_contacts`)
+        const res = await fetch(`http://localhost:3000/api/count_contacts`)
         const count = await res.json()
         setContactCount(count)
     }

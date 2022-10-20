@@ -42,7 +42,7 @@ const EditContact = ({id, contact, fetchContact}) => {
     const updateName = async (e) => {
         e.preventDefault()
         let newName = e.target[0].value
-        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 name: newName
@@ -58,7 +58,7 @@ const EditContact = ({id, contact, fetchContact}) => {
         e.preventDefault()
 
         let newEmail = e.target[0].value
-        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 email: newEmail
@@ -73,7 +73,7 @@ const EditContact = ({id, contact, fetchContact}) => {
     const updatePosition = async (e) => {
         e.preventDefault()
         let newPosition = e.target[0].value
-        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 position: newPosition
@@ -88,7 +88,7 @@ const EditContact = ({id, contact, fetchContact}) => {
     const updateImage = async (e) => {
         e.preventDefault()
         let newImage = e.target[0].value
-        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 image_url: newImage
@@ -103,7 +103,7 @@ const EditContact = ({id, contact, fetchContact}) => {
     const updateLinkedin = async (e) => {
         e.preventDefault()
         let newLinkedin = e.target[0].value
-        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 linkedin_profile_url: newLinkedin
@@ -119,7 +119,7 @@ const EditContact = ({id, contact, fetchContact}) => {
         e.preventDefault()
         console.log('e.target[0].value', e.target[0].value)
         let newBio = e.target[0].value
-        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 bio: newBio
@@ -157,7 +157,7 @@ const EditContact = ({id, contact, fetchContact}) => {
         console.log('result[0]', result[0])
         console.log('result[1]', result[1])
 
-        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 company_id: result[0]
@@ -197,7 +197,7 @@ const EditContact = ({id, contact, fetchContact}) => {
                 newOwner = owners[i]
             }
         }
-        let req = await fetch(`http://localhost:3000/contacts/${id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 user_id: newOwner.id

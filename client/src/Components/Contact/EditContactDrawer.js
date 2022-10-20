@@ -50,7 +50,7 @@ const EditContactDrawer = ({ contact, id, fetchContact }) => {
 
 
         console.log('fNameVal', fNameVal)
-        let req = await fetch(`http://localhost:3000/contacts/${contact.id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${contact.id}`, {
             method: "PATCH",
             body: JSON.stringify(fNameVal),
             headers: {
@@ -78,7 +78,7 @@ const EditContactDrawer = ({ contact, id, fetchContact }) => {
 
 
         console.log('fEmailVal', fEmailVal)
-        let req = await fetch(`http://localhost:3000/contacts/${contact.id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${contact.id}`, {
             method: "PATCH",
             body: JSON.stringify(fEmailVal),
             headers: {
@@ -106,7 +106,7 @@ const EditContactDrawer = ({ contact, id, fetchContact }) => {
 
 
         console.log('fPositionVal', fPositionVal)
-        let req = await fetch(`http://localhost:3000/contacts/${contact.id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${contact.id}`, {
             method: "PATCH",
             body: JSON.stringify(fPositionVal),
             headers: {
@@ -134,7 +134,7 @@ const EditContactDrawer = ({ contact, id, fetchContact }) => {
 
 
         console.log('fLinkedinVal', fLinkedinVal)
-        let req = await fetch(`http://localhost:3000/contacts/${contact.id}`, {
+        let req = await fetch(`http://localhost:3000/api/contacts/${contact.id}`, {
             method: "PATCH",
             body: JSON.stringify(fLinkedinVal),
             headers: {
@@ -162,7 +162,7 @@ const EditContactDrawer = ({ contact, id, fetchContact }) => {
     
     
             console.log('fImageVal', fImageVal)
-            let req = await fetch(`http://localhost:3000/contacts/${contact.id}`, {
+            let req = await fetch(`http://localhost:3000/api/contacts/${contact.id}`, {
                 method: "PATCH",
                 body: JSON.stringify(fImageVal),
                 headers: {
@@ -217,7 +217,7 @@ const EditContactDrawer = ({ contact, id, fetchContact }) => {
                 return company[1] == value
             })
             console.log('findValue[0]', findValue[0])
-            let req = await fetch(`http://localhost:3000/contacts/${contact.id}`, {
+            let req = await fetch(`http://localhost:3000/api/contacts/${contact.id}`, {
                 method: "PATCH",
                 body: JSON.stringify(
                     {company_id: findValue[0]}
@@ -276,7 +276,7 @@ const EditContactDrawer = ({ contact, id, fetchContact }) => {
                 return owner[1] == ownerVal
             })
             console.log('findValue[0]', findValue[0])
-            let req = await fetch(`http://localhost:3000/contacts/${contact.id}`, {
+            let req = await fetch(`http://localhost:3000/api/contacts/${contact.id}`, {
                 method: "PATCH",
                 body: JSON.stringify(
                     {user_id: findValue[0]}
