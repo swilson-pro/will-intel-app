@@ -10,7 +10,7 @@ const HomePage = () => {
 
     let navigate = useNavigate()
 
-    console.log('user', user)
+    // console.log('user', user)
 
     const [contactCount, setContactCount] = useState()
     const [companyCount, setCompanyCount] = useState()
@@ -56,8 +56,8 @@ const HomePage = () => {
         getUsersCount()
     }, [])
 
-    console.log('contactCount', contactCount)
-    console.log('userCount', userCount)
+    // console.log('contactCount', contactCount)
+    // console.log('userCount', userCount)
 
     return (
         <main>
