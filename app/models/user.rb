@@ -6,5 +6,6 @@ class User < ApplicationRecord
     has_many :companies
     has_many :notes
     has_many :products, through: :companies
+    has_many :chickens
 
 end
