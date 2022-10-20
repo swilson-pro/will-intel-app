@@ -1,3 +1,16 @@
+# {
+#   "dependencies": {
+#     "@fortawesome/fontawesome-svg-core": "^6.2.0",
+#     "@rsuite/responsive-nav": "^5.0.1",
+#     "moment": "^2.29.4",
+#     "react-infinite-scroll-component": "^6.1.0"
+#   }
+# }
+
+# the above code was in the package.json in root (not inside client) before. idk why it'd be in this package.json, prob a mistake.
+
+
+
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
